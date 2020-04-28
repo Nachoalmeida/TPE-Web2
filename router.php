@@ -1,0 +1,44 @@
+<?php
+    //require_once 'lib/tasks.php';
+    require_once 'controllers/task.controller.php';
+
+    // definimos la base url de forma dinamica
+    define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
+
+    // define una acción por defecto
+    if (empty($_GET['action'])) {
+        $_GET['action'] = 'listar';
+    } 
+
+    // toma la acción que viene del usuario y parsea los parámetros
+    $accion = $_GET['action']; 
+    $parametros = explode('/', $accion);
+    //var_dump($parametros); die; // like console.log();
+
+    // decide que camino tomar según TABLA DE RUTEO
+    switch ($parametros[0]) {
+        case 'listar': // /listar   ->   showTasks()
+            // instanciando un objeto de la clase TaskController
+            $controller = new TaskController();
+            $controller->showTasks();
+        break;
+
+        case "nueva": // /nueva    ->    addTask()
+            $controller = new TaskController();
+            $controller->addTask();
+        break;
+    
+        case "finalizar":
+            $controller = new TaskController();
+            $controller->finalizeTasks();
+        break;
+    
+        case "ver":   // ver/:ID
+            $controller = new TaskController();
+            $controller->viewTask($parametros[1]);
+        break;
+
+        default: 
+            echo "404 not found";
+        break;
+    }
