@@ -16,5 +16,20 @@ class CarsModel{
         return $pdo;
     }
 
+    /**
+     * Devuelve todos los autos.
+     */
+    public function getAllCars() {
+        // 1. abro la conexión con MySQL 
+        $db = $this->createConection();
+
+        // 2. enviamos la consulta (3 pasos)
+        $sentencia = $db->prepare("SELECT * FROM autos"); // prepara la consulta
+        $sentencia->execute(); // ejecuta
+        $autos = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
+
+        return $autos;
+    }
+
 
 }
