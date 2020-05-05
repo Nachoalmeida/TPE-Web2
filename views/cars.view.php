@@ -4,12 +4,13 @@ class CarsView{
 
     public function show_cars($autos){
         foreach ($autos as $auto) {
-    
-            echo '<li class="list-group-item">';
-    
-            echo ' <b>' . $auto->precio . "</b> - ";
-            echo ' <b>' . $auto->titulo . "</b> - ";
-            echo ' <b>' . $auto->id_marca_fk . "</b> - ";
+   
+            echo ' <p>' . $auto->precio . "</p> - ";
+            echo ' <p>' . $auto->titulo . "</p> - ";
+            //foreach ($marcas as $marca) {
+            echo ' <p>' . $auto->id_marca_fk.'</p> - ';
+            //}
+
         }
     }
 }
