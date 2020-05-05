@@ -1,6 +1,6 @@
 <?php
 require_once 'models/cars.model.php';
-//require_once 'views/cars.view.php';
+require_once 'views/cars.view.php';
 
 class CarsController {
 
@@ -9,7 +9,7 @@ class CarsController {
 
     public function __construct() {
        $this->model = new CarsModel();
-       // $this->view = new CarsView();
+       $this->view = new CarsView();
     }
 
     public function showCars() {

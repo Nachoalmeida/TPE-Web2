@@ -9,7 +9,7 @@ class CarsView{
     
             echo ' <b>' . $auto->precio . "</b> - ";
             echo ' <b>' . $auto->titulo . "</b> - ";
-            echo ' <b>' . $auto->marca . "</b> - ";
+            echo ' <b>' . $auto->id_marca_fk . "</b> - ";
         }
     }
 }
