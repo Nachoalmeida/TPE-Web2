@@ -16,6 +16,9 @@ class CarsController {
         // pido los autos al MODELO
         $autos = $this->model->getAllCars();
 
+        // actualizo la vista
+        $this->view->show_cars($autos);
+
     }
 
 
