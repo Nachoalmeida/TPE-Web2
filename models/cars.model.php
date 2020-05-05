@@ -20,10 +20,10 @@ class CarsModel{
      * Devuelve todos los autos.
      */
     public function getAllCars() {
-        // 1. abro la conexión con MySQL 
+        // abre la conexión con MySQL 
         $db = $this->createConection();
 
-        // 2. enviamos la consulta (3 pasos)
+        //envia la consulta
         $sentencia = $db->prepare("SELECT * FROM autos"); // prepara la consulta
         $sentencia->execute(); // ejecuta
         $autos = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
