@@ -19,23 +19,8 @@
     switch ($parametros[0]) {
         case 'listar': // /listar   ->   showTasks()
             // instanciando un objeto de la clase TaskController
-            $controller = new TaskController();
-            $controller->showTasks();
-        break;
-
-        case "nueva": // /nueva    ->    addTask()
-            $controller = new TaskController();
-            $controller->addTask();
-        break;
-    
-        case "finalizar":
-            $controller = new TaskController();
-            $controller->finalizeTasks();
-        break;
-    
-        case "ver":   // ver/:ID
-            $controller = new TaskController();
-            $controller->viewTask($parametros[1]);
+            $controller = new CarsController();
+            $controller->showCars();
         break;
 
         default: 
