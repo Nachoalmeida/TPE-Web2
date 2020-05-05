@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2020 a las 18:49:00
+-- Tiempo de generación: 05-05-2020 a las 23:58:49
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -32,12 +32,19 @@ CREATE TABLE `autos` (
   `titulo` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `anio` int(11) NOT NULL,
-  `kilometros` int(11) NOT NULL,
+  `kilometros` decimal(11,0) NOT NULL,
   `precio` int(11) NOT NULL,
   `descripcion` text NOT NULL,
   `foto` varchar(200) NOT NULL,
-  `id_marca` int(11) NOT NULL
+  `id_marca_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `autos`
+--
+
+INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `precio`, `descripcion`, `foto`, `id_marca_fk`) VALUES
+(1, 'Vendo Ford, Focus, modelo 2017, impecable!!! 30.000km', 'Focus', 2017, '30', 400, 'Lo vendo Por que no lo puedo mantener..\r\nahree sincero!!', 'images/focus 2017.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -47,8 +54,16 @@ CREATE TABLE `autos` (
 
 CREATE TABLE `marca` (
   `id_marca` int(11) NOT NULL,
-  `nombre_marca` int(11) NOT NULL
+  `nombre_marca` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`id_marca`, `nombre_marca`) VALUES
+(1, 'Ford'),
+(2, 'Chevrolet');
 
 --
 -- Índices para tablas volcadas
@@ -59,7 +74,7 @@ CREATE TABLE `marca` (
 --
 ALTER TABLE `autos`
   ADD PRIMARY KEY (`id_auto`),
-  ADD KEY `id_marca` (`id_marca`);
+  ADD KEY `id_marca` (`id_marca_fk`);
 
 --
 -- Indices de la tabla `marca`
@@ -75,13 +90,13 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de la tabla `autos`
 --
 ALTER TABLE `autos`
-  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -91,7 +106,7 @@ ALTER TABLE `marca`
 -- Filtros para la tabla `autos`
 --
 ALTER TABLE `autos`
-  ADD CONSTRAINT `autos_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`);
+  ADD CONSTRAINT `autos_ibfk_1` FOREIGN KEY (`id_marca_fk`) REFERENCES `marca` (`id_marca`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
