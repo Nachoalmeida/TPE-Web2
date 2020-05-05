@@ -1,13 +1,13 @@
 <?php
     //require_once 'lib/tasks.php';
-    require_once 'controllers/task.controller.php';
+    require_once 'controllers/cars.controller.php';
 
     // definimos la base url de forma dinamica
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
     // define una acción por defecto
     if (empty($_GET['action'])) {
-        $_GET['action'] = 'listar';
+        $_GET['action'] = 'inicio';
     } 
 
     // toma la acción que viene del usuario y parsea los parámetros
@@ -17,7 +17,7 @@
 
     // decide que camino tomar según TABLA DE RUTEO
     switch ($parametros[0]) {
-        case 'listar': // /listar   ->   showTasks()
+        case 'inicio': // /listar   ->   showTasks()
             // instanciando un objeto de la clase TaskController
             $controller = new CarsController();
             $controller->showCars();
