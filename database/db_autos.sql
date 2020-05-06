@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2020 a las 23:58:49
+-- Tiempo de generación: 06-05-2020 a las 19:19:26
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -44,7 +44,7 @@ CREATE TABLE `autos` (
 --
 
 INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `precio`, `descripcion`, `foto`, `id_marca_fk`) VALUES
-(1, 'Vendo Ford, Focus, modelo 2017, impecable!!! 30.000km', 'Focus', 2017, '30', 400, 'Lo vendo Por que no lo puedo mantener..\r\nahree sincero!!', 'images/focus 2017.jpg', 1);
+(1, 'Vendo Ford, Focus, modelo 2017, impecable!!! 30.000km', 'Focus', 2017, '30', 400, 'lo vendo impecable!', 'images/focus 2017.jpg', 1);
 
 -- --------------------------------------------------------
 
