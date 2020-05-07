@@ -27,8 +27,11 @@ class CarsController {
         // pido el auto al MODELO
         $auto = $this->model->getCar($Car);
 
+        if (!empty($auto)){
         // actualizo la vista
         $this->view->show_car($auto);
+        }
+        else{$this->view->show_fail();}
 
     }
 
