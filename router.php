@@ -19,20 +19,25 @@
     // decide que camino tomar según TABLA DE RUTEO
     switch ($parametros[0]) {
         case 'inicio': // /listar   ->   showTasks()
-            // instanciando un objeto de la clase TaskController
+            // instanciando un objeto de la clase CarsController
             $controller = new CarsController();
             $controller->showCars();
         break;
 
-        case 'ver mas':   // ver/:ID
+        case 'ver mas':   // ver/id
             $controller = new CarsController();
             $controller->viewCar($parametros[1]);
         break;
 
         case 'administrador': // /ABM formulario   ->   showForm()
-            // instanciando un objeto de la clase TaskController
+            // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
             $controller->showForm();
+        break;
+
+        case 'nuevo_auto': // Dirige los datos del formulario al controller.    
+            $controller = new AdminController();
+            $controller->addCar();
         break;
 
         default: 

@@ -48,7 +48,7 @@ class AdminView{
     
         <h1>Alta de Publicación</h1>
 
-        <form action="nueva" method="post" class="my-4">
+        <form action="nuevo_auto" method="post" class="my-4">
             <div class="row">
                 <div class="col-9">
                     <div class="form-group">
