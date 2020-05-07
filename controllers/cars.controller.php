@@ -21,4 +21,15 @@ class CarsController {
 
     }
 
+
+    //FUNCION MOSTRAR UN AUTO
+    public function viewCar($Car){
+        // pido el auto al MODELO
+        $auto = $this->model->getCar($Car);
+
+        // actualizo la vista
+        $this->view->show_car($auto);
+
+    }
+
 }
