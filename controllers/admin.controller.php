@@ -26,22 +26,24 @@ class AdminController {
         $kilometros = $_POST['kilometros'];
         $precio = $_POST['precio'];
         $descripcion = $_POST['descripcion'];
-        $foto = $_POST['foto'];
+        $foto = 0; //$_POST['foto'];
         $nombre_marca = $_POST['nombre_marca'];
     
         // verifica los datos obligatorios
         if (empty($titulo) || empty($modelo) || empty($precio) || empty($nombre_marca)) {
-            $this->view->showError("Faltan datos obligatorios");
+            //$this->view->showError("Faltan datos obligatorios");
+            echo "error temporal hasta tener showError, faltan datos";
             die();
         }
 
         // inserta en la DB y redirige
-        $success = $this->model->insert($titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto, $nombre_marca);
+        $success = $this->model->insertCar($titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto, $nombre_marca);
 
         if($success)
             header('Location: ' . BASE_URL . "inicio");
         else
-            $this->view->showError("Error al agregar el registro");
+            //$this->view->showError("Error al agregar el registro");
+            echo "error temporal hasta tener showError, no se subieron los datos";
 
     }
 
