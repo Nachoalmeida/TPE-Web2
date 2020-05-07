@@ -1,15 +1,17 @@
 <?php
-
+require_once 'libs/Smarty.class.php';
 class CarsView{
 
     public function show_cars($autos){
-        foreach ($autos as $auto) {
-            $idauto = $auto->id_auto;
-            echo ' <p>' . $auto->precio . "</p>";
-            echo ' <p>' . $auto->titulo . "</p>";
-            echo ' <p>' . $auto->nombre_marca.'</p>';
-            echo ' <a class="btn btn-info" href="ver mas/'.$idauto.'">ver mas</a>';
-        }
+        //foreach ($autos as $auto) {
+
+        $smarty = new Smarty();
+        $smarty -> assign('base_url', BASE_URL);
+        $smarty -> assign('titulo', 'Autos');
+        $smarty -> assign('autos', $autos);
+        $smarty -> display('show_cars.tpl');
+
+        
     }
 
     public function show_car($auto){
@@ -18,6 +20,10 @@ class CarsView{
 
     public function show_fail(){
 
-        echo 'Error';
+        $smarty = new Smarty();
+        $smarty -> assign('error', 'hay un error');
+        $smarty -> assign('base_url', BASE_URL);
+        $smarty -> assign('titulo', 'Fallo!!!');
+        $smarty -> display('header.tpl');
     }
 }
