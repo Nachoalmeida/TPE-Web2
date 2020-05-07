@@ -24,7 +24,7 @@
             $controller->showCars();
         break;
 
-        case 'ver mas':   // ver/id
+        case 'ver_mas':   // ver/id
             $controller = new CarsController();
             $controller->viewCar($parametros[1]);
         break;
