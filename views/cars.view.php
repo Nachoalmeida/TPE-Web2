@@ -15,4 +15,9 @@ class CarsView{
     public function show_car($auto){
         echo ' <p>' . $auto->nombre_marca . "</p>";
     }
+
+    public function show_fail(){
+
+        echo 'Error';
+    }
 }
