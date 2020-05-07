@@ -38,7 +38,7 @@ class CarsModel{
         $db = $this->createConection();
 
         // envia la consulta
-        $sentencia = $db->prepare("SELECT * FROM  WHERE id_auto = ?"); // prepara la consulta
+        $sentencia = $db->prepare("SELECT * FROM autos JOIN marca ON (id_marca_fk=id_marca) WHERE id_auto = ?"); // prepara la consulta
         $sentencia->execute([$id_car]); // ejecuta
         $car = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
 
