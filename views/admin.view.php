@@ -63,6 +63,21 @@ class AdminView{
                         <input name="modelo" type="text" class="form-control">
                     </div>
                 </div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <label>precio</label>
+                        <input name="precio" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-9">
+                    <div class="form-group">
+                        <label>kilometros</label>
+                        <input name="kilometros" type="text" class="form-control">
+                    </div>
+                </div>
+
+                
 
 
                 <div class="col-3">
@@ -95,6 +110,15 @@ class AdminView{
                         <option value="24">1997</option>
                         <option value="25">1996</option>
 
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>marca</label>
+                        <select name="nombre_marca" class="form-control">
+                        <option value="1">ford</option>
+                        <option value="2">chev</option>
                         </select>
                     </div>
                 </div>
