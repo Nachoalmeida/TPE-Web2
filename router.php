@@ -1,6 +1,7 @@
 <?php
     //require_once 'lib/tasks.php';
     require_once 'controllers/cars.controller.php';
+    require_once 'controllers/admin.controller.php';
 
     // definimos la base url de forma dinamica
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -26,6 +27,12 @@
         case 'ver mas':   // ver/:ID
             $controller = new CarsController();
             $controller->viewCar($parametros[1]);
+        break;
+
+        case 'administrador': // /ABM formulario   ->   showForm()
+            // instanciando un objeto de la clase TaskController
+            $controller = new AdminController();
+            $controller->showForm();
         break;
 
         default: 
