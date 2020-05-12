@@ -11,7 +11,7 @@
         <body>
     
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary mb-3">
-            <a class="navbar-brand" href="">CompAutos</a>
+            <a class="navbar-brand" href="inicio">CompAutos</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

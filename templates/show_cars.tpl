@@ -12,3 +12,5 @@
     </a>
     
 {/foreach}
+
+{include 'footer.tpl'}
