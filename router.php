@@ -24,7 +24,7 @@
             $controller->showCars();
         break;
 
-        case 'ver_mas':   // ver/id
+        case 'ver_mas':   // ver_mas/id
             $controller = new CarsController();
             $controller->viewCar($parametros[1]);
         break;
@@ -41,6 +41,7 @@
         break;
 
         default: 
-            echo "404 not found";
+            $controller = new CarsController();
+            $controller->showURLFail();
         break;
     }
