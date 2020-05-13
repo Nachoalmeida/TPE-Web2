@@ -11,12 +11,4 @@ class FailView{
         $smarty -> assign('titulo', 'Error Fatal!');
         $smarty -> display('show_fail.tpl');
     }
-
-    public function sohw_url_fail(){
-        $smarty = new Smarty();
-        $smarty -> assign('error', 'La URL no  existe!');
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('titulo', ':(');
-        $smarty -> display('show_fail.tpl');
-    }
 }
