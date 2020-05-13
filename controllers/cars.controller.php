@@ -46,10 +46,11 @@ class CarsController {
     public function showBrand($brand){
        // pido el auto al MODELO
        $carsBrand = $this->model->getBrand($brand);
-
+       if (!empty($brand)){
        // actualizo la vista
        $this->view->show_by_category($carsBrand,$brand);
-   
+       }
+       else{$this->failview->show_fail('No se ha encontrado ningun vehiculo con esa Marca :();}
 
     }
 
