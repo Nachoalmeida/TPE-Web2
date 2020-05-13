@@ -50,7 +50,7 @@ class CarsController {
        // actualizo la vista
        $this->view->show_by_category($carsBrand,$brand);
        }
-       else{$this->failview->show_fail('No se ha encontrado ningun vehiculo con esa Marca :();}
+       else{$this->failview->show_fail('No se ha encontrado ningun vehiculo con esa Marca :(');}
 
     }
 
