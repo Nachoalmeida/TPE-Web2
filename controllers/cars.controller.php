@@ -5,22 +5,22 @@ require_once 'views/fail.view.php';
 
 class CarsController {
 
-    private $model;
-    private $view;
+    private $carsModel;
+    private $carsview;
     private $failview;
 
     public function __construct() {
-       $this->model = new CarsModel();
-       $this->view = new CarsView();
+       $this->carsModel = new CarsModel();
+       $this->carsview = new CarsView();
        $this->failview = new FailView();
     }
 
     public function showCars() {
         // pido los autos al MODELO
-        $autos = $this->model->getAllCars();
+        $cars = $this->carsModel->getAllCars();
 
         // actualizo la vista
-        $this->view->show_cars($autos);
+        $this->carsview->show_cars($cars);
 
     }
 
@@ -28,11 +28,11 @@ class CarsController {
     //FUNCION MOSTRAR UN AUTO
     public function viewCar($id_car){
         // pido el auto al MODELO
-        $car = $this->model->getCar($id_car);
+        $car = $this->carsModel->getCar($id_car);
 
         if (!empty($car)){
         // actualizo la vista
-        $this->view->show_car($car);
+        $this->carsview->show_car($car);
         }
         else{$this->failview->show_fail('El Vehiculo no existe');}
 
@@ -45,10 +45,10 @@ class CarsController {
 
     public function showBrand($brand){
        // pido los autos al MODELO
-       $carsBrand = $this->model->getBrand($brand);
+       $carsBrand = $this->carsModel->getBrand($brand);
        if (!empty($brand)){
        // actualizo la vista
-       $this->view->show_by_category($carsBrand,$brand);
+       $this->carsview->show_by_category($carsBrand,$brand);
        }
        else{$this->failview->show_fail('No se ha encontrado ningun vehiculo con esa Marca :(');}
 
