@@ -10,6 +10,9 @@ class CarsModel{
 
         try {
         $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $userName, $password);
+
+        // solo en modo desarrollo
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         } catch (Exception $e) {
             var_dump($e);
         }
@@ -52,6 +55,18 @@ class CarsModel{
         //envia la consulta
         $sentencia = $db->prepare("INSERT INTO autos (titulo, modelo, anio, kilometros,precio,descripcion,foto,id_marca_fk) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); // prepara la consulta
         return $sentencia->execute([$titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto,$nombre_marca]); // ejecuta
+    }
+
+    public function getBrand($brand){
+        // abro la conexión con MySQL 
+        $db = $this->createConection();
+
+        // envia la consulta
+        $sentencia = $db->prepare("SELECT * FROM autos JOIN marca ON (id_marca_fk=id_marca) WHERE nombre_marca = ?"); // prepara la consulta
+        $sentencia->execute([$brand]); // ejecuta
+        $carsBrand = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
+
+        return $carsBrand;
     }
 
 

@@ -40,6 +40,11 @@
             $controller->addCar();
         break;
 
+        case 'marca':    
+            $controller = new CarsController();
+            $controller->showBrand($parametros[1]);
+        break;
+
         default: 
             $controller = new CarsController();
             $controller->showURLFail();

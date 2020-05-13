@@ -28,20 +28,29 @@ class CarsController {
     //FUNCION MOSTRAR UN AUTO
     public function viewCar($id_car){
         // pido el auto al MODELO
-        $auto = $this->model->getCar($id_car);
+        $car = $this->model->getCar($id_car);
 
-        if (!empty($auto)){
+        if (!empty($car)){
         // actualizo la vista
-        $this->view->show_car($auto);
+        $this->view->show_car($car);
         }
         else{$this->view->show_fail();}
 
     }
 
-    public function showURLFail()
-    {
+    public function showURLFail(){
         // actualizo la vista
         $this->failview->show_fail('La URL no existe');
+    }
+
+    public function showBrand($brand){
+       // pido el auto al MODELO
+       $carsBrand = $this->model->getBrand($brand);
+
+       // actualizo la vista
+       $this->view->show_by_category($carsBrand,$brand);
+   
+
     }
 
 }

@@ -26,4 +26,12 @@ class CarsView{
         $smarty -> assign('titulo', 'Fallo!!!');
         $smarty -> display('header.tpl');
     }
+
+    public function show_by_category($carsBrand, $brand){
+        $smarty = new Smarty();
+        $smarty -> assign('base_url', BASE_URL);
+        $smarty -> assign('titulo', $brand);
+        $smarty -> assign('autos', $carsBrand);
+        $smarty -> display('show_cars.tpl');
+    }
 }
