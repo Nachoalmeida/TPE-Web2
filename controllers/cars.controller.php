@@ -34,7 +34,7 @@ class CarsController {
         // actualizo la vista
         $this->view->show_car($car);
         }
-        else{$this->view->show_fail();}
+        else{$this->failview->show_fail('El Vehiculo no existe');}
 
     }
 
@@ -44,7 +44,7 @@ class CarsController {
     }
 
     public function showBrand($brand){
-       // pido el auto al MODELO
+       // pido los autos al MODELO
        $carsBrand = $this->model->getBrand($brand);
        if (!empty($brand)){
        // actualizo la vista
