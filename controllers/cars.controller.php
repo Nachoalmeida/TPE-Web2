@@ -46,7 +46,7 @@ class CarsController {
     public function showBrand($brand){
        // pido los autos al MODELO
        $carsBrand = $this->carsModel->getBrand($brand);
-       if (!empty($brand)){
+       if (!empty($carsBrand)){
        // actualizo la vista
        $this->carsview->show_by_category($carsBrand,$brand);
        }

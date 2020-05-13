@@ -15,7 +15,11 @@ class CarsView{
     }
 
     public function show_car($auto){
-        echo ' <p>' . $auto->nombre_marca . "</p>";
+        $smarty = new Smarty();
+        $smarty -> assign('auto', $auto);
+        $smarty -> assign('base_url', BASE_URL);
+        $smarty -> assign('titulo', 'Ver Mas');
+        $smarty -> display('show_car.tpl');
     }
 
     public function show_fail(){

@@ -8,7 +8,10 @@
             <link rel="stylesheet" href="css/bootstrap.min.css">
             <title>{$titulo}</title>
         </head>
+
         <body>
+            {include 'navbar.tpl'}
+                <div class="container Transparencia-blanca">
+                    <div class="row">
     
        
-{include 'navbar.tpl'}
