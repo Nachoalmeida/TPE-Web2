@@ -26,7 +26,7 @@
 
         case 'ver_mas':   // ver_mas/id
             $controller = new CarsController();
-            $controller->viewCar($parametros[1]);
+            $controller->showCar($parametros[1]);
         break;
 
         case 'administrador': // /ABM formulario   ->   showForm()
