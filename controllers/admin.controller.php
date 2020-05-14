@@ -40,6 +40,10 @@ class AdminController {
 
 
     function addCar() {
+
+        // traigo las marcas
+        $brands=$this->brandsModel->getAllBrands();
+
         // toma los valores enviados por el admin
         $titulo = $_POST['titulo'];
         $modelo = $_POST['modelo'];
@@ -58,13 +62,12 @@ class AdminController {
         }
 
         // inserta en la DB y redirige
-        $success = $this->model->insertCar($titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto, $nombre_marca);
+        $success = $this->carsModel->insertCar($titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto, $nombre_marca);
 
         if($success)
             header('Location: ' . BASE_URL . "inicio");
         else
-            //$this->view->showError("Error al agregar el registro");
-            echo "error temporal hasta tener showError, no se subieron los datos";
+            $this->failview->show_fail('Error al agregar el registro',$brands);
 
     }
 
@@ -78,7 +81,6 @@ class AdminController {
         if(!$detelecar)
             header('Location: ' . BASE_URL . "administrador");
         else
-            //$this->view->showError("Error al agregar el registro");
             $this->failview->show_fail('No se pudo eliminar! revise su conexion',$brands);
     }
 
