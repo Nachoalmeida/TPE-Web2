@@ -5,7 +5,7 @@
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                 <p></p>
                 <figure>
-                    <img src="{$auto->foto}" alt="{$auto->titulo}" />
+                    <img class="img_ver_mas" src="{$auto->foto}" alt="{$auto->titulo}" />
                 </figure>
             </div>
             <!--FIN iMAGEN-->

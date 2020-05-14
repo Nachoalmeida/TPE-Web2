@@ -32,7 +32,7 @@
         case 'administrador': // /ABM formulario   ->   showForm()
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
-            $controller->showForm();
+            $controller->showABMPanel();
         break;
 
         case 'nuevo_auto': // Dirige los datos del formulario al controller.    
@@ -43,6 +43,18 @@
         case 'marca':    
             $controller = new CarsController();
             $controller->showBrand($parametros[1]);
+        break;
+
+        case 'nueva_publicacion': // /ABM formulario   ->   showForm()
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->showForm();
+        break;
+
+        case 'eliminar_publicacion':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->deleteCars();
         break;
 
         default: 

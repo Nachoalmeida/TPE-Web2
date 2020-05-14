@@ -10,9 +10,6 @@ class CarsModel{
 
         try {
         $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $userName, $password);
-
-        // solo en modo desarrollo
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         } catch (Exception $e) {
             var_dump($e);
         }
@@ -48,6 +45,9 @@ class CarsModel{
         return $car;
     }
 
+
+    // inserta al formulario
+
     public function insertCar($titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto, $nombre_marca){
         // abro la conexión con MySQL  
          $db = $this->createConection();
@@ -56,6 +56,8 @@ class CarsModel{
         $sentencia = $db->prepare("INSERT INTO autos (titulo, modelo, anio, kilometros,precio,descripcion,foto,id_marca_fk) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); // prepara la consulta
         return $sentencia->execute([$titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto,$nombre_marca]); // ejecuta
     }
+
+    // trae las marcas
 
     public function getBrand($brand){
         // abro la conexión con MySQL 
@@ -67,6 +69,17 @@ class CarsModel{
         $carsBrand = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
 
         return $carsBrand;
+    }
+
+    //Borra una tarea
+ 
+    public function deleteCar($id_car) {
+        // abro la conexión con MySQL 
+        $db = $this->createConection();
+
+        // enviamos la consulta
+        $sentencia = $db->prepare("DELETE FROM autos WHERE id_auto = ?"); // prepara la consulta
+        $sentencia->execute([$id_car]); // ejecuta    
     }
 
 
