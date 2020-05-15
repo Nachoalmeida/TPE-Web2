@@ -18,7 +18,7 @@
 
     // decide que camino tomar según TABLA DE RUTEO
     switch ($parametros[0]) {
-        case 'inicio': // /listar   ->   showTasks()
+        case 'inicio': 
             // instanciando un objeto de la clase CarsController
             $controller = new CarsController();
             $controller->showCars();
@@ -29,7 +29,7 @@
             $controller->showCar($parametros[1]);
         break;
 
-        case 'administrador': // /ABM formulario   ->   showForm()
+        case 'administrador': // /ABM panel
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
             $controller->showABMPanel();
@@ -45,7 +45,7 @@
             $controller->showBrand($parametros[1]);
         break;
 
-        case 'nueva_publicacion': // /ABM formulario   ->   showForm()
+        case 'nueva_publicacion': //  formulario   ->   showForm()
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
             $controller->showForm();

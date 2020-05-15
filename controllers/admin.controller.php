@@ -31,10 +31,13 @@ class AdminController {
     }
 
     public function showForm() {
-
+        // traigo las marcas
         $brands=$this->brandsModel->getAllBrands();
+        // tomo el año actual
+        $year=date("Y");
+
         // actualizo la vista
-        $this->view->show_form_view($brands);
+        $this->view->show_form_view($brands, $year);
 
     }
 
@@ -44,7 +47,7 @@ class AdminController {
         // traigo las marcas
         $brands=$this->brandsModel->getAllBrands();
 
-        // toma los valores enviados por el admin
+        // toma los valores enviados por el formulario
         $titulo = $_POST['titulo'];
         $modelo = $_POST['modelo'];
         $anio = $_POST['anio'];
@@ -56,8 +59,7 @@ class AdminController {
     
         // verifica los datos obligatorios
         if (empty($titulo) || empty($modelo) || empty($precio) || empty($nombre_marca)) {
-            //$this->view->showError("Faltan datos obligatorios");
-            echo "error temporal hasta tener showError, faltan datos";
+            $this->failview->show_fail('Faltan datos Obligatorios!!',$brands);
             die();
         }
 
@@ -79,7 +81,7 @@ class AdminController {
         $detelecar=$this->carsModel -> deleteCar($id_car);
         // actualizo la vista
         if(!$detelecar)
-            header('Location: ' . BASE_URL . "administrador");
+            header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failview->show_fail('No se pudo eliminar! revise su conexion',$brands);
     }
