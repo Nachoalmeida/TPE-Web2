@@ -57,6 +57,18 @@
             $controller->deleteCars();
         break;
 
+        case 'editar_publicacion':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->showFormEditCars($parametros[1]);
+        break;
+
+        case 'editar_auto':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->editCar();
+        break;
+
         default: 
             $controller = new CarsController();
             $controller->showURLFail();
