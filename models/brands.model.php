@@ -3,6 +3,7 @@
 require_once('system.model.php');
 
 class BrandsModel{
+
     // Devuelve todas las marcas.
     public function getAllBrands() {
         // abre la conexión con MySQL 

@@ -38,7 +38,6 @@ class AdminController {
 
         // actualizo la vista
         $this->view->show_form_view($brands, $year);
-
     }
 
 

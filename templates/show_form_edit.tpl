@@ -9,7 +9,7 @@
 
             <div class="col-3">
                     <div class="form-group">
-                        <label>Marca</label>
+                        <label>Marca:</label>
                         <select name="nombre_marca" class="form-control">
                         <option value="{$auto->id_marca}">{$auto->nombre_marca}</option>
                         {foreach $marcas item= marca}
@@ -23,34 +23,34 @@
 
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Título</label>
+                        <label>Título:</label>
                         <input name="titulo" type="text" class="form-control" value="{$auto->titulo}">
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Modelo</label>
+                        <label>Modelo:</label>
                         <input name="modelo" type="text" class="form-control" value="{$auto->modelo}">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label>precio</label>
+                        <label>Precio:</label>
                         <input name="precio" type="text" class="form-control" value="{$auto->precio}">
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="form-group">
-                        <label>kilometros</label>
+                        <label>kilometros:</label>
                         <input name="kilometros" type="text" class="form-control" value="{$auto->kilometros}">
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Foto(URL)</label>
+                        <label>Foto(URL):</label>
                         <input name="foto" type="text" class="form-control" value="{$auto->foto}">
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 
                 <div class="col-3">
                     <div class="form-group">
-                        <label>Año</label>
+                        <label>Año:</label>
                         <select name="anio" class="form-control">
                             <option value="{$auto->anio}">{$auto->anio}</option>
                             {while  $cont< 50}
@@ -75,7 +75,7 @@
             </div>
         
             <div class="form-group">
-                <label>Descripcion</label>
+                <label>Descripcion:</label>
                 <textarea name="descripcion" class="form-control" rows="3">{$auto->descripcion}</textarea>
             </div>
             <button name="id_auto_editar" type="submit" class="btn btn-dark" value= "{$auto->id_auto}">Guardar</button>
