@@ -84,7 +84,7 @@ class AdminController {
         if(!$detelecar)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            $this->failview->show_fail('No se pudo eliminar! revise su conexion',$brands);
+            $this->failview->show_fail('No se pudo eliminar! Revise su conexión',$brands);
     }
 
     public function editCar(){
@@ -108,7 +108,7 @@ class AdminController {
         if($editcar)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            $this->failview->show_fail('No se pudo editar! revise su conexion',$brands);
+            $this->failview->show_fail('No se pudo editar! Revise su conexión',$brands);
     }
     public function showFormEditCars($id_car){
         // traigo las marcas
@@ -122,5 +122,26 @@ class AdminController {
         $this->view->show_form_edit($brands, $car, $id_car, $year);
 
     }
+    public function formAddBrand(){
+        // traigo las marcas
+        $brands=$this->brandsModel->getAllBrands();
+        // actualizo la vista
+        $this->view->form_add_brand($brands);
+    }
+    public function addBrand(){
+        $nombre_marca = $_POST['nombre_marca'];
 
+        // traigo las marcas
+        $brands=$this->brandsModel->getAllBrands();
+
+        // agrego la nueva marca
+        $addBrands=$this->brandsModel->insertBrand($nombre_marca);
+
+        if($addBrands)
+            header('Location: ' . BASE_URL . 'administrador');
+        else
+            $this->failview->show_fail('No se pudo agregar! Revise su conexión',$brands);
+    }
+
+    
 }

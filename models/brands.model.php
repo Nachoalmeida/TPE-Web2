@@ -12,5 +12,13 @@ class BrandsModel{
         $brands = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $brands;
     }
+    // inserta a la db
+    public function insertBrand($nombre_marca){
+        // abro la conexión con MySQL  
+         $db = SystemModel::getConection();
+        //envia la consulta
+        $sentencia = $db->prepare("INSERT INTO marca (nombre_marca) VALUES(?)"); // prepara la consulta
+        return $sentencia->execute([$nombre_marca]); // ejecuta
+    }
 
 }

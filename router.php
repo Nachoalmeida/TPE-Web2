@@ -69,6 +69,18 @@
             $controller->editCar();
         break;
 
+        case 'nueva_marca':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->formAddBrand();
+        break;
+
+        case 'crear_marca':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->addBrand();
+        break;
+
         default: 
             $controller = new CarsController();
             $controller->showURLFail();

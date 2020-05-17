@@ -16,8 +16,7 @@ class CarsModel{
         return $autos;
     }
     // Devuelve un objeto con el id determinado
-    public function getCar($id_car)
-    {
+    public function getCar($id_car){
         // abro la conexión con MySQL 
         $db = SystemModel::getConection();
         // envia la consulta

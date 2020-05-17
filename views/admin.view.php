@@ -27,7 +27,14 @@ class AdminView{
         $smarty -> assign('auto', $car);
         $smarty -> assign('cont', 0);
         $smarty -> assign('id_auto', $id_car);
-        $smarty -> assign('titulo', 'Subir publicacion');
+        $smarty -> assign('titulo', 'Editar publicacion');
         $smarty -> display('show_form_edit.tpl');
+    }
+    public function form_add_brand($brands){
+        $smarty = new Smarty();
+        $smarty -> assign('base_url', BASE_URL);
+        $smarty -> assign('marcas', $brands);
+        $smarty -> assign('titulo', 'Agregar marca');
+        $smarty -> display('form_add_brand.tpl');
     }
 }
