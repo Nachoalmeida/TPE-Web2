@@ -14,12 +14,12 @@ class BrandsModel{
         return $brands;
     }
     // inserta a la db
-    public function insertBrand($nombre_marca){
+    public function insertBrand($brand_name){
         // abro la conexión con MySQL  
          $db = SystemModel::getConection();
         //envia la consulta
         $sentencia = $db->prepare("INSERT INTO marca (nombre_marca) VALUES(?)"); // prepara la consulta
-        return $sentencia->execute([$nombre_marca]); // ejecuta
+        return $sentencia->execute([$brand_name]); // ejecuta
     }
 
 }
