@@ -81,6 +81,18 @@
             $controller->addBrand();
         break;
 
+        case 'editar_marca':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->formEditBrand($parametros[1]);
+        break;
+
+        case 'cargar_marca_editada':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->editBrand();
+        break;
+
         default: 
             $controller = new CarsController();
             $controller->showURLFail();
