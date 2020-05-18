@@ -42,7 +42,7 @@
 
         case 'marca':    
             $controller = new CarsController();
-            $controller->showBrand($parametros[1]);
+            $controller->showCarsByBrand($parametros[1]);
         break;
 
         case 'nueva_publicacion': //  formulario   ->   showForm()

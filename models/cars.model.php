@@ -25,15 +25,15 @@ class CarsModel{
         return $car;
     }
     // inserta a la db, una nueva publicacion
-    public function insertCar($titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto, $nombre_marca){
+    public function insertCar($title, $model, $year, $kilometres, $price, $description, $photo, $brand_name){
         // abro la conexión con MySQL  
          $db = SystemModel::getConection();
         //envia la consulta
         $sentencia = $db->prepare("INSERT INTO autos (titulo, modelo, anio, kilometros,precio,descripcion,foto,id_marca_fk) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); // prepara la consulta
-        return $sentencia->execute([$titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto,$nombre_marca]); // ejecuta
+        return $sentencia->execute([$title, $model, $year, $kilometres, $price, $description, $photo, $brand_name]); // ejecuta
     }
     // trae solo los autos con una marca especifica
-    public function getBrand($brand){
+    public function getCarsByBrand($brand){
         // abro la conexión con MySQL 
         $db = SystemModel::getConection();
         // envia la consulta
@@ -52,11 +52,11 @@ class CarsModel{
         $sentencia->execute([$id_car]); // ejecuta    
     }
     //edita una publicacion
-    public function editCar($id_car,$titulo, $modelo, $anio, $kilometros, $precio, $descripcion, $foto,$nombre_marca){
+    public function editCar($id_car,$title, $model, $year, $kilometres, $price, $description, $photo, $brand_name){
         // 1. abro la conexión con MySQL 
         $db = SystemModel::getConection(); 
         // 2. enviamos la consulta //importante si es un string la variable va entre ''
-       $sentencia = $db->prepare("UPDATE autos SET titulo='$titulo', modelo='$modelo', anio=$anio, kilometros=$kilometros,precio=$precio,descripcion='$descripcion',foto='$foto', id_marca_fk=$nombre_marca WHERE id_auto = ?"); // prepara la consulta
+       $sentencia = $db->prepare("UPDATE autos SET titulo='$title', modelo='$model', anio=$year, kilometros=$kilometres,precio=$price,descripcion='$description',foto='$photo', id_marca_fk=$brand_name WHERE id_auto = ?"); // prepara la consulta
        return $sentencia->execute([$id_car]); // ejecuta    
     }
 }

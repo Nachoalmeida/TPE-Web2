@@ -53,19 +53,18 @@ class CarsController {
         $this->failview->show_fail('La URL no existe',$brands);
     }
 
-    public function showBrand($brand){
-       // pido los autos al MODELO
-       $carsBrand = $this->carsModel->getBrand($brand);
-
-        // pido las marcas al MODELO
-        $brands = $this->brandsModel->getAllBrands();
-
-       if (!empty($carsBrand)){
-       // actualizo la vista
-       $this->carsview->show_by_category($carsBrand,$brand,$brands);
-       }
-       else{$this->failview->show_fail('No se ha encontrado ningún vehiculo con esa Marca :(',$brands);}
-
-    }
+    public function showCarsByBrand($brand){
+        // pido los autos al MODELO
+        $carsBrand = $this->carsModel->getCarsByBrand($brand);
+ 
+         // pido las marcas al MODELO
+         $brands = $this->brandsModel->getAllBrands();
+ 
+        if (!empty($carsBrand)){
+        // actualizo la vista
+        $this->carsview->show_by_category($carsBrand,$brand,$brands);
+        }
+        else{$this->failview->show_fail('No se ha encontrado ningún vehiculo con esa Marca :(',$brands);}
+    }  
  
 }

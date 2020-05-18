@@ -17,8 +17,7 @@ class AdminController {
        $this->adminView = new AdminView();
        $this->failView = new FailView();
 
-    }
-    
+    }    
     public function showABMPanel(){
         // traigo las marcas
         $brands=$this->brandsModel->getAllBrands();
@@ -38,7 +37,6 @@ class AdminController {
         // actualizo la vista
         $this->adminView->show_form_view($brands, $year);
     }
-
     function addCar() {
         // toma los valores enviados por el formulario
         $title = $_POST['titulo'];
@@ -69,7 +67,6 @@ class AdminController {
             $this->failView->show_fail('Error al agregar el registro',$brands);
 
     }
-
     public function deleteCars(){
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_car=$_POST['id_auto_eliminar'];
@@ -83,7 +80,6 @@ class AdminController {
             $brands=$this->brandsModel->getAllBrands();
             $this->failView->show_fail('No se pudo eliminar! Revise su conexión',$brands);
     }
-
     public function editCar(){
         // traigo el id de del auto, del value del boton, con en name id_auto_editar
         $id_car=$_POST['id_auto_editar'];
@@ -138,7 +134,6 @@ class AdminController {
         else
             $this->failView->show_fail('No se pudo agregar! Revise su conexión',$brands);
     }
-
     public function formEditBrand($id_brand){
         // traigo las marcas
         $brands=$this->brandsModel->getAllBrands();
@@ -146,10 +141,9 @@ class AdminController {
         $brand=$this->brandsModel -> getBrand($id_brand);
 
         // actualizo la vista
-        $this->view->form_edit_brand($brands, $brand);
+        $this->adminView->form_edit_brand($brands, $brand);
 
     }
-
     public function editBrand(){
         // traigo el id de la marca, del value del boton, con el name id_marca
         $id_brand=$_POST['id_marca'];

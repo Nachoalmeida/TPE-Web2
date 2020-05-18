@@ -21,7 +21,7 @@ class BrandsModel{
         $sentencia = $db->prepare("INSERT INTO marca (nombre_marca) VALUES(?)"); // prepara la consulta
         return $sentencia->execute([$brand_name]); // ejecuta
     }
-    // Devuelve todas la marca
+    // Devuelve la marca
     public function getBrand($id_brand) {
             // abre la conexión con MySQL 
             $db = SystemModel::getConection();
@@ -31,7 +31,7 @@ class BrandsModel{
             return $brand;
     }
 
-    //edita una publicacion
+    //edita una marca
     public function editBrand($id_brand,$brand_name){
         // 1. abro la conexión con MySQL 
         $db = SystemModel::getConection(); 
