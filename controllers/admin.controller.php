@@ -142,5 +142,32 @@ class AdminController {
             $this->failview->show_fail('No se pudo agregar! Revise su conexión',$brands);
     }
 
+    public function formEditBrand($id_brand){
+        // traigo las marcas
+        $brands=$this->brandsModel->getAllBrands();
+        // traigo la marca
+        $brand=$this->brandsModel -> getBrand($id_brand);
+
+        // actualizo la vista
+        $this->view->form_edit_brand($brands, $brand);
+
+    }
+
+    public function editBrand(){
+        // traigo el id de la marca, del value del boton, con el name id_marca
+        $id_brand=$_POST['id_marca'];
+        // toma los valores enviados por el formulario
+        $brand_name = $_POST['nombre_marca'];
+
+        // edito la marca
+        $editbrand=$this->brandsModel -> editBrand($id_brand,$brand_name);
+        // actualizo la vista
+        if($editbrand)
+            header('Location: ' . BASE_URL . 'administrador');
+        else
+            // traigo las marcas
+            $brands=$this->brandsModel->getAllBrands();
+            $this->failview->show_fail('No se pudo editar! Revise su conexión',$brands);
+    }
     
 }

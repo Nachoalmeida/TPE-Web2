@@ -37,4 +37,14 @@ class AdminView{
         $smarty -> assign('titulo', 'Agregar marca');
         $smarty -> display('form_add_brand.tpl');
     }
+
+    public function form_edit_brand($brands, $brand){
+        $smarty = new Smarty();
+        $smarty -> assign('base_url', BASE_URL);
+        $smarty -> assign('marcas', $brands);
+        $smarty -> assign('marca', $brand);
+        $smarty -> assign('titulo', 'Editar marca');
+        $smarty -> display('form_edit_brand.tpl');
+    }
+
 }
