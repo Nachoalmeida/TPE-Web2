@@ -9,7 +9,7 @@ class CarsModel{
         // abre la conexión con MySQL 
         $db = SystemModel::getConection();
         //envia la consulta
-        $sentencia = $db->prepare("SELECT * FROM autos JOIN marca ON (id_marca_fk=id_marca)"); // prepara la consulta
+        $sentencia = $db->prepare("SELECT * FROM autos JOIN marcas ON (id_marca_fk=id_marca)"); // prepara la consulta
         $sentencia->execute(); // ejecuta
         $autos = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $autos;
@@ -19,7 +19,7 @@ class CarsModel{
         // abro la conexión con MySQL 
         $db = SystemModel::getConection();
         // envia la consulta
-        $sentencia = $db->prepare("SELECT * FROM autos JOIN marca ON (id_marca_fk=id_marca) WHERE id_auto = ?"); // prepara la consulta
+        $sentencia = $db->prepare("SELECT * FROM autos JOIN marcas ON (id_marca_fk=id_marca) WHERE id_auto = ?"); // prepara la consulta
         $sentencia->execute([$id_car]); // ejecuta
         $car = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
         return $car;
@@ -37,7 +37,7 @@ class CarsModel{
         // abro la conexión con MySQL 
         $db = SystemModel::getConection();
         // envia la consulta
-        $sentencia = $db->prepare("SELECT * FROM autos JOIN marca ON (id_marca_fk=id_marca) WHERE nombre_marca = ?"); // prepara la consulta
+        $sentencia = $db->prepare("SELECT * FROM autos JOIN marcas ON (id_marca_fk=id_marca) WHERE nombre_marca = ?"); // prepara la consulta
         $sentencia->execute([$brand]); // ejecuta
         $carsBrand = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
 

@@ -67,7 +67,7 @@ class AdminController {
             $this->failView->show_fail('Error al agregar el registro',$brands);
 
     }
-    public function deleteCars(){
+    public function deleteCar(){
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_car=$_POST['id_auto_eliminar'];
         // traigo los autos
@@ -160,5 +160,21 @@ class AdminController {
             $brands=$this->brandsModel->getAllBrands();
             $this->failview->show_fail('No se pudo editar! Revise su conexión',$brands);
     }
+
+    public function deleteBrand(){
+        // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
+        $id_brand=$_POST['id_marca_eliminar'];
+        
+        // traigo los autos
+        $detelebrand=$this->brandsModel -> deleteBrand($id_brand);
+        // actualizo la vista
+        if(!$detelebrand)
+            header('Location: ' . BASE_URL . 'administrador');
+        else
+            // traigo las marcas
+            $brands=$this->brandsModel->getAllBrands();
+            $this->failView->show_fail('No se pudo eliminar! Revise su conexión',$brands);
+    }
+
     
 }

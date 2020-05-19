@@ -54,7 +54,7 @@
         case 'eliminar_publicacion':
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
-            $controller->deleteCars();
+            $controller->deleteCar();
         break;
 
         case 'editar_publicacion':
@@ -92,6 +92,13 @@
             $controller = new AdminController();
             $controller->editBrand();
         break;
+
+        case 'eliminar_marca':
+            // instanciando un objeto de la clase AdminController
+            $controller = new AdminController();
+            $controller->deleteBrand();
+        break;
+
 
         default: 
             $controller = new CarsController();
