@@ -18,6 +18,7 @@
                             {/if}
                         {/foreach}
                         </select>
+                        <a class="btn btn-light mt-1" href='nueva_marca'>Nueva Marca..</a>
                     </div>
             </div>
 
@@ -80,7 +81,7 @@
             </div>
             <button name="id_auto_editar" type="submit" class="btn btn-dark" value= "{$auto->id_auto}">Guardar</button>
 
-            <a class="btn btn-light" href="administrador">Vover al panel</a>
+            <a class="btn btn-light" href="administrador">Volver al panel</a>
         </form>
         </div>
 

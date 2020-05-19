@@ -15,6 +15,7 @@
                         <option value="{$marca->id_marca}">{$marca->nombre_marca}</option>
                         {/foreach}
                         </select>
+                        <a class="btn btn-light mt-1" href='nueva_marca'>Nueva Marca..</a>
                     </div>
             </div>
 
@@ -74,7 +75,7 @@
             </div>
 
             <button type="submit" class="btn btn-dark mr-2">Guardar</button>
-            <a class="btn btn-light" href="administrador">Vover al panel</a>
+            <a class="btn btn-light" href="administrador">Volver al panel</a>
         </form>
         </div>
 

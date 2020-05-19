@@ -41,7 +41,7 @@
             </div>
             <!--FIN CAJA Descripcion-->
              <div class="caja_estilo_gris_claro col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <a class="btn btn-light" href="inicio">Vover al Inicio</a>
+                <a class="btn btn-light" href="inicio">Volver al Inicio</a>
             </div>
             
 

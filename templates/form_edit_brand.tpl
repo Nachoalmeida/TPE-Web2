@@ -11,7 +11,7 @@
                 </div>
             </div>
             <button type="submit" name="id_marca" value="{$marca->id_marca}" class="btn btn-dark mr-2 mt-3">Guardar</button>
-            <a class="btn btn-light mt-3" href="administrador">Vover al panel</a>
+            <a class="btn btn-light mt-3" href="administrador">Volver al panel</a>
         </form>
     </div>
 {include 'footer.tpl'}
