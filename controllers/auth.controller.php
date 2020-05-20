@@ -33,12 +33,11 @@ class AuthController {
         //traigo usuario
         $user=$this->usersModel->getUser($mail);
 
-        if($user){
-        // && password_verify($pass, $user->password)){
-            //session_start();
-            //$_SESSION['logged'] = true;
-            //$_SESSION['user'] = $user->user_name;
-            header('Location' . BASE_URL . 'administrador');
+        if($user && password_verify($pass, $user->password)){
+            session_start();
+            $_SESSION['logged'] = true;
+            $_SESSION['user'] = $user->user_name;
+            header("Location: " . BASE_URL . "administrador");
         }
         else {
         //traigo las marcas

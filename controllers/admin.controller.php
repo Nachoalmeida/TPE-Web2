@@ -16,7 +16,7 @@ class AdminController {
        $this->brandsModel = new BrandsModel();
        $this->adminView = new AdminView();
        $this->failView = new FailView();
-
+       $this->access();
     }    
     public function showABMPanel(){
         // traigo las marcas
@@ -174,6 +174,15 @@ class AdminController {
             // traigo las marcas
             $brands=$this->brandsModel->getAllBrands();
             $this->failView->show_fail('No se pudo eliminar! Revise su conexión',$brands);
+    }
+    private function access(){
+        session_start();
+        //preguntar, sin el isset an igual???por que??
+        if (!isset($_SESSION['logged'])){
+            header('Location: ' . BASE_URL . 'ingresar');
+            die; 
+        }
+
     }
 
     
