@@ -47,20 +47,12 @@ class AdminController {
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
-    
-        // verifica los datos obligatorios
-        if (empty($title) || empty($model) || empty($price) || empty($brand_name)) {
-            // traigo las marcas
-            $brands=$this->brandsModel->getAllBrands();
-            $this->failView->show_fail('Faltan datos Obligatorios!!',$brands);
-            die();
-        }
 
         // inserta en la DB y redirige
         $success = $this->carsModel->insertCar($title, $model, $year, $kilometres, $price, $description, $photo, $brand_name);
 
         if($success)
-            header('Location: ' . BASE_URL . "inicio");
+            header('Location: ' . BASE_URL . "administrador");
         else
            // traigo las marcas
            $brands=$this->brandsModel->getAllBrands();

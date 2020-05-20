@@ -1,12 +1,12 @@
 {include 'header.tpl'}
     <div class="container">
         <h1 class="mt-2">Editar marca</h1>
-        <form action="cargar_marca_editada" method="post" class="my-4">
+        <form action="cargar_marca_editada" method="post" class="my-4 was-validated">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
                         <label>Editar:</label>
-                        <input name="nombre_marca" type="text" class="form-control" value="{$marca->nombre_marca}">
+                        <input name="nombre_marca" type="text" class="form-control" value="{$marca->nombre_marca}" required>
                     </div>
                 </div>
             </div>

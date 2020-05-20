@@ -1,12 +1,12 @@
 {include 'header.tpl'}
     <div class="container">
         <h1 class="mt-2">Nueva marca</h1>
-        <form action="crear_marca" method="post" class="my-4">
+        <form action="crear_marca" method="post" class="my-4  was-validated">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
                         <label>Ingrese nueva marca:</label>
-                        <input name="nombre_marca" type="text" class="form-control">
+                        <input name="nombre_marca" type="text" class="form-control" required>
                     </div>
                 </div>
             </div>

@@ -49,6 +49,10 @@
     background-color: rgba(82, 77, 77, 0.301);
     color: #ffffff;
 }
+
+.caja_img_fondo{
+    background: url(../images/nissan.jpg);
+}
 /* CAJA COLOR ////////////////////////////////////////////////77 */
 
 body{
@@ -59,4 +63,7 @@ body{
 .img_ver_mas{
     width: 300px; 
     height: 160px;
+}
+.color_letra_negra{
+    color:black;
 }

@@ -1,5 +1,5 @@
 {include 'header.tpl'}
-
+{include 'cover_page.tpl'}
 {foreach $autos item= auto}
 
     <a class="btn col-sm-12 col-md-3 col-lg-3 col-xl-3 caja_para_efecto_retraer" href="ver_mas/{$auto->id_auto}">
@@ -15,5 +15,4 @@
     </a>
     
 {/foreach}
-
 {include 'footer.tpl'}
