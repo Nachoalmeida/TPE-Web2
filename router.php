@@ -1,6 +1,7 @@
 <?php
     require_once 'controllers/cars.controller.php';
     require_once 'controllers/admin.controller.php';
+    require_once 'controllers/auth.controller.php';
 
     // definimos la base url de forma dinamica
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -97,6 +98,17 @@
             $controller->deleteBrand();
         break;
 
+        case 'ingresar':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->showFormLogin();
+        break;
+
+        case 'logueo':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->login();
+        break;
 
         default: 
             $controller = new CarsController();
