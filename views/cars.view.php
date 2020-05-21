@@ -10,7 +10,7 @@ class CarsView{
         $smarty -> assign('titulo', 'Autos');
         $smarty -> assign('autos', $cars);
         $smarty -> assign('marcas', $brands);
-        $smarty -> display('show_cars.tpl');
+        $smarty -> display('home.tpl');
 
         
     }
@@ -40,6 +40,6 @@ class CarsView{
         $smarty -> assign('base_url', BASE_URL);
         $smarty -> assign('titulo', $brand);
         $smarty -> assign('autos', $carsBrand);
-        $smarty -> display('show_cars.tpl');
+        $smarty -> display('brand.tpl');
     }
 }

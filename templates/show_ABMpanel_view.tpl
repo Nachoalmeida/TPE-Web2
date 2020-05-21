@@ -1,9 +1,8 @@
 {include 'header.tpl'}
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-4 caja_estilo_gris">
-
-    <h3>Panel de Administracion:</h3>
-        
+        <h3>Panel de Administracion:</h3>
+        <h6>SuperUsuario: {$usuario}</h6>       
     </div>
 
    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 my-2 mx-auto">

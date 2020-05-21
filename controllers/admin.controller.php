@@ -23,9 +23,10 @@ class AdminController {
         $brands=$this->brandsModel->getAllBrands();
         // traigo los autos
         $cars=$this->carsModel -> getAllCars();
-
+        //traigo el nombre del usuario
+        $user=$_SESSION['user'];
         // actualizo la vista
-        $this->adminView->show_ABMpanel_view($brands, $cars);
+        $this->adminView->show_ABMpanel_view($brands, $cars,$user);
     }
 
     public function showForm() {
@@ -169,7 +170,7 @@ class AdminController {
     }
     private function access(){
         session_start();
-        //preguntar, sin el isset an igual???por que??
+        //preguntar, sin el isset anda igual???por que??
         if (!isset($_SESSION['logged'])){
             header('Location: ' . BASE_URL . 'ingresar');
             die; 

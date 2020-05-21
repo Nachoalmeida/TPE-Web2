@@ -36,7 +36,6 @@ class CarsController {
         $car = $this->carsModel->getCar($id_car);
         // pido las marcas al MODELO
         $brands = $this->brandsModel->getAllBrands();
-
         if (!empty($car)){
         // actualizo la vista
         $this->carsview->show_car($car,$brands);
