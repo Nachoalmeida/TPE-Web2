@@ -11,9 +11,12 @@
                 <div class="form-group">
                     <label>Marca:</label>
                     <select name="nombre_marca" class="custom-select" required>
-                    {foreach $marcas item= marca}
-                    <option value="{$marca->id_marca}">{$marca->nombre_marca}</option>
-                    {/foreach}
+                        <option value="{$auto->id_marca}">{$auto->nombre_marca}</option>
+                        {foreach $marcas item= marca}
+                            {if $auto->nombre_marca ne $marca->nombre_marca}
+                                <option value="{$marca->id_marca}">{$marca->nombre_marca}</option>
+                            {/if}
+                        {/foreach}
                     </select>
                     <a class="btn btn-light mt-1" href='nueva_marca'>Nueva Marca..</a>
                 </div>
