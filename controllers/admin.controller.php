@@ -4,6 +4,10 @@ require_once 'models/cars.model.php';
 require_once 'models/brands.model.php';
 require_once 'views/admin.view.php';
 require_once 'views/fail.view.php';
+require_once 'helper/session.helper.php';
+
+
+
 
 class AdminController {
     private $carsModel;
@@ -11,32 +15,29 @@ class AdminController {
     private $adminView;
     private $failView;
 
+
+    
     public function __construct() {
+       HelperSession::access();
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
-       $this->adminView = new AdminView();
-       $this->failView = new FailView();
-       $this->access();
+       $brands = $this->brandsModel->getAllBrands();
+       $this->adminView  = new AdminView($brands);
+       $this->failView = new FailView($brands);
     }    
     public function showABMPanel(){
-        // traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
         // traigo los autos
         $cars=$this->carsModel -> getAllCars();
         //traigo el nombre del usuario
         $user=$_SESSION['user'];
         // actualizo la vista
-        $this->adminView->show_ABMpanel_view($brands, $cars,$user);
+        $this->adminView->show_ABMpanel_view( $cars,$user);
     }
-
-    public function showForm() {
-        // traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
+    public function ShowAddCarForm() {
         // tomo el año actual
         $year=date("Y");
-
         // actualizo la vista
-        $this->adminView->show_form_view($brands, $year);
+        $this->adminView->show_form_view( $year);
     }
     function addCar() {
         // toma los valores enviados por el formulario
@@ -55,9 +56,7 @@ class AdminController {
         if($success)
             header('Location: ' . BASE_URL . "administrador");
         else
-           // traigo las marcas
-           $brands=$this->brandsModel->getAllBrands();
-            $this->failView->show_fail('Error al agregar el registro',$brands);
+            $this->failView->show_fail('Error al agregar el registro');
 
     }
     public function deleteCar(){
@@ -69,9 +68,7 @@ class AdminController {
         if(!$detelecar)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            // traigo las marcas
-            $brands=$this->brandsModel->getAllBrands();
-            $this->failView->show_fail('No se pudo eliminar! Revise su conexión',$brands);
+            $this->failView->show_fail('No se pudo eliminar! Revise su conexión');
     }
     public function editCar(){
         // traigo el id de del auto, del value del boton, con en name id_auto_editar
@@ -85,39 +82,28 @@ class AdminController {
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
-
         // edito del auto
         $editcar=$this->carsModel -> editCar($id_car,$title, $model, $year, $kilometres, $price, $description, $photo,$brand_name);
         // actualizo la vista
         if($editcar)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            // traigo las marcas
-            $brands=$this->brandsModel->getAllBrands();
-            $this->failView->show_fail('No se pudo editar! Revise su conexión',$brands);
+            $this->failView->show_fail('No se pudo editar! Revise su conexión');
     }
     public function showFormEditCars($id_car){
-        // traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
         // traigo los autos
         $car=$this->carsModel -> getCar($id_car);
         // tomo el año actual
         $year=date("Y");
-
         // actualizo la vista
-        $this->adminView->show_form_edit($brands, $car, $id_car, $year);
+        $this->adminView->show_form_edit( $car, $id_car, $year);
     }
-    public function formAddBrand(){
-        // traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
+    public function showFormAddBrand(){
         // actualizo la vista
-        $this->adminView->form_add_brand($brands);
+        $this->adminView->form_add_brand();
     }
     public function addBrand(){
         $brand_name = $_POST['nombre_marca'];
-
-        // traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
 
         // agrego la nueva marca
         $addBrands=$this->brandsModel->insertBrand($brand_name);
@@ -125,16 +111,14 @@ class AdminController {
         if($addBrands)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            $this->failView->show_fail('No se pudo agregar! Revise su conexión',$brands);
+            $this->failView->show_fail('No se pudo agregar! Revise su conexión');
     }
-    public function formEditBrand($id_brand){
-        // traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
+    public function showFormEditBrand($id_brand){
         // traigo la marca
         $brand=$this->brandsModel -> getBrand($id_brand);
 
         // actualizo la vista
-        $this->adminView->form_edit_brand($brands, $brand);
+        $this->adminView->form_edit_brand( $brand);
 
     }
     public function editBrand(){
@@ -149,9 +133,7 @@ class AdminController {
         if($editbrand)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            // traigo las marcas
-            $brands=$this->brandsModel->getAllBrands();
-            $this->failview->show_fail('No se pudo editar! Revise su conexión',$brands);
+            $this->failview->show_fail('No se pudo editar! Revise su conexión');
     }
 
     public function deleteBrand(){
@@ -164,19 +146,6 @@ class AdminController {
         if(!$detelebrand)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            // traigo las marcas
-            $brands=$this->brandsModel->getAllBrands();
-            $this->failView->show_fail('No se pudo eliminar! Revise su conexión',$brands);
-    }
-    private function access(){
-        session_start();
-        //preguntar, sin el isset anda igual???por que??
-        if (!isset($_SESSION['logged'])){
-            header('Location: ' . BASE_URL . 'ingresar');
-            die; 
-        }
-
-    }
-
-    
+            $this->failView->show_fail('No se pudo eliminar! Revise su conexión');
+    }   
 }

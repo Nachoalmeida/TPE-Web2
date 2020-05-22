@@ -47,7 +47,7 @@
         case 'nueva_publicacion': //  formulario   ->   showForm()
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
-            $controller->showForm();
+            $controller->ShowAddCarForm();
         break;
 
         case 'eliminar_publicacion':
@@ -71,7 +71,7 @@
         case 'nueva_marca':
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
-            $controller->formAddBrand();
+            $controller->showFormAddBrand();
         break;
 
         case 'crear_marca':
@@ -83,7 +83,7 @@
         case 'editar_marca':
             // instanciando un objeto de la clase AdminController
             $controller = new AdminController();
-            $controller->formEditBrand($parametros[1]);
+            $controller->showFormEditBrand($parametros[1]);
         break;
 
         case 'cargar_marca_editada':

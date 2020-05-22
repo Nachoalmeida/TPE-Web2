@@ -2,7 +2,19 @@
 
 class SystemModel{
 
-    public static function getConection() {
+    private $db;
+
+    public function __construct() {
+        // 1. abro la conexión con MySQL 
+        $this->db = $this->buildConection();
+    }
+
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    public function buildConection() {
         $host = 'localhost';
         $userName = 'root';
         $password = '';

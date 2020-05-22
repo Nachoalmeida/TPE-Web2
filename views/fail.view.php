@@ -1,15 +1,11 @@
 <?php
-require_once 'libs/Smarty.class.php';
 
-class FailView{
+require_once 'smartyInit.view.php';
 
-    public function show_fail($mensaje,$brands){
-
-        $smarty = new Smarty();
-        $smarty -> assign('error', $mensaje);
-        $smarty -> assign('marcas', $brands);
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('titulo', 'Error Fatal!');
-        $smarty -> display('show_fail.tpl');
+class FailView extends SmartyInit{
+    public function show_fail($mensaje){
+        $this-> getSmarty()-> assign('error', $mensaje);
+        $this-> getSmarty()-> assign('titulo', 'Error Fatal!');
+        $this-> getSmarty()-> display('show_fail.tpl');
     }
 }

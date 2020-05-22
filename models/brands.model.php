@@ -2,50 +2,40 @@
 
 require_once('system.model.php');
 
-class BrandsModel{
+class BrandsModel extends SystemModel{
 
     // Devuelve todas las marcas.
     public function getAllBrands() {
-        // abre la conexión con MySQL 
-        $db = SystemModel::getConection();
-        $sentencia = $db->prepare("SELECT * FROM marcas"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM marcas"); // prepara la consulta
         $sentencia->execute(); // ejecuta
         $brands = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $brands;
     }
     // inserta a la db
     public function insertBrand($brand_name){
-        // abro la conexión con MySQL  
-         $db = SystemModel::getConection();
         //envia la consulta
-        $sentencia = $db->prepare("INSERT INTO marcas (nombre_marca) VALUES(?)"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("INSERT INTO marcas (nombre_marca) VALUES(?)"); // prepara la consulta
         return $sentencia->execute([$brand_name]); // ejecuta
     }
     // Devuelve la marca
     public function getBrand($id_brand) {
-            // abre la conexión con MySQL 
-            $db = SystemModel::getConection();
-            $sentencia = $db->prepare("SELECT * FROM marcas WHERE id_marca=?"); // prepara la consulta
+            $sentencia = $this->getDb()->prepare("SELECT * FROM marcas WHERE id_marca=?"); // prepara la consulta
             $sentencia->execute([$id_brand]); // ejecuta
             $brand = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
             return $brand;
     }
 
     //edita una marca
-    public function editBrand($id_brand,$brand_name){
-        // 1. abro la conexión con MySQL 
-        $db = SystemModel::getConection(); 
+    public function editBrand($id_brand,$brand_name){ 
         // 2. enviamos la consulta //importante si es un string la variable va entre ''
-        $sentencia = $db->prepare("UPDATE marcas SET nombre_marca='$brand_name' WHERE id_marca = ?"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("UPDATE marcas SET nombre_marca='$brand_name' WHERE id_marca = ?"); // prepara la consulta
         return $sentencia->execute([$id_brand]); // ejecuta    
     }
 
     //elimina una marca
     public function deleteBrand($id_brand) {
-        // abro la conexión con MySQL 
-        $db = SystemModel::getConection();
         // enviamos la consulta
-        $sentencia = $db->prepare("DELETE FROM marcas WHERE id_marca = ?"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("DELETE FROM marcas WHERE id_marca = ?"); // prepara la consulta
         $sentencia->execute([$id_brand]); // ejecuta    
     }
 

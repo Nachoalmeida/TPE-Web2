@@ -1,13 +1,10 @@
 <?php
-require_once 'libs/Smarty.class.php';
+require_once 'smartyInit.view.php';
 
-class AuthView{
-    public function form_login($brands, $errorMessage = null){
-        $smarty = new Smarty();
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('marcas', $brands);
-        $smarty -> assign('mensaje', $errorMessage);
-        $smarty -> assign('titulo', 'Ingresar');
-        $smarty -> display('login_form.tpl');
+class AuthView extends SmartyInit{
+    public function form_login($errorMessage = null){
+        $this->getSmarty()-> assign('mensaje', $errorMessage);
+        $this->getSmarty()-> assign('titulo', 'Ingresar');
+        $this->getSmarty()-> display('login_form.tpl');
     }
 }

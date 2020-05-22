@@ -1,45 +1,26 @@
 <?php
-require_once 'libs/Smarty.class.php';
-class CarsView{
 
-    public function show_cars($cars, $brands){
-        //foreach ($autos as $auto) {
+require_once 'smartyInit.view.php';
 
-        $smarty = new Smarty();
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('titulo', 'Autos');
-        $smarty -> assign('autos', $cars);
-        $smarty -> assign('marcas', $brands);
-        $smarty -> display('home.tpl');
+class CarsView extends SmartyInit{
+
+    public function show_cars($cars){
+        $this->getSmarty()-> assign('titulo', 'Autos');
+        $this->getSmarty()-> assign('autos', $cars);
+        $this->getSmarty()-> display('home.tpl');
 
         
     }
 
-    public function show_car($car, $brands){
-        $smarty = new Smarty();
-        $smarty -> assign('auto', $car);
-        $smarty -> assign('marcas', $brands);
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('titulo', 'Ver Mas');
-        $smarty -> display('show_car.tpl');
+    public function show_car($car){   
+        $this->getSmarty()-> assign('auto', $car);
+        $this->getSmarty()-> assign('titulo', 'Ver Mas');
+        $this->getSmarty()-> display('show_car.tpl');
     }
 
-    public function show_fail($brands){
-
-        $smarty = new Smarty();
-        $smarty -> assign('marcas', $brands);
-        $smarty -> assign('error', 'hay un error');
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('titulo', 'Fallo!!!');
-        $smarty -> display('header.tpl');
-    }
-
-    public function show_by_category($carsBrand, $brand,$brands){
-        $smarty = new Smarty();
-        $smarty -> assign('marcas', $brands);
-        $smarty -> assign('base_url', BASE_URL);
-        $smarty -> assign('titulo', $brand);
-        $smarty -> assign('autos', $carsBrand);
-        $smarty -> display('brand.tpl');
+    public function show_by_category($carsBrand, $brand){
+        $this->getSmarty()-> assign('titulo', $brand);
+        $this->getSmarty()-> assign('autos', $carsBrand);
+        $this->getSmarty()-> display('brand.tpl');
     }
 }

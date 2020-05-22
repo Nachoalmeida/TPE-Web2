@@ -10,19 +10,17 @@ class AuthController {
     private $brandsModel;
     private $usersModel;
 
-    public function __construct() {
-
-       $this->authView = new AuthView();
+    public function __construct() {  
        $this->brandsModel = new BrandsModel();
        $this->usersModel = new UsersModel();
+       //traigo las marcas
+       $brands=$this->brandsModel->getAllBrands();
+       $this->authView = new AuthView($brands);
 
     }    
     public function showFormLogin(){
-        //traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
-
         //muestro el login
-        $this->authView->form_login($brands);
+        $this->authView->form_login();
         
     }
 
@@ -40,11 +38,8 @@ class AuthController {
             header("Location: " . BASE_URL . "administrador");
         }
         else {
-        //traigo las marcas
-        $brands=$this->brandsModel->getAllBrands();
-
         //muestro el login
-        $this->authView->form_login($brands, 'Datos incorrectos, pruebe nuevamente');
+        $this->authView->form_login('Datos incorrectos, pruebe nuevamente');
 
         }
 
