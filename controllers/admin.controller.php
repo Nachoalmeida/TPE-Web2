@@ -6,21 +6,17 @@ require_once 'views/admin.view.php';
 require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
 
-
-
-
 class AdminController {
     private $carsModel;
     private $brandsModel;
     private $adminView;
     private $failView;
 
-
-    
     public function __construct() {
        HelperSession::access();
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
+       //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
        $this->adminView  = new AdminView($brands);
        $this->failView = new FailView($brands);
@@ -49,10 +45,8 @@ class AdminController {
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
-
         // inserta en la DB y redirige
         $success = $this->carsModel->insertCar($title, $model, $year, $kilometres, $price, $description, $photo, $brand_name);
-
         if($success)
             header('Location: ' . BASE_URL . "administrador");
         else
@@ -104,10 +98,8 @@ class AdminController {
     }
     public function addBrand(){
         $brand_name = $_POST['nombre_marca'];
-
         // agrego la nueva marca
         $addBrands=$this->brandsModel->insertBrand($brand_name);
-
         if($addBrands)
             header('Location: ' . BASE_URL . 'administrador');
         else
@@ -116,17 +108,14 @@ class AdminController {
     public function showFormEditBrand($id_brand){
         // traigo la marca
         $brand=$this->brandsModel -> getBrand($id_brand);
-
         // actualizo la vista
         $this->adminView->form_edit_brand( $brand);
-
     }
     public function editBrand(){
-        // traigo el id de la marca, del value del boton, con el name id_marca
-        $id_brand=$_POST['id_marca'];
         // toma los valores enviados por el formulario
         $brand_name = $_POST['nombre_marca'];
-
+        // traigo el id de la marca, del value del boton, con el name id_marca
+        $id_brand=$_POST['id_marca'];
         // edito la marca
         $editbrand=$this->brandsModel -> editBrand($id_brand,$brand_name);
         // actualizo la vista
@@ -135,12 +124,10 @@ class AdminController {
         else
             $this->failview->show_fail('No se pudo editar! Revise su conexión');
     }
-
     public function deleteBrand(){
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_brand=$_POST['id_marca_eliminar'];
-        
-        // traigo los autos
+        // elimino la marca
         $detelebrand=$this->brandsModel -> deleteBrand($id_brand);
         // actualizo la vista
         if(!$detelebrand)

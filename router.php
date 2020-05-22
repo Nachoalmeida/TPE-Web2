@@ -17,16 +17,39 @@
 
     // decide que camino tomar según TABLA DE RUTEO
     switch ($parametros[0]) {
+
+        //PARTE PUBLICA*****************************************************************************
+
         case 'inicio': 
             // instanciando un objeto de la clase CarsController
             $controller = new CarsController();
             $controller->showCars();
         break;
 
-        case 'ver_mas':   // ver_mas/id
+        case 'ver_mas':   // ver_mas/:id
             $controller = new CarsController();
             $controller->showCar($parametros[1]);
         break;
+
+        case 'ingresar':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->showFormLogin();
+        break;
+
+        //FIN PARTE PUBLICA************************************************************************************
+
+        //AUTENTICACION*****************************************************************************************
+
+        case 'logueo':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->login();
+        break;
+
+        //AUTENTICACION******************************************************************************************
+
+        //PARTE PRIVADA ADMINISTRADOR*****************************************************************************
 
         case 'administrador': // /ABM panel
             // instanciando un objeto de la clase AdminController
@@ -98,17 +121,7 @@
             $controller->deleteBrand();
         break;
 
-        case 'ingresar':
-            // instanciando un objeto de la clase AuthController
-            $controller = new AuthController();
-            $controller->showFormLogin();
-        break;
-
-        case 'logueo':
-            // instanciando un objeto de la clase AuthController
-            $controller = new AuthController();
-            $controller->login();
-        break;
+        //FIN PARTE PRIVADA ADMINISTRADOR*****************************************************************************
 
         default: 
             $controller = new CarsController();
