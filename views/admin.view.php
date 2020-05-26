@@ -5,7 +5,7 @@ require_once 'smartyInit.view.php';
 class AdminView extends SmartyInit{
     
     public function show_ABMpanel_view( $cars,$user){     
-        $this->getSmarty()-> assign('autos', $cars);
+        $this->getSmarty() -> assign('autos', $cars);
         $this->getSmarty() -> assign('usuario', $user);
         $this->getSmarty() -> assign('titulo', 'Panel de Administrador');
         $this->getSmarty() -> display('show_ABMpanel_view.tpl');
@@ -28,11 +28,9 @@ class AdminView extends SmartyInit{
         $this->getSmarty() -> assign('titulo', 'Agregar marca');
         $this->getSmarty() -> display('form_add_brand.tpl');
     }
-
     public function form_edit_brand($brand){
         $this->getSmarty() ->assign('marca', $brand);
         $this->getSmarty() -> assign('titulo', 'Editar marca');
         $this->getSmarty() -> display('form_edit_brand.tpl');
     }
-
 }

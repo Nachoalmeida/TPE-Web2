@@ -62,7 +62,7 @@
                     <label>Año:</label>
                     <select name="anio" class="form-control">
                         <option value="{$auto->anio}">{$auto->anio}</option>
-                        {while  $cont< 50}
+                        {while  $cont< 100}
                             {$cont++}
                             {if $anios ne $auto->anio}
                             <option value="{$anios}">{$anios}</option>

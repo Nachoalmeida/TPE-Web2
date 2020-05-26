@@ -10,6 +10,5 @@ class UsersModel extends SystemModel{
         $sentencia->execute([$mail]); // ejecuta
         $user = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
         return $user;
-
     }
 }

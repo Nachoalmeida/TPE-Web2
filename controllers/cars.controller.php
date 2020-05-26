@@ -4,8 +4,6 @@ require_once 'models/brands.model.php';
 require_once 'views/cars.view.php';
 require_once 'views/fail.view.php';
 
-
-
 class CarsController {
 
     private $carsModel;
@@ -15,11 +13,12 @@ class CarsController {
 
     
     public function __construct() {
+       $log= HelperSession::access_view();
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
        $brands = $this->brandsModel->getAllBrands();
-       $this->carsview  = new CarsView($brands);
-       $this->failview = new FailView($brands);
+       $this->carsview  = new CarsView($brands, $log);
+       $this->failview = new FailView($brands, $log);
     }
 
     public function showCars() {
@@ -30,7 +29,6 @@ class CarsController {
 
     }
 
-
     //FUNCION MOSTRAR UN AUTO
     public function showCar($id_car){
         // pido el auto al MODELO
@@ -40,7 +38,6 @@ class CarsController {
         $this->carsview->show_car($car);
         }
         else{$this->failview->show_fail('El Vehiculo no existe');}
-
     }
 
     public function showURLFail(){

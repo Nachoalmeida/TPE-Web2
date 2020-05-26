@@ -47,6 +47,12 @@
             $controller->login();
         break;
 
+        case 'salir':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->logout();
+        break;
+
         //AUTENTICACION******************************************************************************************
 
         //PARTE PRIVADA ADMINISTRADOR*****************************************************************************

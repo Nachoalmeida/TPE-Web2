@@ -1,5 +1,4 @@
 <?php
-
 require_once 'models/cars.model.php';
 require_once 'models/brands.model.php';
 require_once 'views/admin.view.php';
@@ -18,8 +17,8 @@ class AdminController {
        $this->brandsModel = new BrandsModel();
        //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
-       $this->adminView  = new AdminView($brands);
-       $this->failView = new FailView($brands);
+       $this->adminView  = new AdminView($brands, true);
+       $this->failView = new FailView($brands, true);
     }    
     public function showABMPanel(){
         // traigo los autos
@@ -40,13 +39,18 @@ class AdminController {
         $title = $_POST['titulo'];
         $model = $_POST['modelo'];
         $year = $_POST['anio'];
-        $kilometres = $_POST['kilometros'];
+        $kilometers = $_POST['kilometros'];
         $price = $_POST['precio'];
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
+        //preguntar por todas, nunca van solo a nivel front-end
+        if (!isset ($title) && !isset ($model) && !isset ($year) && !isset ($kilometers)  && !isset ($price) && !isset ($description) && !isset ($photo) && !isset ($brand_name)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
         // inserta en la DB y redirige
-        $success = $this->carsModel->insertCar($title, $model, $year, $kilometres, $price, $description, $photo, $brand_name);
+        $success = $this->carsModel->insertCar($title, $model, $year, $kilometers, $price, $description, $photo, $brand_name);
         if($success)
             header('Location: ' . BASE_URL . "administrador");
         else
@@ -59,7 +63,7 @@ class AdminController {
         // traigo los autos
         $detelecar=$this->carsModel -> deleteCar($id_car);
         // actualizo la vista
-        if(!$detelecar)
+        if($detelecar)
             header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failView->show_fail('No se pudo eliminar! Revise su conexión');
@@ -71,13 +75,17 @@ class AdminController {
         $title = $_POST['titulo'];
         $model = $_POST['modelo'];
         $year = $_POST['anio'];
-        $kilometres = $_POST['kilometros'];
+        $kilometers = $_POST['kilometros'];
         $price = $_POST['precio'];
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
+        if (!isset ($title) && !isset ($model) && !isset ($year) && !isset ($kilometers)  && !isset ($price) && !isset ($description) && !isset ($photo) && !isset ($brand_name)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
         // edito del auto
-        $editcar=$this->carsModel -> editCar($id_car,$title, $model, $year, $kilometres, $price, $description, $photo,$brand_name);
+        $editcar=$this->carsModel -> editCar($id_car,$title, $model, $year, $kilometers, $price, $description, $photo,$brand_name);
         // actualizo la vista
         if($editcar)
             header('Location: ' . BASE_URL . 'administrador');
@@ -98,6 +106,10 @@ class AdminController {
     }
     public function addBrand(){
         $brand_name = $_POST['nombre_marca'];
+        if (!isset ($brand_name)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
         // agrego la nueva marca
         $addBrands=$this->brandsModel->insertBrand($brand_name);
         if($addBrands)
@@ -116,6 +128,10 @@ class AdminController {
         $brand_name = $_POST['nombre_marca'];
         // traigo el id de la marca, del value del boton, con el name id_marca
         $id_brand=$_POST['id_marca'];
+        if (!isset ($brand_name) && !isset ($id_brand)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
         // edito la marca
         $editbrand=$this->brandsModel -> editBrand($id_brand,$brand_name);
         // actualizo la vista
@@ -127,10 +143,14 @@ class AdminController {
     public function deleteBrand(){
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_brand=$_POST['id_marca_eliminar'];
+        if (!isset ($id_brand)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
         // elimino la marca
         $detelebrand=$this->brandsModel -> deleteBrand($id_brand);
         // actualizo la vista
-        if(!$detelebrand)
+        if($detelebrand)
             header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failView->show_fail('No se pudo eliminar! Revise su conexión');

@@ -18,10 +18,17 @@
                             {/foreach}
                         </div>
                     </li
+                    {if $logueo == 1}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="salir">Salir <span class="sr-only"></span></a>
+                        <a class="nav-link" href="administrador">Administrador <span class="sr-only"></span></a>
+                    </li>
+                    {else}
                     <li class="nav-item active">
                         <a class="nav-link" href="ingresar">Ingresar <span class="sr-only"></span></a>
                         <a class="nav-link" href="registrarse">Registrarse <span class="sr-only"></span></a>
                     </li>
+                    {/if}
                 </ul>
             </div>
     </nav>

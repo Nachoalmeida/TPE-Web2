@@ -11,11 +11,12 @@ class AuthController {
     private $usersModel;
 
     public function __construct() {  
+       $log= HelperSession::access_view();
        $this->brandsModel = new BrandsModel();
        $this->usersModel = new UsersModel();
        //traigo las marcas
        $brands=$this->brandsModel->getAllBrands();
-       $this->authView = new AuthView($brands);
+       $this->authView = new AuthView($brands,$log);
     }    
     public function showFormLogin(){
         //muestro el login
@@ -24,7 +25,10 @@ class AuthController {
     public function login(){
         $mail=$_POST['mail'];
         $pass=$_POST['password'];
-
+        if (!isset ($mail) && !isset ($pass)){
+            header("Location: " . BASE_URL . "ingresar");
+            die;
+        }
         //traigo usuario
         $user=$this->usersModel->getUser($mail);
 
@@ -40,5 +44,10 @@ class AuthController {
 
         }
 
+    }
+    public function logout(){
+        session_start();
+        session_destroy();
+        header("Location: " . BASE_URL . "ingresar");
     }
 }

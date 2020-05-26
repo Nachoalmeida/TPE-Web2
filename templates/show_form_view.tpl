@@ -59,15 +59,14 @@
                     <label>Año:</label>
                     <select name="anio" class="custom-select" required>
                         <option value="">Seleccione un año</option>
-                        {while  $cont< 50}
+                        {while  $cont< 100}
                             {$cont++}
                             <option value="{$anios}">{$anios}</option>
                             {$anios--}
                         {/while}
                     </select>   
                 </div>
-            </div>
-                
+            </div>     
         </div>
         
         <div class="form-group">
