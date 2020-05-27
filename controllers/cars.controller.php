@@ -13,12 +13,11 @@ class CarsController {
 
     
     public function __construct() {
-       $log= HelperSession::access_view();
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
        $brands = $this->brandsModel->getAllBrands();
-       $this->carsview  = new CarsView($brands, $log);
-       $this->failview = new FailView($brands, $log);
+       $this->carsview  = new CarsView($brands);
+       $this->failview = new FailView($brands);
     }
 
     public function showCars() {

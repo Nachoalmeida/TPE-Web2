@@ -11,12 +11,11 @@ class AuthController {
     private $usersModel;
 
     public function __construct() {  
-       $log= HelperSession::access_view();
        $this->brandsModel = new BrandsModel();
        $this->usersModel = new UsersModel();
        //traigo las marcas
        $brands=$this->brandsModel->getAllBrands();
-       $this->authView = new AuthView($brands,$log);
+       $this->authView = new AuthView($brands);
     }    
     public function showFormLogin(){
         //muestro el login

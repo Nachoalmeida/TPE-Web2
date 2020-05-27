@@ -10,8 +10,10 @@ class HelperSession {
         }
 
     }
-    static public function access_view(){   
-        session_start();
+    static public function access_view(){
+        if(session_status() != PHP_SESSION_ACTIVE){   
+            session_start();
+        }
         if (isset($_SESSION['logged'])){
             return true;
         }

@@ -17,8 +17,8 @@ class AdminController {
        $this->brandsModel = new BrandsModel();
        //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
-       $this->adminView  = new AdminView($brands, true);
-       $this->failView = new FailView($brands, true);
+       $this->adminView  = new AdminView($brands);
+       $this->failView = new FailView($brands);
     }    
     public function showABMPanel(){
         // traigo los autos
@@ -31,8 +31,10 @@ class AdminController {
     public function ShowAddCarForm() {
         // tomo el año actual
         $year=date("Y");
+        //titulo
+        $titulo= 'Alta de Publicación';
         // actualizo la vista
-        $this->adminView->show_form_view( $year);
+        $this->adminView->show_form_view($year, $titulo);
     }
     function addCar() {
         // toma los valores enviados por el formulario
@@ -97,12 +99,16 @@ class AdminController {
         $car=$this->carsModel -> getCar($id_car);
         // tomo el año actual
         $year=date("Y");
+        //titulo
+        $titulo= 'Editar Publicación';
         // actualizo la vista
-        $this->adminView->show_form_edit( $car, $id_car, $year);
+        $this->adminView->show_form_view($year,$titulo, $car);
     }
     public function showFormAddBrand(){
+        //titulo
+        $titulo='Crear Marca';
         // actualizo la vista
-        $this->adminView->form_add_brand();
+        $this->adminView->form_brand($titulo);
     }
     public function addBrand(){
         $brand_name = $_POST['nombre_marca'];
@@ -118,10 +124,12 @@ class AdminController {
             $this->failView->show_fail('No se pudo agregar! Revise su conexión');
     }
     public function showFormEditBrand($id_brand){
+        //titulo
+        $titulo='Editar Marca';
         // traigo la marca
         $brand=$this->brandsModel -> getBrand($id_brand);
         // actualizo la vista
-        $this->adminView->form_edit_brand( $brand);
+        $this->adminView->form_brand($titulo, $brand);
     }
     public function editBrand(){
         // toma los valores enviados por el formulario
