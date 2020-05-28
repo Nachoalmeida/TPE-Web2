@@ -82,7 +82,7 @@ class AdminController {
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
-        if (!isset ($title) && !isset ($model) && !isset ($year) && !isset ($kilometers)  && !isset ($price) && !isset ($description) && !isset ($photo) && !isset ($brand_name)){
+        if (!isset ($title) && !isset ($model) && !isset ($year) && !isset ($kilometers)  && !isset ($price) && !isset ($description) && !isset ($photo) && !isset ($brand_name) && !isset ($id_car)){
             header("Location: " . BASE_URL . "administrador");
             die;
         }
@@ -162,5 +162,5 @@ class AdminController {
             header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failView->show_fail('No se pudo eliminar! Revise su conexión');
-    }   
+    } 
 }

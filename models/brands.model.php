@@ -1,6 +1,6 @@
 <?php
 
-require_once('system.model.php');
+require_once 'system.model.php';
 
 class BrandsModel extends SystemModel{
     // Devuelve todas las marcas:

@@ -40,7 +40,6 @@ class AuthController {
         else {
         //muestro el login
         $this->authView->form_login('Datos incorrectos, pruebe nuevamente');
-
         }
 
     }
