@@ -44,6 +44,12 @@ class CarsController {
         $this->failview->show_fail('La URL no existe');
     }
 
+    public function showFormBuy(){
+        // actualizo la vista
+        $this->failview->show_fail('Felicitaciones!!! Ya es tuyo! Que maquinón!!');
+    }
+
+
     public function showCarsByBrand($brand){
         // pido los autos al MODELO
         $carsBrand = $this->carsModel->getCarsByBrand($brand);
@@ -51,7 +57,7 @@ class CarsController {
         // actualizo la vista
         $this->carsview->show_by_category($carsBrand,$brand);
         }
-        else{$this->failview->show_fail('No se ha encontrado ningún vehiculo con esa Marca :(');}
+        else{$this->failview->show_fail('No se ha encontrado ningún vehiculo con esa Marca :(', 'Marca');}
     }  
  
 }

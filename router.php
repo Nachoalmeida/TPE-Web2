@@ -37,6 +37,12 @@
             $controller->showFormLogin();
         break;
 
+        case 'comprar':
+            // instanciando un objeto de la clase AuthController
+            $controller = new CarsController();
+            $controller->showFormBuy();
+        break;
+
         //FIN PARTE PUBLICA************************************************************************************
 
         //AUTENTICACION*****************************************************************************************

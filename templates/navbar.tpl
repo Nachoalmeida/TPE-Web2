@@ -16,9 +16,12 @@
                             {foreach $marcas item= marca}
                                 <a class="dropdown-item" href="marca/{$marca->nombre_marca}">{$marca->nombre_marca}</a>
                             {/foreach}
+                            {if $logueo}
+                                <a class="dropdown-item" href="nueva_marca">Crear Marca..</a>
+                            {/if}
                         </div>
                     </li
-                    {if $logueo == 1}
+                    {if $logueo}
                     <li class="nav-item active">
                         <a class="nav-link" href="salir">Salir <span class="sr-only"></span></a>
                         <a class="nav-link" href="administrador">Administrador <span class="sr-only"></span></a>

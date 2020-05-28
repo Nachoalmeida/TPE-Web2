@@ -28,7 +28,7 @@
                 <p><strong class="">Precio:</strong> ${$auto->precio}</p>
                 <p><strong class="">Año:</strong> {$auto->anio}</p>
                 <p><strong class="">Kilometros:</strong> {$auto->kilometros}Km</p>
-                <a class="btn btn-dark" href="Error">Comprar</a>
+                <a class="btn btn-dark" href="comprar">Comprar</a>
                 <p></p>
             </div>
             <!--FIN FICHA Datos-->
@@ -41,7 +41,18 @@
             </div>
             <!--FIN CAJA Descripcion-->
              <div class="caja_estilo_gris_claro col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <a class="btn btn-light" href="inicio">Volver al Inicio</a>
+
+                {if $logueo}
+                    <form action="eliminar_publicacion" method="post">
+                {/if}
+
+                <a class="btn btn-light mr-2" href="inicio">Volver al Inicio</a>
+                               
+                {if $logueo}
+                        <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
+                        <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>                    
+                    </form>    
+                {/if}
             </div>
             
 
