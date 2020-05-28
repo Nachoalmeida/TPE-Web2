@@ -31,6 +31,11 @@
             $controller->showCar($parametros[1]);
         break;
 
+        case 'marca':    
+            $controller = new CarsController();
+            $controller->showCarsByBrand($parametros[1]);
+        break;
+
         case 'ingresar':
             // instanciando un objeto de la clase AuthController
             $controller = new AuthController();
@@ -71,11 +76,6 @@
         case 'nuevo_auto': // Dirige los datos del formulario al controller.    
             $controller = new AdminController();
             $controller->addCar();
-        break;
-
-        case 'marca':    
-            $controller = new CarsController();
-            $controller->showCarsByBrand($parametros[1]);
         break;
 
         case 'nueva_publicacion': //  formulario   ->   showForm()
