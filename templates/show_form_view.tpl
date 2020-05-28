@@ -37,7 +37,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Precio:</label>
-                    <input name="precio" type="text" class="form-control" {if $auto}value="{$auto->modelo}"{/if}required>
+                    <input name="precio" type="text" class="form-control" {if $auto}value="{$auto->precio}"{/if}required>
                 </div>
             </div>
 
