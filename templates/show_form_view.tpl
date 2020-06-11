@@ -47,15 +47,15 @@
                     <input name="kilometros" type="text" class="form-control" {if $auto}value="{$auto->kilometros}"{/if} required>
                 </div>
             </div>
-
+            
             <div class="col-6">
-                <div class="form-group">
-                    <label>Foto(URL):</label>
-                    <input name="foto" type="text" class="form-control"{if $auto}value="{$auto->foto}"{/if} required>
+                <label>Imagen:</label>
+                <div class="custom-file">
+                    <input name="foto" type="file" class="custom-file-input"{if $auto}value="{$auto->foto}"{/if} required>
+                    <label class="custom-file-label" for="validatedCustomFile">Subir imagen...</label>
                 </div>
             </div>
-
-            
+     
             <div class="col-3">
                 <div class="form-group">
                     <label>Año:</label>

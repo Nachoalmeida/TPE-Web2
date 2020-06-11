@@ -67,3 +67,13 @@ body{
 .color_letra_negra{
     color:black;
 }
+
+
+
+
+.media .media-object { max-width: 120px; }
+
+.img-circle {
+    padding: 20px 20px;
+    border-radius: 100px;
+}

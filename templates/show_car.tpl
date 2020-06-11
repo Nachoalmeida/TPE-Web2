@@ -39,6 +39,9 @@
                 <h4 class="text-center">Descripcion:</h4>
                 <p class="text-center">{$auto->descripcion}</p>
             </div>
+
+            {include 'panel_comments.tpl'}
+
             <!--FIN CAJA Descripcion-->
              <div class="caja_estilo_gris_claro col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
