@@ -161,6 +161,6 @@ class AdminController {
         if($detelebrand)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            $this->failView->show_fail('No se pudo eliminar! Revise su conexión');
+            $this->failView->show_fail('No se puede eliminar una marcacon publicaciones activas!');
     } 
 }
