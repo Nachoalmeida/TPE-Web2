@@ -16,11 +16,13 @@ class AuthController {
        //traigo las marcas
        $brands=$this->brandsModel->getAllBrands();
        $this->authView = new AuthView($brands);
-    }    
+    }  
+
     public function showFormLogin(){
         //muestro el login
         $this->authView->form_login(); 
     }
+
     public function login(){
         $mail=$_POST['mail'];
         $pass=$_POST['password'];
@@ -43,9 +45,15 @@ class AuthController {
         }
 
     }
+
     public function logout(){
         session_start();
         session_destroy();
         header("Location: " . BASE_URL . "ingresar");
+    }
+
+    public function showFormSignUp(){
+        //muestro el SignUp
+        $this->authView->form_sign_up(); 
     }
 }
