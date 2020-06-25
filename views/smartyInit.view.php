@@ -11,6 +11,7 @@ class SmartyInit{
         $this->smarty->assign('marcas', $brands);
         }
         $this->smarty->assign('logueo', HelperSession::access_view());
+        $this->smarty->assign('Admin', HelperSession::accessAdmin_view());
     }
     
     public function getSmarty(){

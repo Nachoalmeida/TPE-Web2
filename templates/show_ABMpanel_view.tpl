@@ -2,7 +2,7 @@
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-4 caja_estilo_gris">
         <h3>Panel de Administracion:</h3>
-        <h6>SuperUsuario: {$usuario}</h6>       
+        <h6>Usuario: {$usuario}</h6>       
     </div>
 
    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 my-2 mx-auto">
@@ -21,6 +21,7 @@
             {/foreach}
         </ul>
     </div> 
+    {if $Admin}
     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 my-2 mx-auto">
         <ul class="list-group">
             <li class="list-group-item list-group-item-secondary"><strong>Listado de Marcas:</strong>
@@ -36,6 +37,7 @@
                 </li>   
             {/foreach}
         </ul>
+    {/if}
     </div>
                 
 

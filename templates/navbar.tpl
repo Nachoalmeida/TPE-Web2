@@ -16,7 +16,7 @@
                             {foreach $marcas item= marca}
                                 <a class="dropdown-item" href="marca/{$marca->nombre_marca}">{$marca->nombre_marca}</a>
                             {/foreach}
-                            {if $logueo}
+                            {if $Admin}
                                 <a class="dropdown-item" href="nueva_marca">Crear Marca..</a>
                             {/if}
                         </div>

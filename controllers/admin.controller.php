@@ -105,12 +105,14 @@ class AdminController {
         $this->adminView->show_form_view($year,$titulo, $car);
     }
     public function showFormAddBrand(){
+        HelperSession::accessAdmin();
         //titulo
         $titulo='Crear Marca';
         // actualizo la vista
         $this->adminView->form_brand($titulo);
     }
     public function addBrand(){
+        HelperSession::accessAdmin();
         $brand_name = $_POST['nombre_marca'];
         if (!isset ($brand_name)){
             header("Location: " . BASE_URL . "administrador");
@@ -124,6 +126,7 @@ class AdminController {
             $this->failView->show_fail('No se pudo agregar! Revise su conexión');
     }
     public function showFormEditBrand($id_brand){
+        HelperSession::accessAdmin();
         //titulo
         $titulo='Editar Marca';
         // traigo la marca
@@ -132,6 +135,7 @@ class AdminController {
         $this->adminView->form_brand($titulo, $brand);
     }
     public function editBrand(){
+        HelperSession::accessAdmin();
         // toma los valores enviados por el formulario
         $brand_name = $_POST['nombre_marca'];
         // traigo el id de la marca, del value del boton, con el name id_marca
@@ -149,6 +153,7 @@ class AdminController {
             $this->failview->show_fail('No se pudo editar! Revise su conexión');
     }
     public function deleteBrand(){
+        HelperSession::accessAdmin();
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_brand=$_POST['id_marca_eliminar'];
         if (!isset ($id_brand)){

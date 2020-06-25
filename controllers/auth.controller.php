@@ -39,6 +39,7 @@ class AuthController {
         if($user && password_verify($pass, $user->password)){
             session_start();
             $_SESSION['logged'] = true;
+            $_SESSION['admin'] = $user->administrador;
             $_SESSION['user'] = $user->user_name;
             header("Location: " . BASE_URL . "administrador");
         }
