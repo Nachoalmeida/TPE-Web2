@@ -5,17 +5,17 @@
             <div class="col-md-4 mb-3 mx-auto">       
                 {if $mensaje}
                     <label for="inputEmail" class="sr-only">Email</label>
-                    <input type="email" name="mail" class="form-control is-invalid" placeholder="Email address">
+                    <input type="email" name="mail" class="form-control is-invalid" placeholder="Email address" required>
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="password" class="form-control is-invalid" placeholder="Password">
+                    <input type="password" name="password" class="form-control is-invalid" placeholder="Password" required>
                     <div class="invalid-feedback">
                         {$mensaje}
                     </div>    
                 {else}
                     <label for="inputEmail" class="sr-only">Email</label>
-                    <input type="email" name="mail" class="form-control" placeholder="Email address">  
+                    <input type="email" name="mail" class="form-control" placeholder="Email address" required>  
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                 {/if} 
                 <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Entrar</button>
                 <a class="btn btn-light mt-3" href="inicio">Volver al inicio</a>

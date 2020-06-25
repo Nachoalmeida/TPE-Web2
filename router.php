@@ -42,6 +42,12 @@
             $controller->showFormLogin();
         break;
 
+        case 'registrarse':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->showFormSingUp();
+        break;
+
         case 'comprar':
             $controller = new CarsController();
             $controller->showFormBuy();
@@ -61,6 +67,12 @@
             // instanciando un objeto de la clase AuthController
             $controller = new AuthController();
             $controller->logout();
+        break;
+
+        case 'nuevo_usuario':
+            // instanciando un objeto de la clase AuthController
+            $controller = new AuthController();
+            $controller->SingUp();
         break;
 
         //AUTENTICACION******************************************************************************************

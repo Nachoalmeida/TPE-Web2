@@ -1,12 +1,14 @@
 <?php
 
 require_once 'views/auth.view.php';
+require_once 'views/fail.view.php';
 require_once 'models/brands.model.php';
 require_once 'models/users.model.php';
 
 class AuthController {
 
     private $authView;
+    private $failView;
     private $brandsModel;
     private $usersModel;
 
@@ -16,6 +18,7 @@ class AuthController {
        //traigo las marcas
        $brands=$this->brandsModel->getAllBrands();
        $this->authView = new AuthView($brands);
+       $this->failView = new FailView($brands);
     }  
 
     public function showFormLogin(){
@@ -31,7 +34,7 @@ class AuthController {
             die;
         }
         //traigo usuario
-        $user=$this->usersModel->getUser($mail);
+        $user=$this->usersModel->getUserMail($mail);
 
         if($user && password_verify($pass, $user->password)){
             session_start();
@@ -51,9 +54,55 @@ class AuthController {
         session_destroy();
         header("Location: " . BASE_URL . "ingresar");
     }
-
-    public function showFormSignUp(){
+ //NUEVO******************************************************************************************************
+    public function showFormSingUp(){
         //muestro el SignUp
         $this->authView->form_sign_up(); 
     }
+
+    public function SingUp(){
+        // toma los valores enviados por el formulario
+        $user_name = $_POST['user_name'];
+        $pass = $_POST['password'];
+        $mail = $_POST['mail'];
+        //preguntar por todas, nunca van solo a nivel front-end
+        if (empty ($user_name) || empty ($pass) || empty ($mail)){
+            header("Location: " . BASE_URL . "registrarse");
+            die;
+        }
+
+        $user=$this->usersModel->getUserName($user_name);
+        $mail=$this->usersModel->getUserMail($mail);
+        //REVISAR IF 
+        if ($user || $mail){
+            if ($user && !$mail){
+                $this->authView->form_sign_up('El usuario ya existe');
+                die;
+            }
+            else if($mail && !$user){
+                $this->authView->form_sign_up(null, 'El mail ya existe');
+                die;
+            }
+            else{
+                $this->authView->form_sign_up('El usuario ya existe','El mail ya existe');
+                die;
+            }
+        }
+
+        $encrypted_pass = password_hash ($pass , PASSWORD_DEFAULT );
+        
+        if (($_FILES['input_name']['type'] == "image/jpg" || 
+        $_FILES['input_name']['type'] == "image/jpeg" || 
+        $_FILES['input_name']['type'] == "image/png")) {
+            $success = $this->usersModel->insertImage($user_name, $encrypted_pass, $mail);
+        } else {
+            $success = $this->usersModel->insert($user_name, $encrypted_pass, $mail, "images/user_foto/user");
+        }
+
+        if($success)
+            header('Location: ' . BASE_URL . "administrador");
+        else
+            $this->failView->show_fail('Error al agregar el registro');
+    }
+//NUEVO******************************************************************************************************
 }

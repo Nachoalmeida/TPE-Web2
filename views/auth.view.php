@@ -7,8 +7,9 @@ class AuthView extends SmartyInit{
         $this->getSmarty()->assign('titulo', 'Ingresar');
         $this->getSmarty()->display('login_form.tpl');
     }
-    public function form_sign_up($errorMessage = false){
-        $this->getSmarty()->assign('mensaje', $errorMessage);
+    public function form_sign_up($errorUser = false,$errorMail=false){
+        $this->getSmarty()->assign('mensaje_usuario', $errorUser);
+        $this->getSmarty()->assign('mensaje_mail', $errorMail);
         $this->getSmarty()->assign('titulo', 'Crear usuario');
         $this->getSmarty()->display('sign_up_form.tpl');
     }
