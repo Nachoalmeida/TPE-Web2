@@ -71,16 +71,15 @@ class AuthController {
             header("Location: " . BASE_URL . "registrarse");
             die;
         }
-
         $user=$this->usersModel->getUserName($user_name);
-        $mail=$this->usersModel->getUserMail($mail);
+        $mailCheck=$this->usersModel->getUserMail($mail);
         //REVISAR IF 
-        if ($user || $mail){
-            if ($user && !$mail){
+        if ($user || $mailCheck){
+            if ($user && !$mailCheck){
                 $this->authView->form_sign_up('El usuario ya existe');
                 die;
             }
-            else if($mail && !$user){
+            else if($mailCheck && !$user){
                 $this->authView->form_sign_up(null, 'El mail ya existe');
                 die;
             }
@@ -89,7 +88,7 @@ class AuthController {
                 die;
             }
         }
-
+        
         $encrypted_pass = password_hash ($pass , PASSWORD_DEFAULT );
         
         if (($_FILES['input_name']['type'] == "image/jpg" || 

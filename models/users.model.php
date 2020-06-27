@@ -18,7 +18,6 @@ class UsersModel extends SystemModel{
         $sentencia->execute([$user_name, $pass, $mail, $nombreFinal]);
 
         $lastId = $this->getDb()->lastInsertId();
-
         return  $lastId; 
     }
 
