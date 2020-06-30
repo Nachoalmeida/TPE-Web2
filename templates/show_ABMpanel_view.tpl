@@ -11,7 +11,7 @@
     </div>
 
    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 my-2 mx-auto">
-        <ul class="list-group list-padd">
+        <ul class="list-group">
             <li class="list-group-item list-group-item-secondary"><strong>Listado de publicaciones:</strong>
                 <a class="btn btn-light ml-4 mr-5" href="nueva_publicacion">Crear publicacion</a>
             </li>
@@ -23,13 +23,15 @@
                                 <img class="media-object img-circle" src="{$auto->foto_perfil}" alt="">
                                 <p class="text-center">{$auto->user_name}</p>
                             </div>
-                            <div class="list-group-item list-group-item-dark col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                            <div class="list-group-item list-group-item-dark media  col-sm-12 col-md-9 col-lg-9 col-xl-9">
                                 <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
                                 <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>
-                                <b>{$auto->titulo}</b>
+                                <b>{$auto->titulo}</b> / <p>{$auto->descripcion}</p>
                             </div>
                         </div>
+                        
                     </form>    
+                    
                 </li>   
             {/foreach}
         </ul>
