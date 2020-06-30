@@ -1,6 +1,7 @@
 <?php
+
 require_once 'libs/router/Router.php';
-// require_once 'api/task-api.controller.php';
+require_once 'api/cars-api.controller.php';
 
 // creo el ruteador usando la libreria externa
 $router = new Router();
