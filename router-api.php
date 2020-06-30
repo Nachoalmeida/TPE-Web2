@@ -7,9 +7,9 @@ require_once 'api/cars-api.controller.php';
 $router = new Router();
 
 // creo la tabla de ruteo
-$router->addRoute('tareas', 'GET', 'TaskApiController', 'getTasks');
-$router->addRoute('tareas/:ID', 'GET', 'TaskApiController', 'getTask');
-$router->addRoute('tareas/:ID', 'DELETE', 'TaskApiController', 'deleteTask');
+//$router->addRoute('tareas', 'GET', 'TaskApiController', 'getTasks');
+//$router->addRoute('tareas/:ID', 'GET', 'TaskApiController', 'getTask');
+//$router->addRoute('tareas/:ID', 'DELETE', 'TaskApiController', 'deleteTask');
 
 
 // rutea

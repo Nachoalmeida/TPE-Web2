@@ -10,8 +10,7 @@ class CarsController {
     private $brandsModel;
     private $carsview;
     private $failview;
-
-    
+   
     public function __construct() {
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
@@ -49,11 +48,10 @@ class CarsController {
         $this->failview->show_fail('Felicitaciones!!! Ya es tuyo! Que maquinón!!');
     }
 
-
     public function showCarsByBrand($brand){
         // pido los autos al MODELO
         $carsBrand = $this->carsModel->getCarsByBrand($brand);
-        if (!empty($carsBrand)){
+        if (!empty ($carsBrand)){
         // actualizo la vista
         $this->carsview->show_by_category($carsBrand,$brand);
         }
