@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2020 a las 20:05:46
+-- Tiempo de generación: 30-06-2020 a las 18:26:34
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -36,62 +36,23 @@ CREATE TABLE `autos` (
   `precio` int(11) NOT NULL,
   `descripcion` text NOT NULL,
   `foto` varchar(200) NOT NULL,
-  `id_marca_fk` int(11) NOT NULL
+  `id_marca_fk` int(11) NOT NULL,
+  `id_usuario_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `autos`
 --
 
-INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `precio`, `descripcion`, `foto`, `id_marca_fk`) VALUES
-(2, 'Vendo BMW, ni idea el modelo', 'nose', 2016, 40000, 12241234, 'no es el modelo que ami me gusta recién después de 3 años me doy cuenta... esta impecable!! \r\nni idea de las especificaciones por que nose el modelo!!\r\nuna sola vez me dejo a pata!', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRQWmrenm3I2nDEkFhcDRtcwAdjrVIr9H1db2OTeMPvFFUOtypY&usqp=CAU', 4),
-(3, 'Ford Fiesta Kinetic Design 1.6 Se Powershift 120cv', 'fiesta', 2007, 100000, 300000, 'Vendo fiestita impecable! \r\nno es el Kinetic pero ya fue', 'https://imganuncios.mitula.net/ford_fiesta_for_fiesta_2003_con_gnc_full_1era_mano_11000km_en_cordoba_7610135556641595682.jpg', 1),
-(7, 'Volkswagen Gol Aire Direccion Gnc', 'Gol', 2011, 105000, 289990, 'VALOR FINAL TRANSFERENCIA A CARGO DEL COMPRADOR\r\nLEER AVISO!!! AVISAR 1HS ANTES DE ACERCARSE\r\nLEER TODO EL AVISO!!!!!!\r\nLos valores son de contado. Financiado/Permuta son $10.000 mas\r\n', 'https://www.rionegro.com.ar/wp-content/uploads/2020/01/vw-gol-power-2007.jpg?w=920&h=517&resize=920,517', 6),
-(8, 'Mercedes-Benz Clase C 2.1 C220 Cdi Avantgarde At', 'C 2.1 C220 Cdi Avantgarde', 2009, 315900, 850000, 'El vendedor no incluyó una descripción del producto', 'https://http2.mlstatic.com/mercedes-benz-clase-c-21-c220-cdi-avantgarde-at-2009-D_NQ_NP_928037-MLA40301599918_012020-F.webp', 5),
-(9, 'Mercedes-Benz Clase A 1.6 A 200 Style B.efficiency 156cv', 'A 1.6 A 200 Style', 2013, 107000, 1400000, 'El vendedor no incluyó una descripción del producto', 'https://http2.mlstatic.com/mercedes-benz-clase-a-16-a-200-style-befficiency-156cv-D_NQ_NP_935927-MLA41856569839_052020-F.webp', 5),
-(10, 'Chevrolet S10 Financia Plan Gob Entrega Pactada Solo Dni', 'S10', 2020, 0, 0, 'CHEVROLET S10\r\nFINANCIA HASTA EL 100%\r\nCUOTAS FIJAS SIN INTERES\r\nTOMAMOS USADOS AL MEJOR PRECIO DEL MERCADO\r\nFINANCIA SOLO CON DNI(ACEPTAMOS TEMPORARIOS)\r\nREACTIVA TU PLAN CAIDO\r\nCONSULTE PROMOCIONES SEMANALES EXCLUSIVAS\r\nCHEVROLET CAR ONE < Ford', 'https://http2.mlstatic.com/chevrolet-s10-financia-plan-gob-entrega-pactada-solo-dni-D_NQ_NP_711224-MLA40402271399_012020-F.webp', 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `marcas`
---
-
-CREATE TABLE `marcas` (
-  `id_marca` int(11) NOT NULL,
-  `nombre_marca` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `marcas`
---
-
-INSERT INTO `marcas` (`id_marca`, `nombre_marca`) VALUES
-(1, 'Ford'),
-(2, 'Chevrolet'),
-(4, 'BMW'),
-(5, 'Mercedes Benz'),
-(6, 'Volkswagen');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
-  `mail` varchar(200) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `user_name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `user_name`) VALUES
-(1, 'admin@gmail.com', '$2y$12$S0H.0ABwNEPKUeuY5k7ouukdzwQlAXvjiRMHiXZ9pLLGuONvMK.nC', 'carsadmin');
+INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `precio`, `descripcion`, `foto`, `id_marca_fk`, `id_usuario_fk`) VALUES
+(6, 'etgryhrherh', 'ghdfhdhdhdh', 2017, 3254235, 3425345, 'rghdhjdfhdfh', '534252345346', 4, 1),
+(7, 'etgryhrherh', 'ghdfhdhdhdh', 2017, 3254235, 3425345, 'rghdhjdfhdfh', '534252345346', 4, 1),
+(8, 'ytrujrturtu', 'rturturt', 2017, 23423423, 4234234, '423eryhdfhaesr', '6yryeryf', 27, 6),
+(9, 'ytrujrturtu', 'rturturt', 2017, 23423423, 4234234, '423eryhdfhaesr', '6yryeryf', 27, 6),
+(10, 'ytrujrturtu', 'rturturt', 2017, 23423423, 4234234, '423eryhdfhaesr', '6yryeryf', 27, 6),
+(11, '5euy5urt', 'turturturt', 56756, 67567, 67567, 'tuyhtrujsrtu', 'hdhdrh', 4, 17),
+(12, '5euy5urt', 'turturturt', 56756, 67567, 67567, 'tuyhtrujsrtu', 'hdhdrh', 4, 17),
+(13, 'eryeryh', 'r4terw', 2017, 3254235, 34234, 'rteghfhdfhdfhdfhrr0oihji0oghj90rhgj9ghsdoifg4e89her9uioghroigjer0g9\'hjerjoi\'hg809sgiodhg80934hg809rhgkosdgh0984gy098erhg0943ghhh', 'gfhfghgfh', 6, 16);
 
 --
 -- Índices para tablas volcadas
@@ -102,19 +63,8 @@ INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `user_name`) VALUES
 --
 ALTER TABLE `autos`
   ADD PRIMARY KEY (`id_auto`),
-  ADD KEY `id_marca_fk` (`id_marca_fk`);
-
---
--- Indices de la tabla `marcas`
---
-ALTER TABLE `marcas`
-  ADD PRIMARY KEY (`id_marca`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD KEY `id_marca_fk` (`id_marca_fk`),
+  ADD KEY `id_usuario-fk` (`id_usuario_fk`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -124,19 +74,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autos`
 --
 ALTER TABLE `autos`
-  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `marcas`
---
-ALTER TABLE `marcas`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
@@ -146,7 +84,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `autos`
 --
 ALTER TABLE `autos`
-  ADD CONSTRAINT `autos_ibfk_1` FOREIGN KEY (`id_marca_fk`) REFERENCES `marcas` (`id_marca`);
+  ADD CONSTRAINT `autos_ibfk_2` FOREIGN KEY (`id_marca_fk`) REFERENCES `marcas` (`id_marca`),
+  ADD CONSTRAINT `autos_ibfk_3` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuarios` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
