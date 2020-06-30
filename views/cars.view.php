@@ -5,7 +5,7 @@ require_once 'smartyInit.view.php';
 class CarsView extends SmartyInit{
 
     public function show_cars($cars){
-        $this->getSmarty()->assign('titulo', 'Autos');
+        $this->getSmarty()->assign('titulo', 'Comprate un Nissan');
         $this->getSmarty()->assign('autos', $cars);
         $this->getSmarty()->display('home.tpl');
 

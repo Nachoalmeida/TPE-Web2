@@ -3,7 +3,7 @@ require_once 'libs/smarty/Smarty.class.php';
 
 class SmartyInit{
     private $smarty;
-
+    //PREGUNTAR SI VA NULL O $brands = [];
     public function __construct($brands=null){
         $this->smarty = new Smarty();
         $this->smarty->assign('base_url', BASE_URL);

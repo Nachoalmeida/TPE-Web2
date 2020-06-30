@@ -1,26 +1,40 @@
 {include 'header.tpl'}
 
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-4 caja_estilo_gris">
-        <h3>Panel de Administracion:</h3>
-        <h6>Usuario: {$usuario}</h6>       
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-4 caja_estilo_gris media">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h3>Panel de Administracion:</h3>
+                <img class="media-object img-circle" src="{$foto}" alt="">
+                <figure>Usuario: {$usuario}</figure>
+            </div>
+        </div>
     </div>
 
    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 my-2 mx-auto">
-        <ul class="list-group">
+        <ul class="list-group list-padd">
             <li class="list-group-item list-group-item-secondary"><strong>Listado de publicaciones:</strong>
                 <a class="btn btn-light ml-4 mr-5" href="nueva_publicacion">Crear publicacion</a>
             </li>
             {foreach $autos item= auto}              
-                <li class="list-group-item list-group-item-dark">    
+                <li class="list-group-item list-group-item-dark media">    
                     <form action="eliminar_publicacion" method="post">
-                        <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
-                        <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>
-                        {$auto->titulo}
+                        <div class="row"> 
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <img class="media-object img-circle" src="{$auto->foto_perfil}" alt="">
+                                <p class="text-center">{$auto->user_name}</p>
+                            </div>
+                            <div class="list-group-item list-group-item-dark col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
+                                <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>
+                                <b>{$auto->titulo}</b>
+                            </div>
+                        </div>
                     </form>    
                 </li>   
             {/foreach}
         </ul>
     </div> 
+    
     {if $Admin}
     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 my-2 mx-auto">
         <ul class="list-group">

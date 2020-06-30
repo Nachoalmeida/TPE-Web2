@@ -9,6 +9,7 @@
             </figure>
             <div class="caja_estilo_gris_claro">
                 <h6 class="text-center"><strong class="">Precio:</strong> ${$auto->precio}</h6>
+                <h6 class="text-center"><strong class="">Marca:</strong> {$auto->nombre_marca}</h6>
             </div>
         </div>
     </a>
