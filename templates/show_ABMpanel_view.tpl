@@ -44,23 +44,24 @@
     </div> 
     
     {if $Admin}
-    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 my-2 mx-auto">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-secondary"><strong>Listado de Marcas:</strong>
-                <a class="btn btn-light ml-4 mr-3" href="nueva_marca">Crear marca</a>
-            </li>
-            {foreach $marcas item= marca}              
-                <li class="list-group-item list-group-item-dark">    
-                    <form action="eliminar_marca" method="post">
-                        <a class="btn btn-light mr-2" href="editar_marca/{$marca->id_marca}">Editar</a>
-                        <button name="id_marca_eliminar" type="submit" class="btn btn-danger" value= "{$marca->id_marca}">Eliminar</button>
-                        {$marca->nombre_marca}
-                    </form>    
-                </li>   
-            {/foreach}
-        </ul>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 my-2 mx-auto">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-secondary"><strong>Listado de Marcas:</strong>
+                    <a class="btn btn-light ml-4 mr-3" href="nueva_marca">Crear marca</a>
+                </li>
+                {foreach $marcas item= marca}              
+                    <li class="list-group-item list-group-item-dark">    
+                        <form action="eliminar_marca" method="post">
+                            <a class="btn btn-light mr-2" href="editar_marca/{$marca->id_marca}">Editar</a>
+                            <button name="id_marca_eliminar" type="submit" class="btn btn-danger" value= "{$marca->id_marca}">Eliminar</button>
+                            {$marca->nombre_marca}
+                        </form>    
+                    </li>   
+                {/foreach}
+            </ul>
+        </div>
     {/if}
-    </div>
+
                 
 
 {include 'footer.tpl'}

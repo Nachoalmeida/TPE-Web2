@@ -34,8 +34,8 @@ class CarsController {
     public function showCar($id_car){
         // pido el auto al MODELO
         $car = $this->carsModel->getCar($id_car);
-
-        $photos = $this->photoModel->getAllphotos();
+        //traigo las fotos del auto
+        $photos=$this->photoModel ->getPhotosByCar($id_car);
         
         if (!empty($car)){
         // actualizo la vista

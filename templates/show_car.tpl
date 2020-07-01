@@ -6,13 +6,11 @@
                 <p></p>
                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        {foreach $fotos item= foto}          
-                            {if $foto->id_auto_fk == $auto->id_auto} 
-                                <div class="carousel-item  {if !$unaFoto}active{/if}"> 
-                                    <img class="d-block w-100" src="{$foto->nombre}" alt="{$auto->titulo}">  
-                                </div>  
-                                {$unaFoto=1}                                                                     
-                            {/if} 
+                        {foreach $fotos item= foto}                                     
+                            <div class="carousel-item {if !$unaFoto}active{/if}"> 
+                                <img class="d-block w-100" src="{$foto->nombre}" alt="{$auto->titulo}">  
+                            </div>  
+                            {$unaFoto=1}                                                                     
                         {/foreach}                                       
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

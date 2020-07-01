@@ -13,6 +13,10 @@ class UserController {
     private $photoModel;
     private $adminView;
     private $failView;
+    private $user_id;
+    private $userChecked;
+    private $userName;
+    private $userPhoto;
 
     public function __construct() {
        HelperSession::access();
@@ -23,12 +27,16 @@ class UserController {
        $brands = $this->brandsModel->getAllBrands();
        $this->adminView  = new AdminView($brands);
        $this->failView = new FailView($brands);
+       $this->user_id = $_SESSION['user_id'];
+       $this->userChecked = $_SESSION['admin'];
+       $this->userName = $_SESSION['user'];
+       $this->userPhoto = $_SESSION['photo'];
     }    
 
     public function showABMPanel(){
         // traigo los autos
-        $userChecked=$_SESSION['admin'];
-        $user_id=$_SESSION['user_id'];   
+        $userChecked=$this->userChecked;
+        $user_id=$this->user_id;  
         //si es adming puede ver todo sion solo ve sus publicaciones
         if ($userChecked){
         $cars=$this->carsModel -> getAllCars();
@@ -36,10 +44,10 @@ class UserController {
         else $cars=$this->carsModel -> getCarsByUser($user_id);
 
         //traigo el nombre del usuario
-        $user=$_SESSION['user'];
-        $photo=$_SESSION['photo'];
+        $userName=$this->userName;
+        $photo=$this->userPhoto;
         // actualizo la vista
-        $this->adminView->show_ABMpanel_view( $cars,$user,$photo);
+        $this->adminView->show_ABMpanel_view( $cars,$userName,$photo);
     }
 
     public function ShowAddCarForm() {
@@ -61,34 +69,26 @@ class UserController {
         $description = $_POST['descripcion'];
         $brand_name = $_POST['nombre_marca'];
 
+        //la unica que se me ocurrio para saber si tiene algo el file o no 
+        foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name)
+    
         //preguntar por todas, nunca van solo a nivel front-end
-        if (empty ($title) || empty ($model) || empty ($year) || empty ($kilometers)  || empty ($price) || empty ($description) || empty ($brand_name)){
-            header("Location: " . BASE_URL . "administrador");
+        if (empty ($title) || empty ($model) || empty ($year) || empty ($price) || empty ($description) || empty ($brand_name) || !$tmp_name){
+            $this->failView->show_fail('Faltan Datos!!');
             die;
         }
         //traigo el ID del usuario, para saber de quien es la publicacion.
-        $user=$_SESSION['user_id'];
+        $user= $this->user_id;
 
         // inserta en la DB y redirige
         $success = $this->carsModel->insertCar($title, $model, $year, $kilometers, $price, $description,$brand_name,$user);
 
-        //si hay imagenes las inserta tambien
-        if ($_FILES){
-            //PREGUNTAR SI ESTA BIEN, ASI
-            //recorremos el arreglo
-            foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name)
-            {
-                //pregunta si es del formato que aceptamos
-                if (($_FILES['imagesToUpload']['type'][$key] == "image/jpg" || 
-                    $_FILES['imagesToUpload']['type'] [$key]== "image/jpeg" || 
-                    $_FILES['imagesToUpload']['type'] [$key] == "image/png")) {
-
-                    $originalName = $_FILES["imagesToUpload"]["name"][$key];
-                    $this->photoModel ->insertByCar($success,$originalName,$tmp_name);
-                }
-            }
+        //PREGUNTAR SI ESTA BIEN, ASI
+        if($success){
+            $success_img =$this->addPhotos($success);
         }
-        if($success)
+        
+        if($success && $success_img)
             header('Location: ' . BASE_URL . "administrador");
         else
             $this->failView->show_fail('Error al agregar el registro');
@@ -125,21 +125,42 @@ class UserController {
         $kilometers = $_POST['kilometros'];
         $price = $_POST['precio'];
         $description = $_POST['descripcion'];
-        $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
 
-        if (empty ($title) || empty ($model) || empty ($year) || empty ($kilometers)  || empty ($price) || empty ($description) || empty ($photo) || empty ($brand_name) || empty ($id_car)){
-            header("Location: " . BASE_URL . "administrador");
+        if (empty ($title) || empty ($model) || empty ($year) || empty ($price) || empty ($description) || empty ($brand_name) || empty ($id_car)){
+            $this->failView->show_fail('Faltan Datos!!');
             die;
         }
+        //traigo las fotos del auto, para verificar que tiene foto subida
+        $photos=$this->photoModel ->getPhotosByCar($id_car);
+
+        if (!$photos){
+             //ejecuto un for para saber si subio alguna  
+            foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name);
+            if (!$tmp_name){
+                $this->failView->show_fail('Faltan las fotos!');
+                die;
+            }
+        }
+        if ($photos){
+        //ejecuto un for para saber si subio alguna  
+        foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name);
+        }
+        $photos=1;
 
         //chequeo los privilegios del usuario, si puede o no editar
         $this->userPrivileges($id_car);
 
         // edito del auto
-        $editcar=$this->carsModel -> editCar($id_car,$title, $model, $year, $kilometers, $price, $description, $photo,$brand_name);
+        $editcar=$this->carsModel -> editCar($id_car,$title, $model, $year, $kilometers, $price, $description, $brand_name);
+
+        //PREGUNTAR SI ESTA BIEN, ASI
+        if($tmp_name && $id_car){
+            $photos =$this->addPhotos($id_car);
+        }
+        
         // actualizo la vista
-        if($editcar)
+        if($editcar && $photos)
             header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failView->show_fail('No se pudo editar! Revise su conexión');
@@ -150,20 +171,48 @@ class UserController {
         //chequeo los privilegios del usuario, si puede o no editar
         $this->userPrivileges($id_car);
 
-        // traigo los autos
+        // traigo el auto
         $car=$this->carsModel -> getCar($id_car);
+
+        //traigo las fotos del auto
+        $photos=$this->photoModel ->getPhotosByCar($id_car);
+
         // tomo el año actual
         $year=date("Y");
         //titulo
         $titulo= 'Editar Publicación';
         // actualizo la vista
-        $this->adminView->show_form_view($year,$titulo, $car);
+        $this->adminView->show_form_view($year,$titulo, $car,$photos);
     }
+
+    //ELIMINAR UNA FOTO DE LAS PUBLICACIONES
+    public function deletePhoto($id_foto,$id_car){
+
+        //verifico que vengan los datos solicitados 
+        if (empty ($id_foto) || empty ($id_car)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
+
+        //chequeo los privilegios del usuario, si puede o no manipular la publicacion
+        $this->userPrivileges($id_car);
+
+        //traigo las fotos del auto
+        $photos=$this->photoModel ->deletePhoto($id_foto);
+
+        //PREGUNTART SI ESTA BIEN ESTO  
+        if($photos){
+            $referencia= $_SERVER['HTTP_REFERER'];
+            header ("Location: ".$referencia);}
+        else
+        $this->failView->show_fail('No se pudo eliminar la foto! Revise su conexión');
+    }
+
     //FUNCION QUE NO PERMITE A LOS USUARIOS manipular publicaciones de otros usuarios
     private function userPrivileges($car_id){
 
-        $user_id=$_SESSION['user_id'];   
-        $userChecked=$_SESSION['admin'];
+        $user_id = $this->user_id;
+        $userChecked = $this->userChecked;
 
         if (!$userChecked){
             $cars=$this->carsModel ->getCarsByUser($user_id);
@@ -180,5 +229,25 @@ class UserController {
             $this->failView->show_fail('La publicacion no es de su propiedad');
             die;
         }
+    }
+
+    private function addPhotos($success){
+        //si algo sale mal tira false, sino cambia a true
+        $success_img=false;
+        //recorremos el arreglo
+        foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name)
+        {
+            //pregunta si es del formato que aceptamos
+            if (($_FILES['imagesToUpload']['type'][$key] == "image/jpg" || 
+                $_FILES['imagesToUpload']['type'] [$key]== "image/jpeg" || 
+                $_FILES['imagesToUpload']['type'] [$key] == "image/png")) {
+
+                $originalName = $_FILES["imagesToUpload"]["name"][$key];
+                $success_img=$this->photoModel ->insertByCar($success,$originalName,$tmp_name);
+                
+            }
+        }
+        return $success_img;
+       
     }
 }

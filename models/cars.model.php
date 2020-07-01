@@ -43,9 +43,9 @@ class CarsModel extends SystemModel{
         return $sentencia->execute([$id_car]); // ejecuta    
     }
     //edita una publicacion
-    public function editCar($id_car, $title, $model, $year, $kilometers, $price, $description, $photo, $brand_name){
-       $sentencia = $this->getDb()->prepare("UPDATE autos SET titulo= ?, modelo= ?, anio= ?, kilometros= ?,precio= ?,descripcion= ?,foto= ?, id_marca_fk= ? WHERE id_auto = ?"); // prepara la consulta
-       return $sentencia->execute([$title, $model, $year, $kilometers, $price, $description, $photo, $brand_name, $id_car]); // ejecuta    
+    public function editCar($id_car, $title, $model, $year, $kilometers, $price, $description, $brand_name){
+       $sentencia = $this->getDb()->prepare("UPDATE autos SET titulo= ?, modelo= ?, anio= ?, kilometros= ?,precio= ?,descripcion= ?, id_marca_fk= ? WHERE id_auto = ?"); // prepara la consulta
+       return $sentencia->execute([$title, $model, $year, $kilometers, $price, $description, $brand_name, $id_car]); // ejecuta    
     }
     // trae solo los autos con un usuario especificado
     public function getCarsByUser($user_id){

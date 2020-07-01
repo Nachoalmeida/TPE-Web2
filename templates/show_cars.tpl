@@ -4,12 +4,12 @@
     <a class="btn col-sm-12 col-md-3 col-lg-3 col-xl-3 caja_para_efecto_retraer" href="ver_mas/{$auto->id_auto}">
         <div class="caja_estilo_gris efecto_retraer_algo" >
             <ul class="slider">
+                {$unaFoto=0}
                 {foreach $fotos item= foto}            
                     {if $foto->id_auto_fk == $auto->id_auto && $unaFoto==0} 
-                        <li id="{$foto->nombre}"><img class="d-block w-100" src="{$foto->nombre}" alt="{$auto->titulo}"> </li> 
+                        <li><img class="d-block w-100" src="{$foto->nombre}" alt="{$auto->titulo}"> </li> 
                         {$unaFoto=1}                                                                                
-                    {/if} 
-                   
+                    {/if}  
                 {/foreach}
             </ul>    
             <figcaption class="text-center">{$auto->titulo}</figcaption>
@@ -19,9 +19,7 @@
             </div>
         </div>
     </a>
-
-   
-    
+       
 {/foreach}
 
  

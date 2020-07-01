@@ -30,4 +30,20 @@ class PhotoModel extends SystemModel{
         return $photos;
     }
 
+
+    // trae solo las fotos con una publicacion especifica
+    public function getPhotosByCar($id_car){
+        // envia la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM fotos WHERE id_auto_fk = ?"); // prepara la consulta
+        $sentencia->execute([$id_car]); // ejecuta
+        $photosCar = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
+        return $photosCar;
+    }
+
+    public function deletePhoto($id_foto){
+        // enviamos la consulta
+        $sentencia = $this->getDb()->prepare("DELETE FROM fotos WHERE id_foto = ?"); // prepara la consulta
+        return $sentencia->execute([$id_foto]); // ejecuta    
+    }
+
 } 
