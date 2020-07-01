@@ -4,7 +4,7 @@
     
     <h1 class="mt-2">{if $auto} Editar Publicación {else} Alta de Publicación {/if}</h1>
 
-    <form {if $auto} action="editar_auto" {else} action="nuevo_auto" {/if} method="post" class="my-4 was-validated">
+    <form {if $auto} action="editar_auto" {else} action="nuevo_auto" {/if} method="post" class="my-4 was-validated" enctype="multipart/form-data">
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
@@ -51,7 +51,7 @@
             <div class="col-6">
                 <label>Imagen:</label>
                 <div class="custom-file">
-                    <input name="foto" type="file" class="custom-file-input"{if $auto}value="{$auto->foto}"{/if} required>
+                    <input name="imagesToUpload[]" id="imagesToUpload" type="file" class="custom-file-input"{if $auto}value="{$auto->foto}"{/if} multiple required>
                     <label class="custom-file-label" for="validatedCustomFile">Subir imagen...</label>
                 </div>
             </div>

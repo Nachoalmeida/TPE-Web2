@@ -1,6 +1,7 @@
 <?php
 require_once 'models/cars.model.php';
 require_once 'models/brands.model.php';
+require_once 'models/photo.model.php';
 require_once 'views/admin.view.php';
 require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
@@ -9,6 +10,7 @@ class UserController {
 
     private $carsModel;
     private $brandsModel;
+    private $photoModel;
     private $adminView;
     private $failView;
 
@@ -16,6 +18,7 @@ class UserController {
        HelperSession::access();
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
+       $this->photoModel = new PhotoModel();
        //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
        $this->adminView  = new AdminView($brands);
@@ -24,7 +27,14 @@ class UserController {
 
     public function showABMPanel(){
         // traigo los autos
+        $userChecked=$_SESSION['admin'];
+        $user_id=$_SESSION['user_id'];   
+        //si es adming puede ver todo sion solo ve sus publicaciones
+        if ($userChecked){
         $cars=$this->carsModel -> getAllCars();
+        }
+        else $cars=$this->carsModel -> getCarsByUser($user_id);
+
         //traigo el nombre del usuario
         $user=$_SESSION['user'];
         $photo=$_SESSION['photo'];
@@ -49,11 +59,10 @@ class UserController {
         $kilometers = $_POST['kilometros'];
         $price = $_POST['precio'];
         $description = $_POST['descripcion'];
-        $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
 
         //preguntar por todas, nunca van solo a nivel front-end
-        if (empty ($title) || empty ($model) || empty ($year) || empty ($kilometers)  || empty ($price) || empty ($description) || empty ($photo) || empty ($brand_name)){
+        if (empty ($title) || empty ($model) || empty ($year) || empty ($kilometers)  || empty ($price) || empty ($description) || empty ($brand_name)){
             header("Location: " . BASE_URL . "administrador");
             die;
         }
@@ -61,7 +70,24 @@ class UserController {
         $user=$_SESSION['user_id'];
 
         // inserta en la DB y redirige
-        $success = $this->carsModel->insertCar($title, $model, $year, $kilometers, $price, $description, $photo, $brand_name,$user);
+        $success = $this->carsModel->insertCar($title, $model, $year, $kilometers, $price, $description,$brand_name,$user);
+
+        //si hay imagenes las inserta tambien
+        if ($_FILES){
+            //PREGUNTAR SI ESTA BIEN, ASI
+            //recorremos el arreglo
+            foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name)
+            {
+                //pregunta si es del formato que aceptamos
+                if (($_FILES['imagesToUpload']['type'][$key] == "image/jpg" || 
+                    $_FILES['imagesToUpload']['type'] [$key]== "image/jpeg" || 
+                    $_FILES['imagesToUpload']['type'] [$key] == "image/png")) {
+
+                    $originalName = $_FILES["imagesToUpload"]["name"][$key];
+                    $this->photoModel ->insertByCar($success,$originalName,$tmp_name);
+                }
+            }
+        }
         if($success)
             header('Location: ' . BASE_URL . "administrador");
         else
@@ -73,8 +99,12 @@ class UserController {
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_car=$_POST['id_auto_eliminar'];
 
-        $userChecked=$_SESSION['admin'];
-        $this->userPrivileges($id_car,$userChecked);
+        if (empty ($id_car)){
+            header("Location: " . BASE_URL . "administrador");
+            die;
+        }
+
+        $this->userPrivileges($id_car);
 
         // traigo los autos
         $detelecar=$this->carsModel -> deleteCar($id_car);
@@ -97,10 +127,15 @@ class UserController {
         $description = $_POST['descripcion'];
         $photo = $_POST['foto'];
         $brand_name = $_POST['nombre_marca'];
+
         if (empty ($title) || empty ($model) || empty ($year) || empty ($kilometers)  || empty ($price) || empty ($description) || empty ($photo) || empty ($brand_name) || empty ($id_car)){
             header("Location: " . BASE_URL . "administrador");
             die;
         }
+
+        //chequeo los privilegios del usuario, si puede o no editar
+        $this->userPrivileges($id_car);
+
         // edito del auto
         $editcar=$this->carsModel -> editCar($id_car,$title, $model, $year, $kilometers, $price, $description, $photo,$brand_name);
         // actualizo la vista
@@ -111,6 +146,10 @@ class UserController {
     }
 
     public function showFormEditCars($id_car){
+
+        //chequeo los privilegios del usuario, si puede o no editar
+        $this->userPrivileges($id_car);
+
         // traigo los autos
         $car=$this->carsModel -> getCar($id_car);
         // tomo el año actual
@@ -121,9 +160,10 @@ class UserController {
         $this->adminView->show_form_view($year,$titulo, $car);
     }
     //FUNCION QUE NO PERMITE A LOS USUARIOS manipular publicaciones de otros usuarios
-    private function userPrivileges($car_id,$userChecked){
+    private function userPrivileges($car_id){
 
         $user_id=$_SESSION['user_id'];   
+        $userChecked=$_SESSION['admin'];
 
         if (!$userChecked){
             $cars=$this->carsModel ->getCarsByUser($user_id);
@@ -137,7 +177,7 @@ class UserController {
         }
 
         if (!$userChecked){
-            $this->failView->show_fail('No tiene permisos para eliminar la publicacion');
+            $this->failView->show_fail('La publicacion no es de su propiedad');
             die;
         }
     }

@@ -18,20 +18,26 @@
             {foreach $autos item= auto}              
                 <li class="list-group-item list-group-item-dark media">    
                     <form action="eliminar_publicacion" method="post">
-                        <div class="row"> 
-                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                <img class="media-object img-circle" src="{$auto->foto_perfil}" alt="">
-                                <p class="text-center">{$auto->user_name}</p>
-                            </div>
-                            <div class="list-group-item list-group-item-dark media  col-sm-12 col-md-9 col-lg-9 col-xl-9">
-                                <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
-                                <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>
-                                <b>{$auto->titulo}</b> / <p>{$auto->descripcion}</p>
-                            </div>
+                        <div class="container">
+                            <div class="row"> 
+                                {if $Admin}
+                                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                        <img class="media-object img-circle" src="{$auto->foto_perfil}" alt="">
+                                        <p class="text-center">{$auto->user_name}</p>
+                                    </div>
+                                {/if}
+                                <div class="text-center text-break list-group-item list-group-item-dark media {if $Admin} col-sm-12 col-md-9 col-lg-9 col-xl-9{else}col-sm-12 col-md-12 col-lg-12 col-xl-12 {/if}">
+                                    <a class="btn btn-light mr-2" href="ver_mas/{$auto->id_auto}">Ver</a>
+                                    <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
+                                    <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>
+                                    <hr>
+                                    <b>{$auto->titulo}</b>
+                                    <hr>
+                                    {$auto->descripcion}
+                                </div>
+                            </div> 
                         </div>
-                        
                     </form>    
-                    
                 </li>   
             {/foreach}
         </ul>

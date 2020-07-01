@@ -21,10 +21,12 @@ class CarsModel extends SystemModel{
         return $car;
     }
     // inserta a la db, una nueva publicacion
-    public function insertCar($title, $model, $year, $kilometers, $price, $description, $photo, $brand_name, $user_id){      
+    public function insertCar($title, $model, $year, $kilometers, $price, $description, $brand_name, $user_id){      
         //envia la consulta
-        $sentencia = $this->getDb()->prepare("INSERT INTO autos (titulo, modelo, anio, kilometros,precio,descripcion,foto,id_marca_fk,id_usuario_fk) VALUES(?, ?, ?, ?, ?, ?, ?, ?,?)"); // prepara la consulta
-        return $sentencia->execute([$title, $model, $year, $kilometers, $price, $description, $photo, $brand_name,$user_id]); // ejecuta
+        $sentencia = $this->getDb()->prepare("INSERT INTO autos (titulo, modelo, anio, kilometros,precio,descripcion,id_marca_fk,id_usuario_fk) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); // prepara la consulta
+        $sentencia->execute([$title, $model, $year, $kilometers, $price, $description, $brand_name,$user_id]); // ejecuta
+        $lastId = $this->getDb()->lastInsertId();
+        return $lastId;
     }
     // trae solo los autos con una marca especifica
     public function getCarsByBrand($brand){
@@ -48,7 +50,7 @@ class CarsModel extends SystemModel{
     // trae solo los autos con un usuario especificado
     public function getCarsByUser($user_id){
         // envia la consulta
-        $sentencia = $this->getDb()->prepare("SELECT * FROM autos JOIN marcas ON (id_marca_fk=id_marca) WHERE id_usuario_fk = ?"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM autos INNER JOIN marcas ON (id_marca_fk=id_marca) INNER JOIN usuarios ON (id_usuario_fk=id_usuario) WHERE id_usuario_fk = ? "); // prepara la consulta
         $sentencia->execute([$user_id]); // ejecuta
         $carsUser = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $carsUser;

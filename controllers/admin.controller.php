@@ -77,12 +77,13 @@ class AdminController {
             header("Location: " . BASE_URL . "administrador");
             die;
         }
+        
         // elimino la marca
         $detelebrand=$this->brandsModel -> deleteBrand($id_brand);
         // actualizo la vista
         if($detelebrand)
             header('Location: ' . BASE_URL . 'administrador');
         else
-            $this->failView->show_fail('No se puede eliminar una marcacon publicaciones activas!');
+            $this->failView->show_fail('No se puede eliminar una marca con publicaciones activas!');
     } 
 }
