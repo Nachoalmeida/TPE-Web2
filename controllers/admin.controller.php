@@ -1,17 +1,20 @@
 <?php
 require_once 'models/brands.model.php';
+require_once 'models/cars.model.php';
 require_once 'views/admin.view.php';
 require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
 
 class AdminController {
     private $brandsModel;
+    private $carsModel;
     private $adminView;
     private $failView;
 
     public function __construct() {
        HelperSession::accessAdmin();
        $this->brandsModel = new BrandsModel();
+       $this->carsModel = new CarsModel();
        //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
        $this->adminView  = new AdminView($brands);
@@ -77,9 +80,15 @@ class AdminController {
             header("Location: " . BASE_URL . "administrador");
             die;
         }
-        
-        // elimino la marca
-        $detelebrand=$this->brandsModel -> deleteBrand($id_brand);
+        //consulta si hay publicaciones con esa marca
+        $carsBrandId = $this->carsModel->getCarsByBrandId($id_brand);
+
+        $detelebrand=0;
+
+        if(!$carsBrandId){
+            // elimino la marca
+            $detelebrand=$this->brandsModel -> deleteBrand($id_brand);
+        }
         // actualizo la vista
         if($detelebrand)
             header('Location: ' . BASE_URL . 'administrador');

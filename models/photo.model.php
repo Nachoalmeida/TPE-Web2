@@ -46,4 +46,12 @@ class PhotoModel extends SystemModel{
         return $sentencia->execute([$id_foto]); // ejecuta    
     }
 
+    public function getPhoto($id_foto){
+         // envia la consulta
+         $sentencia = $this->getDb()->prepare("SELECT * FROM fotos WHERE id_foto = ?"); // prepara la consulta
+         $sentencia->execute([$id_foto]); // ejecuta
+         $photo = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
+         return $photo;
+    }
+
 } 

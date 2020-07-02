@@ -162,7 +162,7 @@ height: 95%;
 }
 /*FIN  EFECTO DE GALERIAS (editar foto)////////////////////////////////////////////////77 */
 
-/*para hacer zoom en una imagen/////////////////////////////////////////////////7*/
+/*para hacer zoom en una imagen carrusel/////////////////////////////////////////////////7*/
 .carousel-item{
     width:300px;
     height:180px;
@@ -178,6 +178,35 @@ height: 95%;
     width:100%;
 }
 .carousel-item:hover img {
+    -webkit-transform:scale(2.25);
+    -moz-transform:scale(2.25);
+    -ms-transform:scale(2.25);
+    -o-transform:scale(2.25);
+    transform:scale(2.25);
+}
+
+/* dropdown de nissan*/
+div.dropdown-menu a.active {
+    background-color: rgba(20, 21, 22, 0.459);
+}
+
+/*ZOOM*/
+
+.zoom-item{
+    width:300px;
+    height:180px;
+    overflow-x: visible; /* Hide horizontal scrollbar */
+    overflow-y: visible; /* Add vertical scrollbar */
+}
+.zoom-item img {
+    -webkit-transition:all .5s ease; /* Safari y Chrome */
+    -moz-transition:all .5s ease; /* Firefox */
+    -o-transition:all .5s ease; /* IE 9 */
+    -ms-transition:all .5s ease; /* Opera */
+    transition:all .5s ease; 
+    width:100%;
+}
+.zoom-item:hover img {
     -webkit-transform:scale(2.25);
     -moz-transform:scale(2.25);
     -ms-transform:scale(2.25);

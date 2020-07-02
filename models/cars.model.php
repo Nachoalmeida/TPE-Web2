@@ -55,4 +55,11 @@ class CarsModel extends SystemModel{
         $carsUser = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $carsUser;
     }
+    public function getCarsByBrandId($id_brand){
+        // envia la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM autos JOIN marcas ON (id_marca_fk=id_marca) WHERE id_marca = ?"); // prepara la consulta
+        $sentencia->execute([$id_brand]); // ejecuta
+        $carsBrand = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
+        return $carsBrand;
+    }
 }

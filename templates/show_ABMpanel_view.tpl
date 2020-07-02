@@ -21,7 +21,7 @@
                         <div class="container">
                             <div class="row"> 
                                 {if $Admin}
-                                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 zoom-item">
                                         <img class="media-object img-circle" src="{$auto->foto_perfil}" alt="">
                                         <p class="text-center">{$auto->user_name}</p>
                                     </div>

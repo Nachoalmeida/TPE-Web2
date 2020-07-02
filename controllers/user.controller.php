@@ -104,9 +104,16 @@ class UserController {
             die;
         }
 
+        //Reviso que la publicacion exista
+        $carExists= $this->carsModel ->getcar($id_car);
+
+        //funcion chequea que sea una valor valido
+        $this->broughtSomething($carExists, 'La publicacion no existe');
+
+        //verifico los permisos del ususario
         $this->userPrivileges($id_car);
 
-        // traigo los autos
+        // elimino el auto
         $detelecar=$this->carsModel -> deleteCar($id_car);
         // actualizo la vista
         if($detelecar)
@@ -137,10 +144,9 @@ class UserController {
         if (!$photos){
              //ejecuto un for para saber si subio alguna  
             foreach($_FILES["imagesToUpload"]["tmp_name"] as $key => $tmp_name);
-            if (!$tmp_name){
-                $this->failView->show_fail('Faltan las fotos!');
-                die;
-            }
+
+            //funcion chequea que sea una valor valido
+            $this->broughtSomething($tmp_name, 'Faltan las fotos!');
         }
         if ($photos){
         //ejecuto un for para saber si subio alguna  
@@ -179,14 +185,16 @@ class UserController {
 
         // tomo el año actual
         $year=date("Y");
+
         //titulo
         $titulo= 'Editar Publicación';
+
         // actualizo la vista
         $this->adminView->show_form_view($year,$titulo, $car,$photos);
     }
 
     //ELIMINAR UNA FOTO DE LAS PUBLICACIONES
-    public function deletePhoto($id_foto,$id_car){
+    public function deletePhoto($id_car,$id_foto){
 
         //verifico que vengan los datos solicitados 
         if (empty ($id_foto) || empty ($id_car)){
@@ -194,14 +202,45 @@ class UserController {
             die;
         }
 
+        //Reviso que la publicacion exista
+        $carExists= $this->carsModel ->getcar($id_car);
+
+        //funcion chequea que sea una valor valido
+        $this->broughtSomething($carExists, 'La publicacion no existe');
+
         //chequeo los privilegios del usuario, si puede o no manipular la publicacion
         $this->userPrivileges($id_car);
 
+        //Reviso que la foto exista
+        $photoExists= $this->photoModel ->getPhoto($id_foto);
+
+        //funcion chequea que sea una valor valido
+        $this->broughtSomething($photoExists, 'La foto que desea eliminar no existe');
+
+        //UNA VEZ QUE SE QUE EL USUARIO TIENE PERMISOS PARA MANIPULAR LA PUBLICACION TENGO QUE SABER Y LA FOTO A ELIMINAR ES DE LA PUBLICACION YA VERIFICADA.
+
+        //traigo las fotos por el id de la publicacion verificado y comparo si es de la publicacion, para no eliminar otra foto
+        $photosChecked=$this->photoModel ->getPhotosByCar($id_car);
+
+        //variable que chequea que la foto sea del usuario que la quirere eliminar
+        $Checked=false;
+
+        //recorro las fotos y me fijo si el ID de la foto que quiero eliminar el el mismo que el de alguna de las fotos de la publicacion ya verificada.
+        foreach($photosChecked as $photoChecked){
+
+            if($photoChecked->id_foto ==$id_foto){
+                $Checked= true;
+            }   
+        }
+        
+        //funcion chequea que sea una valor valido
+        $this->broughtSomething($Checked, 'La foto que desea eliminar no es de una publicacion valida');
+
         //traigo las fotos del auto
-        $photos=$this->photoModel ->deletePhoto($id_foto);
+        $photo=$this->photoModel ->deletePhoto($id_foto);
 
         //PREGUNTART SI ESTA BIEN ESTO  
-        if($photos){
+        if($photo){
             $referencia= $_SERVER['HTTP_REFERER'];
             header ("Location: ".$referencia);}
         else
@@ -225,10 +264,8 @@ class UserController {
             }
         }
 
-        if (!$userChecked){
-            $this->failView->show_fail('La publicacion no es de su propiedad');
-            die;
-        }
+        //funcion chequea que sea una valor valido
+        $this->broughtSomething($userChecked, 'La publicacion no es de su propiedad');
     }
 
     private function addPhotos($success){
@@ -249,5 +286,12 @@ class UserController {
         }
         return $success_img;
        
+    }
+    //funcion que se encarga de dar un error si no un valor valido ingresado
+    private function broughtSomething($value, $message){
+        if (!$value){
+            $this->failView->show_fail($message);
+            die;
+        }
     }
 }
