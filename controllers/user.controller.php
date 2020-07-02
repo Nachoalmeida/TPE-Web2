@@ -37,7 +37,7 @@ class UserController {
         // traigo los autos
         $userChecked=$this->userChecked;
         $user_id=$this->user_id;  
-        //si es adming puede ver todo sion solo ve sus publicaciones
+        //si es admin puede ver todo, sino solo ve sus publicaciones
         if ($userChecked){
         $cars=$this->carsModel -> getAllCars();
         }
