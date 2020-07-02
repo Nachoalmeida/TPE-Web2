@@ -8,10 +8,10 @@ $router = new Router();
 
 // creo la tabla de ruteo
 //$router->addRoute('comments', 'GET', 'CommentsApiController', 'getComments');
-$router->addRoute('car/:ID/comments', 'GET', 'CommentsApiController', 'getCommentsByCar');
-$router->addRoute('car/:ID/comment', 'DELETE', 'CommentsApiController', 'deleteComment');
-$router->addRoute('car/:ID/comment', 'POST', 'CommentsApiController', 'insertComment');
-//$router->addRoute('car/:ID/comment', 'UPDATE', 'CommentsApiController', 'editComment');
+$router->addRoute('cars/:ID/comments', 'GET', 'CommentsApiController', 'getCommentsByCar');
+$router->addRoute('comments/:ID', 'DELETE', 'CommentsApiController', 'deleteComment');
+$router->addRoute('cars/:ID/comments', 'POST', 'CommentsApiController', 'insertComment');
+$router->addRoute('comments/:ID', 'PUT', 'CommentsApiController', 'editComment');
 
 
 

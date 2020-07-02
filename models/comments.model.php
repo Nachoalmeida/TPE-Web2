@@ -12,17 +12,24 @@ class CommentsModel extends SystemModel{
         return $comments;
     }
 
-    public function deleteComment($idCar){
+    public function deleteComment($idComment){
         // envia la consulta
-        $sentencia = $this->getDb()->prepare("DELETE FROM comentarios WHERE id_auto_fk = ?"); // prepara la consulta
-        return $sentencia->execute([$idCar]); // ejecuta    
+        $sentencia = $this->getDb()->prepare("DELETE FROM comentarios WHERE id_comentario = ?"); // prepara la consulta
+        return $sentencia->execute([$idComment]); // ejecuta    
         
     }
 
     public function insertComment($mensaje, $puntaje, $id_usuario, $id_auto) {
-        $sentencia = $this->getDb()->prepare("INSERT INTO comentarios(mensaje, puntaje, id_usuario, id_auto) VALUES(?, ?, ?, ?)"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("INSERT INTO comentarios(mensaje, puntaje, id_usuario_fk, id_auto_fk) VALUES(?, ?, ?, ?)"); // prepara la consulta
         return $sentencia->execute([$mensaje, $puntaje, $id_usuario, $id_auto]);
  
     }
+
+    public function editComment($mensaje, $puntaje, $id_comentario) {
+        $sentencia = $this->getDb()->prepare("UPDATE comentarios SET mensaje=?, puntaje=? WHERE id_comentario=?"); // prepara la consulta
+        return $sentencia->execute([$mensaje, $puntaje, $id_comentario]);
+ 
+    }
+
 
 }
