@@ -207,7 +207,7 @@ class UserController {
 
         //funcion chequea que sea una valor valido
         $this->broughtSomething($carExists, 'La publicacion no existe');
-
+        
         //chequeo los privilegios del usuario, si puede o no manipular la publicacion
         $this->userPrivileges($id_car);
 
@@ -289,7 +289,8 @@ class UserController {
     }
     //funcion que se encarga de dar un error si no un valor valido ingresado
     private function broughtSomething($value, $message){
-        if (!$value){
+
+        if (!$value){    
             $this->failView->show_fail($message);
             die;
         }

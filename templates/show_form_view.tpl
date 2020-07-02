@@ -72,7 +72,7 @@
                 </div>
                 {if $auto}
                     {foreach $fotos item= foto}  
-                        <a class="btn col-sm-3 col-md-3 col-lg-3 col-xl-3 caja_para_efecto_retraer" href="eliminar_foto/{$foto->id_foto}/{$auto->id_auto}">
+                        <a class="btn col-sm-3 col-md-3 col-lg-3 col-xl-3 caja_para_efecto_retraer" href="eliminar_foto/{$auto->id_auto}/{$foto->id_foto}">
                             <div class="caja_estilo_gris efecto_retraer_algo  caja_cont_img_galeria" >
                                 <ul class="cont_img_galeria slider">
                                     <figure class="img_galeria">
