@@ -38,12 +38,11 @@ class CommentsApiController{
     }
 
     public function deleteComment($params = []) {
-        $idCar = $params[':ID'];
-        $comments = $this->model->getCommentsByCar($idCar);
+        $idComment = $params[':ID'];
+        $success=$this->model->deleteComment($idComment);
 
-        if ($comments) {
-            $this->model->deleteComment($idCar);
-            $this->view->response($comments, 200);
+        if ($success) {
+            $this->view->response("Se eliminó el comentario", 200);
         }
         else 
             $this->view->response("No se pudo eliminar el comentario", 404);
@@ -53,13 +52,15 @@ class CommentsApiController{
     public function insertComment($params = []) {
         // devuelve el objeto JSON enviado por POST     
         $body = $this->getData();
-        var_dump($body); die;
+        //var_dump($body); die;
 
         // inserta la tarea
         $mensaje = $body->mensaje;
         $puntaje = $body->puntaje;
         $id_usuario = $body->id_usuario_fk;
         $id_auto = $params[':ID'];
+        //var_dump($id_usuario); die;
+
 
         $success = $this->model->insertComment($mensaje, $puntaje, $id_usuario, $id_auto);
 
@@ -71,6 +72,33 @@ class CommentsApiController{
         {
             $this->view->response("El comentario no fue agregado", 500);
         }
+    }
+
+    public function editComment($params = []){
+        // devuelve el objeto JSON enviado por POST     
+        $body = $this->getData();
+        //var_dump($body); die;
+
+        // inserta el comentario
+        $id_comentario = $params[':ID'];
+        $mensaje = $body->mensaje;
+        $puntaje = $body->puntaje;
+        //$id_usuario = $body->id_usuario_fk;
+        //$id_auto = $body->id_auto;
+        //var_dump($id_usuario); die;
+
+
+        $success = $this->model->editComment($mensaje, $puntaje, $id_comentario);
+
+        if ($success)
+        {
+            $this->view->response("Se agrego el comentario", 200);
+        }
+        else
+        {
+            $this->view->response("El comentario no fue agregado", 500);
+        }
+        
     }
 
 }
