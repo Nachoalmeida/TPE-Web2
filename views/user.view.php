@@ -2,7 +2,7 @@
 require_once 'smartyInit.view.php';
 
 
-class AdminView extends SmartyInit{
+class UserView extends SmartyInit{
     
     public function show_ABMpanel_view( $cars,$user,$photo){     
         $this->getSmarty()->assign('autos', $cars);

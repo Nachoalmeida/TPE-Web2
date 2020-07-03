@@ -2,7 +2,7 @@
 require_once 'models/cars.model.php';
 require_once 'models/brands.model.php';
 require_once 'models/photo.model.php';
-require_once 'views/admin.view.php';
+require_once 'views/user.view.php';
 require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
 
@@ -13,7 +13,7 @@ class UserController{
     private $brandsModel;
     private $photoModel;
 
-    private $adminView;
+    private $userView;
     private $failView;
 
     private $user_id;
@@ -28,10 +28,10 @@ class UserController{
        $this->photoModel = new PhotoModel();
        //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
-       $this->adminView  = new AdminView($brands);
+       $this->userView  = new UserView($brands);
        $this->failView = new FailView($brands);
        $this->user_id = $_SESSION['user_id'];
-       $this->userChecked = $_SESSION['admin'];
+       $this->userChecked = $_SESSION['user'];
        $this->userName = $_SESSION['user'];
        $this->userPhoto = $_SESSION['photo'];
     }    
@@ -43,21 +43,21 @@ class UserController{
         $userName=$this->userName;
         $photo=$this->userPhoto; 
 
-        //si es admin puede ver todo, sino solo ve sus publicaciones
+        //si es user puede ver todo, sino solo ve sus publicaciones
         if ($userChecked){
         $cars=$this->carsModel -> getAllCars();
         }
         else $cars=$this->carsModel -> getCarsByUser($user_id);
 
         // actualizo la vista
-        $this->adminView->show_ABMpanel_view( $cars,$userName,$photo);
+        $this->userView->show_ABMpanel_view( $cars,$userName,$photo);
     }
 
     public function ShowAddCarForm() {
         // tomo el año actual
         $year=date("Y");
         // actualizo la vista
-        $this->adminView->show_form_view($year, 'Alta de Publicación');
+        $this->userView->show_form_view($year, 'Alta de Publicación');
     }
 
     public function addCar() {
@@ -89,7 +89,7 @@ class UserController{
         $success_img =$this->addPhotos($success);
 
         //finaliza
-        $this->endResult('Error al agregar el registro','administrador',$success,$success_img);
+        $this->endResult('Error al agregar el registro','useristrador',$success,$success_img);
     }
 
     public function deleteCar(){
@@ -111,7 +111,7 @@ class UserController{
         // elimino el auto
         $detelecar=$this->carsModel -> deleteCar($id_car);
         // actualizo la vista
-        $this->endResult('No se pudo eliminar! Revise su conexión','administrador',$detelecar);
+        $this->endResult('No se pudo eliminar! Revise su conexión','useristrador',$detelecar);
     }
 
     public function editCar(){
@@ -146,7 +146,7 @@ class UserController{
         }
         
         // actualizo la vista
-        $this->endResult('No se pudo editar! Revise su conexión','administrador',$editcar,$photos);
+        $this->endResult('No se pudo editar! Revise su conexión','useristrador',$editcar,$photos);
     }
 
     public function showFormEditCars($id_car){
@@ -167,7 +167,7 @@ class UserController{
         $titulo= 'Editar Publicación';
 
         // actualizo la vista
-        $this->adminView->show_form_view($year,$titulo, $car,$photos);
+        $this->userView->show_form_view($year,$titulo, $car,$photos);
     }
 
     //ELIMINAR UNA FOTO DE LAS PUBLICACIONES
