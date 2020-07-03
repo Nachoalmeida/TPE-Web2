@@ -89,7 +89,7 @@ class UserController{
         $success_img =$this->addPhotos($success);
 
         //finaliza
-        $this->endResult('Error al agregar el registro','useristrador',$success,$success_img);
+        $this->endResult('Error al agregar el registro','administrador',$success,$success_img);
     }
 
     public function deleteCar(){
@@ -111,7 +111,7 @@ class UserController{
         // elimino el auto
         $detelecar=$this->carsModel -> deleteCar($id_car);
         // actualizo la vista
-        $this->endResult('No se pudo eliminar! Revise su conexión','useristrador',$detelecar);
+        $this->endResult('No se pudo eliminar! Revise su conexión','administrador',$detelecar);
     }
 
     public function editCar(){
@@ -146,7 +146,7 @@ class UserController{
         }
         
         // actualizo la vista
-        $this->endResult('No se pudo editar! Revise su conexión','useristrador',$editcar,$photos);
+        $this->endResult('No se pudo editar! Revise su conexión','administrador',$editcar,$photos);
     }
 
     public function showFormEditCars($id_car){

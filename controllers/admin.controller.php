@@ -32,13 +32,13 @@ class userController {
        
         $brand_name = $_POST['nombre_marca'];
         if (empty ($brand_name)){
-            header("Location: " . BASE_URL . "useristrador");
+            header('Location: ' . BASE_URL . 'administrador');
             die;
         }
         // agrego la nueva marca
         $addBrands=$this->brandsModel->insertBrand($brand_name);
         if($addBrands)
-            header('Location: ' . BASE_URL . 'useristrador');
+            header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failView->show_fail('No se pudo agregar! Revise su conexión');
     }
@@ -60,14 +60,14 @@ class userController {
         // traigo el id de la marca, del value del boton, con el name id_marca
         $id_brand=$_POST['id_marca'];
         if (empty ($brand_name) || empty ($id_brand)){
-            header("Location: " . BASE_URL . "useristrador");
+            header("Location: " . BASE_URL . "administrador");
             die;
         }
         // edito la marca
         $editbrand=$this->brandsModel -> editBrand($id_brand,$brand_name);
         // actualizo la vista
         if($editbrand)
-            header('Location: ' . BASE_URL . 'useristrador');
+            header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failview->show_fail('No se pudo editar! Revise su conexión');
     }
@@ -77,7 +77,7 @@ class userController {
         // traigo el id de del auto, del value del boton, con en name id_auto_eliminar
         $id_brand=$_POST['id_marca_eliminar'];
         if (empty ($id_brand)){
-            header("Location: " . BASE_URL . "useristrador");
+            header('Location: ' . BASE_URL . 'administrador');
             die;
         }
         //consulta si hay publicaciones con esa marca
@@ -91,7 +91,7 @@ class userController {
         }
         // actualizo la vista
         if($detelebrand)
-            header('Location: ' . BASE_URL . 'useristrador');
+            header('Location: ' . BASE_URL . 'administrador');
         else
             $this->failView->show_fail('No se puede eliminar una marca con publicaciones activas!');
     } 
