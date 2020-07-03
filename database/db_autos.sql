@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-06-2020 a las 19:12:21
+-- Tiempo de generación: 03-07-2020 a las 23:44:26
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -35,7 +35,6 @@ CREATE TABLE `autos` (
   `kilometros` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
   `descripcion` text NOT NULL,
-  `foto` varchar(200) NOT NULL,
   `id_marca_fk` int(11) NOT NULL,
   `id_usuario_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -44,15 +43,19 @@ CREATE TABLE `autos` (
 -- Volcado de datos para la tabla `autos`
 --
 
-INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `precio`, `descripcion`, `foto`, `id_marca_fk`, `id_usuario_fk`) VALUES
-(6, 'etgryhrherh', 'ghdfhdhdhdh', 2017, 3254235, 3425345, 'rghdhjdfhdfh', '534252345346', 4, 1),
-(7, 'etgryhrherh', 'ghdfhdhdhdh', 2017, 3254235, 3425345, 'rghdhjdfhdfh', '534252345346', 4, 1),
-(8, 'ytrujrturtu', 'rturturt', 2017, 23423423, 4234234, '423eryhdfhaesr', '6yryeryf', 27, 6),
-(9, 'ytrujrturtu', 'rturturt', 2017, 23423423, 4234234, '423eryhdfhaesr', '6yryeryf', 27, 6),
-(10, 'ytrujrturtu', 'rturturt', 2017, 23423423, 4234234, '423eryhdfhaesr', '6yryeryf', 27, 6),
-(11, '5euy5urt', 'turturturt', 56756, 67567, 67567, 'tuyhtrujsrtu', 'hdhdrh', 4, 17),
-(12, '5euy5urt', 'turturturt', 56756, 67567, 67567, 'tuyhtrujsrtu', 'hdhdrh', 4, 17),
-(13, 'eryeryh', 'r4terw', 2017, 3254235, 34234, 'rteghfhdfhdfhdfhrr0oihji0oghj90rhgj9ghsdoifg4e89her9uioghroigjer0g9\'hjerjoi\'hg809sgiodhg80934hg809rhgkosdgh0984gy098erhg0943ghhh', 'gfhfghgfh', 6, 16);
+INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `precio`, `descripcion`, `id_marca_fk`, `id_usuario_fk`) VALUES
+(68, 'Ford Ranger Raptor 2.0 Biturbo 2020', 'Raptor', 2009, 0, 5599000, 'FORD ROBAYNA MARTINEZ - CONCESIONARIO OFICIAL FORD\r\n\r\nUNIDADES FISICAS EN STOCK- CON ENTREGA INMEDIATA\r\n\r\nCONSULTA AL CONSECIONARIO PREMIUM DE ZONA NORTE\r\n\r\nCARACTERÍSTICAS DEL VEHICULO LINEA NUEVA 2020', 26, 1),
+(69, 'BMW Serie 1 2.0 120i Active 156cv', 'Active 156cv', 2011, 54300, 1250000, 'VERDADERAMENTE IMPECABLE\r\nSOLO 54.300 KMS - AÑO 2010, NO 2011\r\nSEGUNDO DUEÑO\r\nRECIENTEMENTE HECHO TRATAMIENTO ACRÍLICO COMPLETO Y PINTADO DE PARRILLA Y LLANTAS TODO EN NEGRO. NO ES PLASTIDIP.\r\nRECIÉN HECHO SERVICE (MENOS DE 500 KMS).\r\nNADA QUE HACERLE.', 4, 6),
+(70, 'Chevrolet Cruze 1.8 Ltz Mt 141cv', 'Cruze ', 2020, 0, 1040000, 'Descripción de la publicación\r\n', 27, 6),
+(71, 'Fiat 600', '600', 1971, 100000, 50400, 'Datos específicos por privado, excelente sin rodar', 30, 18),
+(72, 'Nissan Skyline Gt-r', 'Skyline Gt-r', 1999, 107000, 10000000, '1999 Nissan Skyline R33 GTR Vspec\r\nVIN: BCNR33001487\r\n\r\n-Midnight Purple (LP2)\r\n-RB26DETT\r\n-157,xxx KM on original cluster\r\n-Functional AC/Heat\r\n-N1 Front Bumper\r\n-S2 Front Lip Spoiler\r\n-HID Headlights\r\n-TE37 Wheels With New Tires\r\n-Tein Coilovers\r\n-Fujitsubo Exhaust\r\n\r\nMaintenance:\r\n-Fresh Oil Change Synthetic 5w30\r\n-NGK Spark Plugs\r\n-Top Engine Cleaner\r\n-Injector Cleaning Service\r\n-Coolant Flush\r\n-DOT 4 Brake Fluid\r\n-Alignment', 40, 1),
+(73, 'Bugatti SC 45 Atlantic Aéro, como nuevo sin uso casi!! oferton!', 'SC 45 Atlantic Aéro', 2019, 20000, 1200000000, 'Este único ejemplar, que tiene 1.500 caballos de fuerza y alcanza los 420 kilómetros por hora, conmemora su 110° aniversario y está inspirado en su icónico SC 45 Atlantic Aéro Coupé, que había sido diseñado por Jean Bugatti, el hijo del fundador de la marca, Ettore Bugatti. De ese modelo se construyeron cuatro unidades entre 1936 y 1938, cada una personalizada por su dueño.', 43, 19),
+(89, 'Corsa 1.6 4 Pts Super', 'Corsa', 2007, 40000, 8600000, 'reyreyh', 4, 1),
+(90, 'Corsa 1.6 4 Pts Super', 'Corsa', 2007, 107000, 8600000, 'rhrhrwhw', 4, 1),
+(91, 'Corsa 1.6 4 Pts Super', 'Corsa', 2007, 107000, 8600000, 'rhrhrwhw', 4, 1),
+(92, 'Corsa 1.6 4 Pts Super', 'Corsa', 2007, 107000, 8600000, 'cqrwegwegwe', 4, 1),
+(93, 'Corsa 1.6 4 Pts Super', 'Corsa', 2008, 107000, 8600000, 'sdfafasf', 4, 1),
+(94, 'Corsa 1.6 4 Pts Super', 'Corsa', 2014, 0, 8600000, 'afaff', 26, 1);
 
 -- --------------------------------------------------------
 
@@ -63,9 +66,17 @@ INSERT INTO `autos` (`id_auto`, `titulo`, `modelo`, `anio`, `kilometros`, `preci
 CREATE TABLE `comentarios` (
   `id_comentario` int(11) NOT NULL,
   `mensaje` text NOT NULL,
+  `puntaje` int(11) NOT NULL,
   `id_usuario_fk` int(11) NOT NULL,
   `id_auto_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `mensaje`, `puntaje`, `id_usuario_fk`, `id_auto_fk`) VALUES
+(1, 'Genial!', 1, 19, 71);
 
 -- --------------------------------------------------------
 
@@ -78,6 +89,34 @@ CREATE TABLE `fotos` (
   `nombre` varchar(200) NOT NULL,
   `id_auto_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `fotos`
+--
+
+INSERT INTO `fotos` (`id_foto`, `nombre`, `id_auto_fk`) VALUES
+(56, 'images/cars/5efcea05007a15efcea0500b711.71503861.jpg', 68),
+(57, 'images/cars/5efcea05166945efcea0516a651.49758269.jpg', 68),
+(65, 'images/cars/5efcf0943f2e55efcf0943f6b57.63866137.jpg', 69),
+(66, 'images/cars/5efcf09449e8e5efcf0944a25e4.60220804.jpg', 69),
+(67, 'images/cars/5efcf094542965efcf094546679.21647903.jpg', 69),
+(68, 'images/cars/5efcf1c4913265efcf1c4916f70.45181149.jpg', 70),
+(70, 'images/cars/5efcf1c50a7d85efcf1c50aba93.64670596.jpg', 70),
+(71, 'images/cars/5efcf1c510ed75efcf1c5112a87.21165911.jpg', 70),
+(73, 'images/cars/5efcfcc1ee6b25efcfcc1eea836.78075531.jpg', 71),
+(74, 'images/cars/5efe068f82e445efe068f832158.95078353.jpg', 72),
+(77, 'images/cars/5efe068fcd0a35efe068fcd4746.41599811.jpg', 72),
+(78, 'images/cars/5efe068fe68cf5efe068fe6ca08.36285899.jpg', 72),
+(79, 'images/cars/5efe068ff2f2d5efe068ff32fd5.81295813.jpg', 72),
+(80, 'images/cars/5efe08b230a325efe08b230e037.90587971.jpg', 73),
+(81, 'images/cars/5efe08b2713fb5efe08b2717cb6.99922782.jpg', 73),
+(82, 'images/cars/5efe2d6420a9d5efe2d6420e6d6.50114892.jpg', 72),
+(83, 'images/cars/5efe2d642e40d5efe2d642e7dd2.04732827.jpg', 72),
+(93, 'images/cars/5efe5695c56915efe5695c5a621.29325145.jpg', 68),
+(95, 'images/cars/5efe56f8da6435efe56f8daa136.26984238.jpg', 89),
+(96, 'images/cars/5efe5f9dd5dc85efe5f9dd61993.74172455.jpg', 92),
+(97, 'images/cars/5efe648a0e1115efe648a0e4e11.53340046.jpg', 93),
+(98, 'images/cars/5efe7cb71fb5a5efe7cb71ff2b2.85791294.jpg', 94);
 
 -- --------------------------------------------------------
 
@@ -96,10 +135,19 @@ CREATE TABLE `marcas` (
 
 INSERT INTO `marcas` (`id_marca`, `nombre_marca`) VALUES
 (4, 'BMW'),
-(5, 'Mercedes Benz'),
-(6, 'Volkswagen'),
 (26, 'Ford'),
-(27, 'Chevrolet');
+(27, 'Chevrolet'),
+(30, 'Fiat'),
+(31, 'Volkswagen'),
+(33, 'Mercedes Benz'),
+(34, 'Audi'),
+(35, 'Bugatti'),
+(36, 'Alfa Romeo'),
+(37, 'Aston Martin'),
+(40, 'Nissan'),
+(41, 'Toyota'),
+(42, 'Honda'),
+(43, 'Bugatti ');
 
 -- --------------------------------------------------------
 
@@ -129,7 +177,9 @@ INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `user_name`, `administ
 (14, 'sdgds@fgghrgh', '$2y$10$Gp2k/ldSeyifWDbPnfUJRe9yOFX2xL.NNzzbz3yYvNDsm9uulFMr2', 'fgedgweg', 0, 'images/user_foto/user.png'),
 (15, 'qewqer@1111', '$2y$10$HFOsegrLsJZS63dBV.QmwOfgpEmZk6CnjH6eU25YNQYT6cJTUsKPq', 'esteva', 0, 'images/user_foto/user.png'),
 (16, 'fe@fhgrf', '$2y$10$NjlbVt309Ywf5CYlq1sFgu/8PFQtMRrjitV3Q.6MWIS0sUI.IEX0K', 'fgsdgsdg', 0, 'images/user_foto/user.png'),
-(17, 'pepo@gmail.com', '$2y$10$Tp1fTJ6C.Bzw02KWD3YQMeUCF7p5K6z3zIpptPzGmFoHHJJBCBUoW', 'pepito', 0, 'images/user_foto/user.png');
+(17, 'pepo@gmail.com', '$2y$10$Tp1fTJ6C.Bzw02KWD3YQMeUCF7p5K6z3zIpptPzGmFoHHJJBCBUoW', 'pepito', 0, 'images/user_foto/user.png'),
+(18, 'harold@gmail.com', '$2y$10$.DrWsqQBaMRmDuWMFG8gLeEoaf.3tEwNeomVQXKHADJ1w5u4kA5xS', 'Harold', 0, 'images/user_foto/5efcfc1a773593.65574674.jpg'),
+(19, 'cr7@gmail.com', '$2y$10$cvib0DmiKHYczylN1VKUtupk0BaAGVvXFvA6jufURhfJS0lSYzx.a', 'CR7', 0, 'images/user_foto/5efe073225e894.96444818.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -178,31 +228,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autos`
 --
 ALTER TABLE `autos`
-  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `fotos`
 --
 ALTER TABLE `fotos`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
@@ -226,7 +276,7 @@ ALTER TABLE `comentarios`
 -- Filtros para la tabla `fotos`
 --
 ALTER TABLE `fotos`
-  ADD CONSTRAINT `fotos_ibfk_1` FOREIGN KEY (`id_auto_fk`) REFERENCES `autos` (`id_auto`);
+  ADD CONSTRAINT `fotos_ibfk_1` FOREIGN KEY (`id_auto_fk`) REFERENCES `autos` (`id_auto`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
