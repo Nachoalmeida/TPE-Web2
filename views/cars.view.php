@@ -1,5 +1,4 @@
 <?php
-
 require_once 'smartyInit.view.php';
 
 class CarsView extends SmartyInit{

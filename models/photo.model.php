@@ -5,7 +5,7 @@ require_once 'system.model.php';
 class PhotoModel extends SystemModel{
 
     // inserta a la db, una nueva foto a la publicacion
-    public function insertByCar($id_car,$originalName=null,$physicalName){  
+    public function insertByCar($id_car,$originalName,$physicalName){  
 
         if ($originalName)
             $pathImg = $this->uploadImage($originalName,$physicalName);
