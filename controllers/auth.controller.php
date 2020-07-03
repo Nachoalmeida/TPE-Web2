@@ -38,13 +38,7 @@ class AuthController {
         $user=$this->usersModel->getUserMail($mail);
 
         if($user && password_verify($pass, $user->password)){
-            session_start();
-            $_SESSION['logged'] = true;
-            $_SESSION['admin'] = $user->administrador;
-            $_SESSION['user'] = $user->user_name;
-            $_SESSION['user_id'] = $user->id_usuario;
-            $_SESSION['photo'] = $user->foto_perfil;
-            header("Location: " . BASE_URL . "administrador");
+            $this->sessionUser($user);
         }
         else {
         //muestro el login
@@ -71,13 +65,18 @@ class AuthController {
         $passTwo = $_POST['password_two'];
         $mail = $_POST['mail'];
 
+         // Nombre archivo original
+         $originalName = $_FILES['input_name']['name'];
+         // Nombre en el file system:
+         $physicalName = $_FILES['input_name']['tmp_name'];
+
         //pregunto si los campos obligatorios existen
-        if (empty ($user_name) || empty ($pass) || empty ($passTwo) || empty ($mail)){
+        if (empty ($user_name) || empty ($pass) || empty ($passTwo) || empty ($mail) || !$originalName){
             header("Location: " . BASE_URL . "registrarse");
             die;
         }
 
-        //Chequeo si el usuario y el mail existen 
+        //Chequeo si, el usuario o el mail existen 
         $userCheck=$this->usersModel->getUserName($user_name);
         $mailCheck=$this->usersModel->getUserMail($mail);
         //Chequeo los pass son iguales, sin son iguales devuelven false, si son distitos devuelve true.
@@ -97,15 +96,25 @@ class AuthController {
         if (($_FILES['input_name']['type'] == "image/jpg" || 
         $_FILES['input_name']['type'] == "image/jpeg" || 
         $_FILES['input_name']['type'] == "image/png")) {
-            $success = $this->usersModel->insertImage($user_name, $encrypted_pass, $mail);
+            $success = $this->usersModel->insertImage($user_name, $encrypted_pass, $mail, $originalName, $physicalName);
         } else {
             $success = $this->usersModel->insert($user_name, $encrypted_pass, $mail, "images/user_foto/user.png");
         }
 
         if($success)
-            header('Location: ' . BASE_URL . "ingresar");
+            $this->sessionUser($success);
         else
             $this->failView->show_fail('Error al agregar el registro');
+    }
+
+    private function sessionUser($user){
+        session_start();
+            $_SESSION['logged'] = true;
+            $_SESSION['admin'] = $user->administrador;
+            $_SESSION['user'] = $user->user_name;
+            $_SESSION['user_id'] = $user->id_usuario;
+            $_SESSION['photo'] = $user->foto_perfil;
+            header("Location: " . BASE_URL . "administrador");
     }
  //FIN NUEVO******************************************************************************************************
 }

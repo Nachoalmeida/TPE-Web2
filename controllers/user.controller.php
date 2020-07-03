@@ -31,7 +31,7 @@ class UserController{
        $this->userView  = new UserView($brands);
        $this->failView = new FailView($brands);
        $this->user_id = $_SESSION['user_id'];
-       $this->userChecked = $_SESSION['user'];
+       $this->userChecked = $_SESSION['admin'];
        $this->userName = $_SESSION['user'];
        $this->userPhoto = $_SESSION['photo'];
     }    
