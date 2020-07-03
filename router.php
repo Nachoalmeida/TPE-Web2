@@ -149,6 +149,13 @@ switch ($parametros[0]) {
         $controller = new UserController();
         $controller->editCar();
     break;
+
+    case 'eliminar_foto':
+        // instanciando un objeto de la clase UserController
+        $controller = new UserController();
+        $controller->deletePhoto($parametros[1],$parametros[2]);
+    break;
+
     //FIN PARTE PRIVADA usuario*****************************************************************************
 
 

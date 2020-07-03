@@ -12,11 +12,12 @@ class AdminView extends SmartyInit{
         $this->getSmarty()->display('show_ABMpanel_view.tpl');
     }
     
-    public function show_form_view($year, $titulo,$car=false){
+    public function show_form_view($year, $titulo,$car=false,$photos=false){
         $this->getSmarty()->assign('anios', $year);
         $this->getSmarty()->assign('cont', 0);
         $this->getSmarty()->assign('auto', $car);
         $this->getSmarty()->assign('titulo', $titulo);
+        $this->getSmarty()->assign('fotos', $photos);
         $this->getSmarty()->display('show_form_view.tpl');
     }
     

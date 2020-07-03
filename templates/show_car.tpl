@@ -4,9 +4,24 @@
             <!--iMAGEN-->
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                 <p></p>
-                <figure>
-                    <img class="img_ver_mas" src="{$auto->foto}" alt="{$auto->titulo}" />
-                </figure>
+                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        {foreach $fotos item= foto}                                     
+                            <div class="carousel-item {if !$unaFoto}active{/if}"> 
+                                <img class="d-block w-100" src="{$foto->nombre}" alt="{$auto->titulo}">  
+                            </div>  
+                            {$unaFoto=1}                                                                     
+                        {/foreach}                                       
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
             <!--FIN iMAGEN-->
 
@@ -45,19 +60,18 @@
             <!--FIN CAJA Descripcion-->
              <div class="caja_estilo_gris_claro col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-                {if $logueo}
+                {if $Admin}
                     <form action="eliminar_publicacion" method="post">
                 {/if}
 
                 <a class="btn btn-light mr-2" href="inicio">Volver al Inicio</a>
                                
-                {if $logueo}
+                {if $Admin}
                         <a class="btn btn-light mr-2" href="editar_publicacion/{$auto->id_auto}">Editar</a>
                         <button name="id_auto_eliminar" type="submit" class="btn btn-danger" value= "{$auto->id_auto}">Eliminar</button>                    
                     </form>    
                 {/if}
             </div>
-            
 
 
 

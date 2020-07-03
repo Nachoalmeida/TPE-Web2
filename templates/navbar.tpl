@@ -14,7 +14,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {foreach $marcas item= marca}
-                                <a class="dropdown-item" href="marca/{$marca->nombre_marca}">{$marca->nombre_marca}</a>
+                                <a class="dropdown-item {if $marca->nombre_marca==Nissan}active {/if}" href="marca/{$marca->nombre_marca}">{$marca->nombre_marca}</a>
                             {/foreach}
                             {if $Admin}
                                 <a class="dropdown-item" href="nueva_marca">Crear Marca..</a>
