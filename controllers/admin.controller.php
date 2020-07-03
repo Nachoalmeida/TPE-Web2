@@ -5,7 +5,7 @@ require_once 'views/user.view.php';
 require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
 
-class userController {
+class AdminController {
     private $brandsModel;
     private $carsModel;
     private $userView;
