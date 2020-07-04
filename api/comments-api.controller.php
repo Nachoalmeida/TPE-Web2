@@ -20,13 +20,8 @@ class CommentsApiController{
     }
 
     public function getCommentsByCar($params = []){
-                    // obtengo el id de los params
+        // obtengo el id de los params
         $idCar = $params[':ID'];
-
-        /*$colname = null;
-        if (isset($params[':COLNAME'])) {
-            $colname = $params[':COLNAME'];
-        }*/
 
         $comments = $this->model->getCommentsByCar($idCar);
 
@@ -38,7 +33,19 @@ class CommentsApiController{
     }
 
     public function deleteComment($params = []) {
+
         $idComment = $params[':ID'];
+
+
+        $comentario = $this->model->getComment($idComment);
+        
+        // verifico que exista
+        if (empty($comentario)) {
+            $this->view->response("no existe el comentario con id {$comentario}", 404);
+            die();
+        }
+
+
         $success=$this->model->deleteComment($idComment);
 
         if ($success) {

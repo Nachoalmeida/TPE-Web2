@@ -16,6 +16,7 @@ class CarsView extends SmartyInit{
     public function show_car($car, $photos){   
         $this->getSmarty()->assign('auto', $car);
         $this->getSmarty()->assign('fotos', $photos);
+        $this->getSmarty()->assign('user_id', HelperSession::userID_view());
         $this->getSmarty()->assign('unaFoto', 0);
         $this->getSmarty()->assign('titulo', 'Ver Mas');
         $this->getSmarty()->display('show_car.tpl');

@@ -31,5 +31,13 @@ class CommentsModel extends SystemModel{
  
     }
 
+    public function getComment($idComment){
+        // envia la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM comentarios WHERE id_comentario = ?"); // prepara la consulta
+        $sentencia->execute([$idComment]); // ejecuta
+        $comment = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
+        return $comment;
+    }
+
 
 }

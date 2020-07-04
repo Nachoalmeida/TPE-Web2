@@ -1,5 +1,7 @@
 <section id="app-comments">
 
+    <input id="idCar" type="hidden" value={$auto->id_auto}>
+
     <div v-if = "comments" class="alert alert-dark" role="alert">
         <div v-for="comment in comments"  class="container">
             <div class="row media">
@@ -13,18 +15,13 @@
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
                     
                     
-                        <!-- foreach de vue -->
-                        <p> 
-                            {{ comment.mensaje }} 
-                        </p>
-                
-                
-                    
+                    <!-- foreach de vue -->
+                    <h6 class="alert-heading ">
+                        {{ comment.mensaje }} 
+                    </h6>
+                    <hr>
 
-                    <!--<h4 class="alert-heading ">Well done!</h4>
-                    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-                    <hr>-->
+                    <button v-if = "admin" name="id_comentario_eliminar" type="button" class="btn btn-danger" v-on:click="deleteComment(comment.id_comentario)">Eliminar</button>
                 </div>
             </div>
         </div>

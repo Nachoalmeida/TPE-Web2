@@ -38,7 +38,17 @@ class HelperSession {
             return true;
         }
         
-    }         
+    } 
+    
+    static public function userID_view(){
+        if(session_status() != PHP_SESSION_ACTIVE){   
+            session_start();
+        }
+        if (isset($_SESSION['logged'])){
+            $user_id=$_SESSION['user_id'];
+            return $user_id;
+        }
+    }
 }
 
 
