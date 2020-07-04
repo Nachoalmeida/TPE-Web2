@@ -1,7 +1,7 @@
 <section id="app-comments">
 
-    <div v-for="comment in comments" class="alert alert-dark" role="alert">
-        <div class="container">
+    <div v-if = "comments" class="alert alert-dark" role="alert">
+        <div v-for="comment in comments"  class="container">
             <div class="row media">
 
                 <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col-mr-5">
@@ -18,6 +18,7 @@
                             {{ comment.mensaje }} 
                         </p>
                 
+                
                     
 
                     <!--<h4 class="alert-heading ">Well done!</h4>
@@ -25,10 +26,26 @@
                     <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
                     <hr>-->
                 </div>
-
             </div>
         </div>
     </div>
+
+    <div v-else class="alert alert-dark" role="alert">
+        <div class="container">
+            <div class="row media">
+
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                    <p class="text-center"> 
+                        No hay comentarios  
+                    </p>
+                         
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 </section>
 

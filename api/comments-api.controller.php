@@ -29,11 +29,11 @@ class CommentsApiController{
         }*/
 
         $comments = $this->model->getCommentsByCar($idCar);
+
         if ($comments)
             $this->view->response($comments, 200);
         else
-            $this->view->response("Esta publicación no posee comentarios aún, puedes ser el primero!", 404);
-
+            $this->view->response(null, 404);
 
     }
 
