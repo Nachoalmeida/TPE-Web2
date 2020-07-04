@@ -9,6 +9,15 @@
     <button type="submit" class="btn btn-light mr-2"  name="" value="">Comentar</button>
     
 </form>
-{include 'comments.tpl'}
+
+<input id="idCar" type="hidden" value=[$auto->id_auto]
+{include 'vue/comments.vue'}
 
 </div>
+
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script src="js/main.js"></script>
+
+
