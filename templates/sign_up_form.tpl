@@ -3,7 +3,7 @@
         <form action="nuevo_usuario" method="post" class="form-signin" enctype="multipart/form-data">
             <h1 class="h3 mb-3 font-weight-normal mt-3">Registrarse:</h1>
             <div class="col-md-4 mb-3 mx-auto">  
-                <label>Nombre de ususario:</label>
+                <label>Nombre de usuario:</label>
                 <input name="user_name" type="text" class="form-control {if $mensaje_usuario}is-invalid{/if}" placeholder="User Name" required>  
                 {if $mensaje_usuario}
                     <div class="invalid-feedback">

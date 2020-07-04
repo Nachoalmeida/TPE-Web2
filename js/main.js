@@ -1,33 +1,35 @@
 "use strict"
-/*
+
 // definimos la app Vue
 let app = new Vue({
-    el: "#app-tasks",
+    el: "#app-comments",
     data: {
-        loading: false,
-        footer: "Este panel se renderiza con CSR ;)",
-        tasks: []
+        //loading: false,
+        //footer: "Este panel se renderiza con CSR ;)",
+        comments: []
     },
     methods: {
-        saludar: function(id) {
-            alert("hola: " + id);
+        saludar: function(id_auto) {
+            alert("hola: " + id_auto);
         }
     }
 });
 
 // asigno event listener al boton de refresh
-document.querySelector('#btn-refresh').addEventListener('click', cargar);
-*/
-// carga inicial de las tareas
-cargar();
+//document.querySelector('#btn-refresh').addEventListener('click', cargar);
 
-function cargar() {
-    app.loading = true;
-    fetch('api/comments/1')
+// paso el ID del auto (publicacion) en el que vamos a comentar
+let id_auto = document.querySelector("input[id=idCar]").value;
+
+// carga inicial de las tareas
+cargarComentarios();
+function cargarComentarios() {
+    //app.loading = true;
+    fetch('api/cars/'+id_auto+'/comments')
         .then(response => response.json())
         .then(comments => {
            // asigno las tareas que me devuelve la API
            app.comments = comments; // es como el $this->smarty->assign("tasks", tareas);
-           app.loading = false;
+           //app.loading = false;
         });
 }
