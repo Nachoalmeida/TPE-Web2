@@ -1,5 +1,5 @@
 <section id="app-comments">
-
+    <input id="idCar" type="hidden" value={$auto->id_auto}>
     <div v-for="comment in comments" class="alert alert-dark" role="alert">
         <div class="container">
             <div class="row media">
