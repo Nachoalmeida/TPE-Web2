@@ -65,10 +65,10 @@ class AuthController {
         $passTwo = $_POST['password_two'];
         $mail = $_POST['mail'];
 
-         // Nombre archivo original
-         $originalName = $_FILES['input_name']['name'];
-         // Nombre en el file system:
-         $physicalName = $_FILES['input_name']['tmp_name'];
+        // Nombre archivo original
+        $originalName = $_FILES['input_name']['name'];
+        // Nombre en el file system:
+        $physicalName = $_FILES['input_name']['tmp_name'];
 
         //pregunto si los campos obligatorios existen
         if (empty ($user_name) || empty ($pass) || empty ($passTwo) || empty ($mail) || !$originalName){
