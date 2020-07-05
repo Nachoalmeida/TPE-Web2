@@ -21,11 +21,7 @@ class UsersModel extends SystemModel{
         return  $lastId; 
     }
 
-    public function copyImage(){
-        // Nombre archivo original
-        $originalName = $_FILES['input_name']['name'];
-        // Nombre en el file system:
-        $physicalName = $_FILES['input_name']['tmp_name'];
+    public function copyImage($originalName, $physicalName){
         
         $finalName = "images/user_foto/". uniqid("", true) . "." . strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
 
@@ -34,8 +30,8 @@ class UsersModel extends SystemModel{
         return $finalName;
     }
 
-    public function insertImage($user_name, $pass, $mail){ 
-        $finalName = $this->copyImage();
+    public function insertImage($user_name, $pass, $mail, $originalName,$physicalName){ 
+        $finalName = $this->copyImage($originalName, $physicalName);
         $success = $this->insert($user_name, $pass, $mail, $finalName);
         return $success;
     }
