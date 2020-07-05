@@ -71,7 +71,7 @@ class AuthController {
         $physicalName = $_FILES['input_name']['tmp_name'];
 
         //pregunto si los campos obligatorios existen
-        if (empty ($user_name) || empty ($pass) || empty ($passTwo) || empty ($mail) || !$originalName){
+        if (empty ($user_name) || empty ($pass) || empty ($passTwo) || empty ($mail)){
             header("Location: " . BASE_URL . "registrarse");
             die;
         }
@@ -101,8 +101,15 @@ class AuthController {
             $success = $this->usersModel->insert($user_name, $encrypted_pass, $mail, "images/user_foto/user.png");
         }
 
-        if($success)
-            $this->sessionUser($success);
+        $user=null;
+
+        if ($success){
+            //traigo usuario
+            $user=$this->usersModel->getUserMail($mail);
+        }
+
+        if($user)
+            $this->sessionUser($user);
         else
             $this->failView->show_fail('Error al agregar el registro');
     }

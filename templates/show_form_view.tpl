@@ -40,14 +40,14 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Precio:</label>
-                    <input name="precio" type="text" class="form-control" {if $auto}value="{$auto->precio}"{/if}required>
+                    <input name="precio" type="number" class="form-control" {if $auto}value="{$auto->precio}"{/if}required>
                 </div>
             </div>
 
             <div class="col-6">
                 <div class="form-group">
                     <label>kilometros:</label>
-                    <input name="kilometros" type="text" class="form-control" {if $auto}value="{$auto->kilometros}"{/if} required>
+                    <input name="kilometros" type="number" class="form-control" {if $auto}value="{$auto->kilometros}"{/if} required>
                 </div>
             </div>
 
@@ -102,5 +102,6 @@
         <a class="btn btn-light" href="administrador">Volver al panel</a>
 
     </form>
+    <hr>
 </div>
 
