@@ -43,5 +43,32 @@ class UsersModel extends SystemModel{
         $user = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
         return $user;
     }
+
+    public function getAllUsers(){
+        //envio consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM usuarios ORDER BY administrador DESC, user_name"); // prepara la consulta
+        $sentencia->execute(); // ejecuta
+        $users = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
+        return $users;
+    }
+
+    public function deleteUser($id_user){
+        // enviamos la consulta
+        $sentencia = $this->getDb()->prepare("DELETE FROM usuarios WHERE id_usuario = ?"); // prepara la consulta
+        return $sentencia->execute([$id_user]); // ejecuta
+    }
+
+    public function getUser($id_user){
+        //envio consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM usuarios WHERE id_usuario= ?"); // prepara la consulta
+        $sentencia->execute([$id_user]); // ejecuta
+        $user = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
+        return $user;
+    }
+
+    public function modifyRole($id_user,$role){
+        $sentencia = $this->getDb()->prepare("UPDATE usuarios SET administrador= ?WHERE id_usuario = ?"); // prepara la consulta
+       return $sentencia->execute([$role, $id_user]); // ejecuta    
+    }
 //NUEVO*********************************************************************************************************************
 }

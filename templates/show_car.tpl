@@ -6,6 +6,7 @@
                 <p></p>
                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
+                        {include 'vue/score.vue'}
                         {foreach $fotos item= foto}                                     
                             <div class="carousel-item {if !$unaFoto}active{/if}"> 
                                 <img class="d-block w-100" src="{$foto->nombre}" alt="{$auto->titulo}">  
@@ -23,6 +24,7 @@
                     </a>
                 </div>
             </div>
+            
             <!--FIN iMAGEN-->
 
             <!--DATOS TITULO-->

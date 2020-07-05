@@ -59,9 +59,38 @@
                     </li>   
                 {/foreach}
             </ul>
-        </div>
-    {/if}
 
+            <div class="my-4">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-secondary"><strong>Listado de Usuarios:</strong>
+                        
+                    </li>
+                    {foreach $usuarios item= usuario} 
+                        <li class="list-group-item list-group-item-dark"> 
+                            <form action="eliminar_usuario" method="post">
+                                <button name="id_usuario_eliminar" type="submit" class="btn btn-danger" value= "{$usuario->id_usuario}">Eliminar</button>
+                                {$usuario->user_name}
+                            </form> 
+                            {if $usuario->administrador}
+                                Administrador
+                                <form action="modificar_permiso" method="post">
+                                    <button name="id_usuario_permiso" type="submit" class="btn btn-outline-danger btn-sm" value= "{$usuario->id_usuario}">Quitar permiso de Administrador</button>
+                                </form> 
+                               {else}
+                               Usuario 
+                                <form action="modificar_permiso" method="post">
+                                    <button name="id_usuario_permiso" type="submit" class="btn btn-outline-success btn-sm" value= "{$usuario->id_usuario}">Otorgar permisos de Administrador</button>
+                                </form> 
+                            {/if}                         
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+           
+        </div>
+        
+    {/if}
+            
                 
 
 {include 'footer.tpl'}

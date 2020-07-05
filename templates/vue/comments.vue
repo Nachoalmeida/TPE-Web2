@@ -20,8 +20,7 @@
                             
                             <!-- foreach de vue -->
                             <h6 class="p-4 text-dark border border-secondary list-group-item my-5 ml-3 alert-heading ">
-                                {{ comment.mensaje }} 
-                                
+                                {{ comment.mensaje }}      
                             </h6>
                             <hr>   
                         

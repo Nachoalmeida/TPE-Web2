@@ -2,6 +2,7 @@
 require_once 'models/cars.model.php';
 require_once 'models/brands.model.php';
 require_once 'models/photo.model.php';
+require_once 'models/users.model.php';
 require_once 'views/user.view.php';
 require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
@@ -12,6 +13,7 @@ class UserController{
     private $carsModel;
     private $brandsModel;
     private $photoModel;
+    private $usersModel;
 
     private $userView;
     private $failView;
@@ -26,6 +28,7 @@ class UserController{
        $this->carsModel = new CarsModel();
        $this->brandsModel = new BrandsModel();
        $this->photoModel = new PhotoModel();
+       $this->usersModel = new UsersModel();
        //pido las marcas al modelo
        $brands = $this->brandsModel->getAllBrands();
        $this->userView  = new UserView($brands);
@@ -46,11 +49,15 @@ class UserController{
         //si es user puede ver todo, sino solo ve sus publicaciones
         if ($userChecked){
         $cars=$this->carsModel -> getAllCars();
+        $users= $this->usersModel ->getAllUsers();
         }
-        else $cars=$this->carsModel -> getCarsByUser($user_id);
-
+        else{ 
+            $cars=$this->carsModel -> getCarsByUser($user_id);
+            $users=null;
+        }
+        
         // actualizo la vista
-        $this->userView->show_ABMpanel_view( $cars,$userName,$photo);
+        $this->userView->show_ABMpanel_view( $cars,$userName,$photo,$users);
     }
 
     public function ShowAddCarForm() {
@@ -146,7 +153,7 @@ class UserController{
         }
         
         // actualizo la vista
-        $this->endResult('No se pudo editar! Revise su conexión','administrador',$editcar,$photos);
+        $this->endResult('No se pudo editar! Revise su conexión','editar_publicacion/'.$id_car,$editcar,$photos);
     }
 
     public function showFormEditCars($id_car){
@@ -204,8 +211,7 @@ class UserController{
         $photo=$this->photoModel ->deletePhoto($id_foto);
      
         //repuesta final
-        $referencia= $_SERVER['HTTP_REFERER'];
-        $this->endResult('No se pudo eliminar la foto! Revise su conexión',$referencia,$photo);
+        $this->endResult('No se pudo eliminar la foto! Revise su conexión','editar_publicacion/'.$id_car,$photo);
     }
 
     //FUNCION QUE NO PERMITE A LOS USUARIOS manipular publicaciones de otros usuarios

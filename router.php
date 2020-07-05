@@ -110,6 +110,19 @@ switch ($parametros[0]) {
         $controller->deleteBrand();
     break;
 
+    case 'eliminar_usuario':
+        // instanciando un objeto de la clase AdminController
+        $controller = new AdminController();
+        $controller->deleteUser();
+    break;
+
+    case 'modificar_permiso':
+        // instanciando un objeto de la clase AdminController
+        $controller = new AdminController();
+        $controller->modifyRole();
+    break;
+
+
     //FIN PARTE PRIVADA ADMINISTRADOR*****************************************************************************
 
 

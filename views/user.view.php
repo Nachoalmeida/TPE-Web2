@@ -4,10 +4,11 @@ require_once 'smartyInit.view.php';
 
 class UserView extends SmartyInit{
     
-    public function show_ABMpanel_view( $cars,$user,$photo){     
+    public function show_ABMpanel_view( $cars,$user,$photo,$users){     
         $this->getSmarty()->assign('autos', $cars);
         $this->getSmarty()->assign('usuario', $user);
         $this->getSmarty()->assign('foto', $photo);
+        $this->getSmarty()->assign('usuarios', $users);
         $this->getSmarty()->assign('titulo', 'Panel de Administrador');
         $this->getSmarty()->display('show_ABMpanel_view.tpl');
     }
@@ -18,7 +19,12 @@ class UserView extends SmartyInit{
         $this->getSmarty()->assign('auto', $car);
         $this->getSmarty()->assign('titulo', $titulo);
         $this->getSmarty()->assign('fotos', $photos);
-        $this->getSmarty()->display('show_form_view.tpl');
+        if($car){
+        $this->getSmarty()->display('panel_edit.tpl');
+        }
+        else    
+        $this->getSmarty()->display('panel_create.tpl');
+        
     }
     
     public function form_brand($titulo, $brand=false){

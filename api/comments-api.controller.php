@@ -23,6 +23,11 @@ class CommentsApiController{
         // obtengo el id de los params
         $idCar = $params[':ID'];
 
+        if (empty ($idCar)){
+            $this->view->response("Parametro vacio", 404);
+            die;
+        }
+
         $comments = $this->model->getCommentsByCar($idCar);
 
         if ($comments)
@@ -36,6 +41,10 @@ class CommentsApiController{
 
         $idComment = $params[':ID'];
 
+        if (empty ($idComment)){
+            $this->view->response("Falta el ID del comentario que desea eliminar", 404);
+            die;
+        }
 
         $comentario = $this->model->getComment($idComment);
         
@@ -68,6 +77,10 @@ class CommentsApiController{
         $id_auto = $params[':ID'];
         //var_dump($id_usuario); die;
 
+        if (empty ($mensaje) || empty ($puntaje) || empty ($id_usuario) || empty ($id_auto) || $puntaje < 1 || $puntaje >5){
+            $this->view->response("Error al agregar el comentario", 404);
+            die;
+        }
 
         $success = $this->model->insertComment($mensaje, $puntaje, $id_usuario, $id_auto);
 

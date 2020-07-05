@@ -1,7 +1,7 @@
 "use strict"
 
 // paso el ID del auto (publicacion) en el que vamos a comentar
-let id_auto = document.querySelector("input[id=idCar]").value;
+let id_car = document.querySelector("input[id=idCar]").value;
 
 
 loadComments();
@@ -9,23 +9,21 @@ loadComments();
 
 function loadComments() {
 
-    
-
-    fetch('api/cars/'+id_auto+'/comments')
+    fetch('api/cars/'+id_car+'/comments')
 
         .then(function(r){
             if(!r.ok){
                 console.log("error")
             }
-                return r.json()
-
-            
+                return r.json()        
         })
         .then(comments => {
            console.log(document.querySelector("input[name=admin]").value);
            app.comments = comments; // es como el $this->smarty->assign("tasks", tareas);
+           app_score.comments = comments;
+           scoreComment();
         });
-}
+}   
 
 // definimos la app Vue
 let app = new Vue({
@@ -47,9 +45,6 @@ let app = new Vue({
     }
 });
 
-// App Vue para mostrar form para agregar comentario
-// Lo mustra si es un usuario registrado
-// El botón ejecuta la función addComment
 
 
 let app_form = new Vue({
@@ -66,8 +61,7 @@ let app_form = new Vue({
             if(this.mensaje == "" || this.puntaje == ""){
                 this.alert= 1;
             }
-            else
-            {
+            else{
                 let data = {
                     mensaje: this.mensaje,
                     puntaje: this.puntaje,
@@ -75,7 +69,7 @@ let app_form = new Vue({
                     id_auto_fk: document.querySelector("input[name=id_auto]").value
                 }
                 console.log(data);
-                fetch('api/cars/'+id_auto+'/comments', {
+                fetch('api/cars/'+id_car+'/comments', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(data)
@@ -92,7 +86,30 @@ let app_form = new Vue({
     },
 })
 
+let app_score = new Vue({
+    el: "#app-score",
+    data: {
+       score: 0,
+       total:0,
+       index: 0,
+       average: 0,
+       comments:[]
+    },
 
+})
 
+function scoreComment(){
+    app_score.average =0;
+    app_score.score =0;
+    app_score.index =0;
+    app_score.total=0;
+    app_score.comments.forEach(average);
+    app_score.average = app_score.total/ app_score.index;
+    app_score.average = app_score.average.toFixed(1);
+}
 
-
+function average(item, index) {
+    app_score.score =+ item.puntaje;
+    app_score.index = index+1;
+    app_score.total = app_score.score + app_score.total;
+}
