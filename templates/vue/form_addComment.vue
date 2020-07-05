@@ -1,23 +1,31 @@
 
-<input type="hidden" name="logueo" value="{$logueo}"> 
-<section  id="app-form-comments"> 
-    <input type="hidden" name="admin" value="{$Admin}">
-    <form v-if = "logueo" class="contenedor-form-comentario my-4">
+
+<section id="app-form-comments"> 
+    <input type="hidden" name="logueo" value="{$logueo}">
+    <form v-show="user" class="my-4 ">
         <div class="form-group">
-            <textarea class="cajas-form-comentario form-control" rows="3" name="mensaje" placeholder="COMENTARIO" maxlength="200" required></textarea>
-            <input type="hidden" name="id_usuario_fk" value="{$user_id}">
-            <select class="cajas-form-comentario" name="puntaje" required>
-                <option value="0">Elige un Puntaje</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-            <input type="hidden" name="id_auto" value={$auto->id_auto}>
-            
-        </div>
-        
-        <button type="button" v-on:click="addComment()" class="btn btn-danger centrar btn_alta"><b>Publicar</b></button>
+            <textarea v-model="mensaje" class="form-control" name="mensaje" placeholder="Comenta algo.." required></textarea>
+            <input type="hidden" name="id_usuario_fk" value="{$user_id}">   
+            <div v-show="mensaje">    
+                <hr>
+                <select v-model="puntaje" class="custom-select col-3" name="puntaje" required>
+                    <option value="">Puntúanos!!</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <input type="hidden" name="id_auto" value={$auto->id_auto}> 
+            </div>
+            <div v-show="alert" class="alert alert-danger my-3" role="alert">
+                Faltan datos
+            </div>
+        </div>       
+        <button type="button" v-on:click="addComment()" class="btn btn-dark"><b>Publicar</b></button>
     </form>
+    <div v-show="!user">
+        <a class="btn btn-outline-light my-2" href="registrarse">Registrate para comentar</a>
+    </div>
+    <input type="hidden" name="admin" value="{$Admin}">
 </section>

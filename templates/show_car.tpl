@@ -60,9 +60,9 @@
 
                 <h2>Comentarios</h2>
                 <hr>
-                
-                {include 'vue/form_addComment.vue'}
 
+                {include 'vue/form_addComment.vue'}
+              
                 {include 'vue/comments.vue'}
 
             </div>

@@ -6,7 +6,7 @@ class CommentsModel extends SystemModel{
 
     public function getCommentsByCar($idCar){
         // envia la consulta
-        $sentencia = $this->getDb()->prepare("SELECT * FROM comentarios WHERE id_auto_fk = ?"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM comentarios JOIN usuarios ON (id_usuario_fk=id_usuario) WHERE id_auto_fk = ?"); // prepara la consulta
         $sentencia->execute([$idCar]); // ejecuta
         $comments = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $comments;
