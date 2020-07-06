@@ -49,7 +49,7 @@
                 <li class="list-group-item list-group-item-secondary"><strong>Listado de Marcas:</strong>
                     <a class="btn btn-light ml-4 mr-3" href="nueva_marca">Crear marca</a>
                 </li>
-                {foreach $marcas item= marca}              
+                {foreach $marcas item= marca}         
                     <li class="list-group-item list-group-item-dark">    
                         <form action="eliminar_marca" method="post">
                             <a class="btn btn-light mr-2" href="editar_marca/{$marca->id_marca}">Editar</a>
@@ -67,26 +67,29 @@
                     </li>
                     {foreach $usuarios item= usuario} 
                         <li class="list-group-item list-group-item-dark">
-                            
-                                <p class="text-center">{$usuario->user_name}</p>
+                            <div class="list-group-item list-group-item-dark">
+                                <p class="font-weight-bold text-center {if $user_id ==   $usuario->id_usuario}nav-link disabled {/if}">{$usuario->user_name}</p>
                                 <hr> 
                                 {if $usuario->administrador}
-                                    
-                                    <p>Administrador</p> 
-                                    <hr>
-                                    <form action="modificar_permiso" method="post">
-                                        <button name="id_usuario_permiso" type="submit" class="btn btn-outline-danger btn-sm my-2" value= "{$usuario->id_usuario}">Quitar permiso de Administrador</button>
-                                    </form> 
+                                    <p class="text-primary">Administrador</p>
+                                    {if $user_id !=   $usuario->id_usuario} 
+                                        <form action="modificar_permiso" method="post">
+                                            <button name="id_usuario_permiso" type="submit" class="btn btn-outline-danger btn-sm my-2" value= "{$usuario->id_usuario}">Quitar permiso de Administrador</button>
+                                        </form> 
+                                    {/if}
                                 {else}
-                                    <p>Usuario</p> 
+                                    <p class="text-secondary">Usuario</p>
                                     <form action="modificar_permiso" method="post">
                                         <button name="id_usuario_permiso" type="submit" class="btn btn-outline-success btn-sm my-2" value= "{$usuario->id_usuario}">Otorgar permisos de Administrador</button>
-                                    </form> 
+                                    </form>      
                                 {/if}
                                 <hr>
-                                <form action="eliminar_usuario" method="post">  
-                                    <button name="id_usuario_eliminar" type="submit" class="btn btn-danger btn-sm my-2" value= "{$usuario->id_usuario}">Eliminar</button>
-                                </form>                         
+                                {if $user_id !=   $usuario->id_usuario}
+                                    <form action="eliminar_usuario" method="post">  
+                                        <button name="id_usuario_eliminar" type="submit" class="btn btn-danger btn-sm my-2" value= "{$usuario->id_usuario}">Eliminar</button>
+                                    </form> 
+                                 {/if} 
+                            </div>                        
                         </li>
                     {/foreach}
                 </ul>

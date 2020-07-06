@@ -57,7 +57,7 @@ class UserController{
         }
         
         // actualizo la vista
-        $this->userView->show_ABMpanel_view( $cars,$userName,$photo,$users);
+        $this->userView->show_ABMpanel_view( $cars,$userName,$photo,$users,$user_id);
     }
 
     public function ShowAddCarForm() {
@@ -220,13 +220,12 @@ class UserController{
         $user_id = $this->user_id;
         $userChecked = $this->userChecked;
 
-        if (!$userChecked){
-            $cars=$this->carsModel ->getCarsByUser($user_id);
-            if ($cars){
-                foreach ($cars as $car){  
-                    if($car_id == $car->id_auto){
-                        $userChecked = 1;
-                    }
+        $cars=$this->carsModel ->getCarsByUser($user_id);
+        
+        if (!$userChecked && $cars){     
+            foreach ($cars as $car){  
+                if($car_id == $car->id_auto){
+                    $userChecked = 1;
                 }
             }
         }

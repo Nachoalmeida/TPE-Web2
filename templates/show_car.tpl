@@ -3,7 +3,7 @@
 
             <!--iMAGEN-->
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
-                <p></p>
+                 <p></p>
                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         {include 'vue/score.vue'}

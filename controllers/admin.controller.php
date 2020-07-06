@@ -40,8 +40,18 @@ class AdminController {
             header('Location: ' . BASE_URL . 'administrador');
             die;
         }
-        // agrego la nueva marca
-        $addBrands=$this->brandsModel->insertBrand($brand_name);
+
+        $brandCheckedName= $this->brandsModel->getBrandName($brand_name);
+
+        if($brandCheckedName->nombre_marca != $brand_name){
+            // agrego la nueva marca
+            $addBrands=$this->brandsModel->insertBrand($brand_name);
+        }
+        else{
+            $this->failView->show_fail('La marca que intenta crear, ya fue creada');
+            die;
+        }
+        
         if($addBrands)
             header('Location: ' . BASE_URL . 'administrador');
         else

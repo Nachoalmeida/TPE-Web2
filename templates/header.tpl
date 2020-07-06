@@ -6,7 +6,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="css/style.css">
             <link rel="stylesheet" href="css/bootstrap.min.css">
-            <link rel="icon" href="images/ico/ico_auto.ico">
+            <link rel="icon" href="images/icono/logo_ico.png ">
             <title>{$titulo}</title>
         </head>
 

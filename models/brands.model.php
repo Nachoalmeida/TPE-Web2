@@ -5,7 +5,7 @@ require_once 'system.model.php';
 class BrandsModel extends SystemModel{
     // Devuelve todas las marcas:
     public function getAllBrands() {
-        $sentencia = $this->getDb()->prepare("SELECT * FROM marcas"); // prepara la consulta
+        $sentencia = $this->getDb()->prepare("SELECT * FROM marcas ORDER BY nombre_marca"); // prepara la consulta
         $sentencia->execute(); // ejecuta
         $brands = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
         return $brands;
@@ -33,5 +33,12 @@ class BrandsModel extends SystemModel{
         // enviamos la consulta
         $sentencia = $this->getDb()->prepare("DELETE FROM marcas WHERE id_marca = ?"); // prepara la consulta
         return $sentencia->execute([$id_brand]); // ejecuta    
+    }
+    //trae una marca por nombre
+    public function getBrandName($brand_name){
+        $sentencia = $this->getDb()->prepare("SELECT * FROM marcas WHERE nombre_marca=?"); // prepara la consulta
+        $sentencia->execute([$brand_name]); // ejecuta
+        $brand = $sentencia->fetch(PDO::FETCH_OBJ); // obtiene la respuesta
+        return $brand;
     }
 }

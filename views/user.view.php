@@ -4,11 +4,12 @@ require_once 'smartyInit.view.php';
 
 class UserView extends SmartyInit{
     
-    public function show_ABMpanel_view( $cars,$user,$photo,$users){     
+    public function show_ABMpanel_view( $cars,$user,$photo,$users,$user_id){     
         $this->getSmarty()->assign('autos', $cars);
         $this->getSmarty()->assign('usuario', $user);
         $this->getSmarty()->assign('foto', $photo);
         $this->getSmarty()->assign('usuarios', $users);
+        $this->getSmarty()->assign('user_id', $user_id);
         $this->getSmarty()->assign('titulo', 'Panel de Administrador');
         $this->getSmarty()->display('show_ABMpanel_view.tpl');
     }

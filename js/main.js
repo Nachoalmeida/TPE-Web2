@@ -18,11 +18,13 @@ function loadComments() {
                 return r.json()        
         })
         .then(comments => {
-           console.log(document.querySelector("input[name=admin]").value);
            app.comments = comments; // es como el $this->smarty->assign("tasks", tareas);
            app_score.comments = comments;
-           scoreComment();
-        });
+           if(app_score.comments){
+            scoreComment();
+           }
+        })
+        .catch(error => console.log(error));
 }   
 
 // definimos la app Vue
@@ -40,7 +42,7 @@ let app = new Vue({
             .then(()=> {
                 loadComments()
             })
-            .catch(error=>console.log(error))
+            .catch(error=>console.log(error));
         }
     }
 });
@@ -68,7 +70,6 @@ let app_form = new Vue({
                     id_usuario_fk: document.querySelector("input[name=id_usuario_fk]").value,
                     id_auto_fk: document.querySelector("input[name=id_auto]").value
                 }
-                console.log(data);
                 fetch('api/cars/'+id_car+'/comments', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},

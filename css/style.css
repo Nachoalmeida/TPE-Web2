@@ -3,7 +3,10 @@
     width: 100%; 
     height: 200;
 }
-
+.logo{
+    width: 110px; 
+    height: 90px;
+}
 /*EFECTO DE LA GALERIA DE INICIO ////////////////////////////////////////////////77 */
 .caja_para_efecto_retraer:hover .efecto_retraer_algo {
     -webkit-transform:scale(1.3);
