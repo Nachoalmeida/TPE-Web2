@@ -7,6 +7,7 @@ require_once 'views/fail.view.php';
 require_once 'helper/session.helper.php';
 
 class AdminController {
+    
     private $brandsModel;
     private $carsModel;
     private $userModel;
@@ -125,7 +126,8 @@ class AdminController {
 
         if($existsUser && $this->user_id != $id_user){
             // elimino el usuario
-            $deleteUser=$this->userModel -> deleteUser($id_user);
+            $route = $existsUser->foto_perfil;
+            $deleteUser=$this->userModel -> deleteUser($id_user,$route);
         }
         
         // actualizo la vista

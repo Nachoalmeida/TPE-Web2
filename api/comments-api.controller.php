@@ -3,8 +3,9 @@
 require_once 'models/comments.model.php';
 require_once 'api/api.view.php';
 
-class CommentsApiController{
 
+class CommentsApiController{
+    
     private $model;
     private $view;
     private $data;
@@ -33,12 +34,11 @@ class CommentsApiController{
         if ($comments)
             $this->view->response($comments, 200);
         else
-            $this->view->response(null, 404);
+            $this->view->response(null, 204);
 
     }
 
     public function deleteComment($params = []) {
-
         $idComment = $params[':ID'];
 
         if (empty ($idComment)){
@@ -50,10 +50,9 @@ class CommentsApiController{
         
         // verifico que exista
         if (empty($comentario)) {
-            $this->view->response("no existe el comentario con id {$comentario}", 404);
+            $this->view->response("No existe el comentario", 204);
             die();
         }
-
 
         $success=$this->model->deleteComment($idComment);
 
@@ -68,57 +67,27 @@ class CommentsApiController{
     public function insertComment($params = []) {
         // devuelve el objeto JSON enviado por POST     
         $body = $this->getData();
-        //var_dump($body); die;
 
         // inserta la tarea
         $mensaje = $body->mensaje;
         $puntaje = $body->puntaje;
         $id_usuario = $body->id_usuario_fk;
         $id_auto = $params[':ID'];
-        //var_dump($id_usuario); die;
+
 
         if (empty ($mensaje) || empty ($puntaje) || empty ($id_usuario) || empty ($id_auto) || $puntaje < 1 || $puntaje >5){
-            $this->view->response("Error al agregar el comentario", 404);
+            $this->view->response("Fatan datos obligatorios", 404);
             die;
         }
 
         $success = $this->model->insertComment($mensaje, $puntaje, $id_usuario, $id_auto);
 
-        if ($success)
-        {
+        if ($success){
             $this->view->response("Se agrego el comentario", 200);
         }
-        else
-        {
+        else{
             $this->view->response("El comentario no fue agregado", 500);
         }
-    }
-
-    public function editComment($params = []){
-        // devuelve el objeto JSON enviado por POST     
-        $body = $this->getData();
-        //var_dump($body); die;
-
-        // inserta el comentario
-        $id_comentario = $params[':ID'];
-        $mensaje = $body->mensaje;
-        $puntaje = $body->puntaje;
-        //$id_usuario = $body->id_usuario_fk;
-        //$id_auto = $body->id_auto;
-        //var_dump($id_usuario); die;
-
-
-        $success = $this->model->editComment($mensaje, $puntaje, $id_comentario);
-
-        if ($success)
-        {
-            $this->view->response("Se agrego el comentario", 200);
-        }
-        else
-        {
-            $this->view->response("El comentario no fue agregado", 500);
-        }
-        
     }
 
 }

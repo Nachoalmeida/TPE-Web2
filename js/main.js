@@ -3,9 +3,11 @@
 // paso el ID del auto (publicacion) en el que vamos a comentar
 let id_car = document.querySelector("input[id=idCar]").value;
 
-
 loadComments();
 
+setInterval(function(){
+    loadComments();
+},5000);
 
 function loadComments() {
 

@@ -203,12 +203,13 @@ class UserController{
 
             if($photoChecked->id_foto ==$id_foto){
                 $Checked= true;
+                $route=$photoChecked->nombre;
             }   
         }    
         $this->broughtSomething($Checked, 'La foto que desea eliminar no es de una publicacion valida');
 
         //elimino la foto
-        $photo=$this->photoModel ->deletePhoto($id_foto);
+        $photo=$this->photoModel ->deletePhoto($id_foto,$route);
      
         //repuesta final
         $this->endResult('No se pudo eliminar la foto! Revise su conexión','editar_publicacion/'.$id_car,$photo);

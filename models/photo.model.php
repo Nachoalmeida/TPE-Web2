@@ -40,10 +40,14 @@ class PhotoModel extends SystemModel{
         return $photosCar;
     }
 
-    public function deletePhoto($id_foto){
+    public function deletePhoto($id_foto,$route){
         // enviamos la consulta
         $sentencia = $this->getDb()->prepare("DELETE FROM fotos WHERE id_foto = ?"); // prepara la consulta
-        return $sentencia->execute([$id_foto]); // ejecuta    
+        $sentencia->execute([$id_foto]); // ejecuta  
+        if($sentencia){
+            unlink($route);
+        }
+        return $sentencia;
     }
 
     public function getPhoto($id_foto){

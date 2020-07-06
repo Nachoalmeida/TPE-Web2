@@ -13,9 +13,9 @@ class UsersModel extends SystemModel{
     }
 
 //NUEVO*********************************************************************************************************************
-    public function insert($user_name, $pass, $mail,$nombreFinal=null){
+    public function insert($user_name, $pass, $mail,$finalName=null){
         $sentencia = $this->getDb()->prepare("INSERT INTO usuarios(user_name, password, mail, foto_perfil) VALUES(?, ?, ?, ?)"); // prepara la consulta
-        $sentencia->execute([$user_name, $pass, $mail, $nombreFinal]);
+        $sentencia->execute([$user_name, $pass, $mail, $finalName]);
 
         $lastId = $this->getDb()->lastInsertId();
         return  $lastId; 
@@ -52,10 +52,16 @@ class UsersModel extends SystemModel{
         return $users;
     }
 
-    public function deleteUser($id_user){
+    public function deleteUser($id_user,$route){
         // enviamos la consulta
         $sentencia = $this->getDb()->prepare("DELETE FROM usuarios WHERE id_usuario = ?"); // prepara la consulta
-        return $sentencia->execute([$id_user]); // ejecuta
+        $sentencia->execute([$id_user]); // ejecuta
+        
+        if($sentencia && $route != 'images/user_foto/user.png'){
+            unlink($route);
+        }
+    
+        return $sentencia;
     }
 
     public function getUser($id_user){
