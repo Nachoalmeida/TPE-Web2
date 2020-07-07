@@ -8,8 +8,8 @@
             <input type="hidden" name="id_usuario_fk" value="{$user_id}">   
             <div v-show="mensaje">    
                 <hr>
-                <select v-model="puntaje" class="custom-select col-3" name="puntaje" required>
-                    <option value="">Puntúanos!!</option>
+                <select v-model="puntaje" class="custom-select col-4" name="puntaje" required>
+                    <option value="">Puntúa la publicación!!</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>

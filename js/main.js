@@ -64,8 +64,7 @@ let app_form = new Vue({
         let data = {
           mensaje: this.mensaje,
           puntaje: this.puntaje,
-          id_usuario_fk: document.querySelector("input[name=id_usuario_fk]")
-            .value,
+          id_usuario_fk: document.querySelector("input[name=id_usuario_fk]").value,
           id_auto_fk: document.querySelector("input[name=id_auto]").value,
         };
         fetch("api/cars/" + id_car + "/comments", {
