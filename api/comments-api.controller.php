@@ -4,27 +4,31 @@ require_once 'models/comments.model.php';
 require_once 'api/api.view.php';
 
 
-class CommentsApiController{
-    
+class CommentsApiController
+{
+
     private $model;
     private $view;
     private $data;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model =  new CommentsModel();
         $this->view = new APIView();
         $this->data = file_get_contents("php://input");
     }
 
-    private function getData() {
+    private function getData()
+    {
         return json_decode($this->data);
     }
 
-    public function getCommentsByCar($params = []){
+    public function getCommentsByCar($params = [])
+    {
         // obtengo el id de los params
         $idCar = $params[':ID'];
 
-        if (empty ($idCar)){
+        if (empty($idCar)) {
             $this->view->response("Parametro vacio", 404);
             die;
         }
@@ -35,36 +39,36 @@ class CommentsApiController{
             $this->view->response($comments, 200);
         else
             $this->view->response(null, 204);
-
     }
 
-    public function deleteComment($params = []) {
+    public function deleteComment($params = [])
+    {
         $idComment = $params[':ID'];
 
-        if (empty ($idComment)){
+        if (empty($idComment)) {
             $this->view->response("Falta el ID del comentario que desea eliminar", 404);
             die;
         }
 
         $comentario = $this->model->getComment($idComment);
-        
+
         // verifico que exista
         if (empty($comentario)) {
             $this->view->response("No existe el comentario", 204);
             die();
         }
 
-        $success=$this->model->deleteComment($idComment);
+        $success = $this->model->deleteComment($idComment);
 
         if ($success) {
             $this->view->response("Se eliminó el comentario", 200);
-        }
-        else 
+        } else
             $this->view->response("No se pudo eliminar el comentario", 404);
     }
-    
 
-    public function insertComment($params = []) {
+
+    public function insertComment($params = [])
+    {
         // devuelve el objeto JSON enviado por POST     
         $body = $this->getData();
 
@@ -75,19 +79,20 @@ class CommentsApiController{
         $id_auto = $params[':ID'];
 
 
-        if (empty ($mensaje) || empty ($puntaje) || empty ($id_usuario) || empty ($id_auto) || $puntaje < 1 || $puntaje >5){
+        if (
+            empty($mensaje) || empty($puntaje) || empty($id_usuario) ||
+            empty($id_auto) || $puntaje < 1 || $puntaje > 5
+        ) {
             $this->view->response("Fatan datos obligatorios", 404);
             die;
         }
 
         $success = $this->model->insertComment($mensaje, $puntaje, $id_usuario, $id_auto);
 
-        if ($success){
+        if ($success) {
             $this->view->response("Se agrego el comentario", 200);
-        }
-        else{
+        } else {
             $this->view->response("El comentario no fue agregado", 500);
         }
     }
-
 }

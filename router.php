@@ -5,175 +5,175 @@ require_once 'controllers/auth.controller.php';
 require_once 'controllers/user.controller.php';
 
 // definimos la base url de forma dinamica
-define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
+define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
 // define una acción por defecto
 if (empty($_GET['action'])) {
     $_GET['action'] = 'inicio';
-} 
+}
 
 // toma la acción que viene del usuario y parsea los parámetros
-$accion = $_GET['action']; 
+$accion = $_GET['action'];
 $parametros = explode('/', $accion);
 
 // decide que camino tomar según TABLA DE RUTEO
 switch ($parametros[0]) {
 
-    //PARTE PUBLICA*****************************************************************************
+        //PARTE PUBLICA*****************************************************************************
 
-    case 'inicio': 
+    case 'inicio':
         // instanciando un objeto de la clase CarsController
         $controller = new CarsController();
         $controller->showCars();
-    break;
+        break;
 
     case 'ver_mas':   // ver_mas/:id
         $controller = new CarsController();
         $controller->showCar($parametros[1]);
-    break;
+        break;
 
-    case 'marca':    
+    case 'marca':
         $controller = new CarsController();
         $controller->showCarsByBrand($parametros[1]);
-    break;
+        break;
 
     case 'ingresar':
         // instanciando un objeto de la clase AuthController
         $controller = new AuthController();
         $controller->showFormLogin();
-    break;
+        break;
 
     case 'registrarse':
         // instanciando un objeto de la clase AuthController
         $controller = new AuthController();
         $controller->showFormSingUp();
-    break;
+        break;
 
     case 'comprar':
         $controller = new CarsController();
         $controller->showFormBuy();
-    break;
+        break;
 
-    //FIN PARTE PUBLICA************************************************************************************
+        //FIN PARTE PUBLICA************************************************************************************
 
-    //AUTENTICACION*****************************************************************************************
+        //AUTENTICACION*****************************************************************************************
 
     case 'logueo':
         // instanciando un objeto de la clase AuthController
         $controller = new AuthController();
         $controller->login();
-    break;
+        break;
 
     case 'salir':
         // instanciando un objeto de la clase AuthController
         $controller = new AuthController();
         $controller->logout();
-    break;
+        break;
 
     case 'nuevo_usuario':
         // instanciando un objeto de la clase AuthController
         $controller = new AuthController();
         $controller->SignUp();
-    break;
+        break;
 
-    //AUTENTICACION******************************************************************************************
+        //AUTENTICACION******************************************************************************************
 
-    //PARTE PRIVADA ADMINISTRADOR*****************************************************************************
+        //PARTE PRIVADA ADMINISTRADOR*****************************************************************************
 
     case 'nueva_marca':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->showFormAddBrand();
-    break;
+        break;
 
     case 'crear_marca':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->addBrand();
-    break;
+        break;
 
     case 'editar_marca':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->showFormEditBrand($parametros[1]);
-    break;
+        break;
 
     case 'cargar_marca_editada':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->editBrand();
-    break;
+        break;
 
     case 'eliminar_marca':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->deleteBrand();
-    break;
+        break;
 
     case 'eliminar_usuario':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->deleteUser();
-    break;
+        break;
 
     case 'modificar_permiso':
         // instanciando un objeto de la clase AdminController
         $controller = new AdminController();
         $controller->modifyRole();
-    break;
+        break;
 
 
-    //FIN PARTE PRIVADA ADMINISTRADOR*****************************************************************************
+        //FIN PARTE PRIVADA ADMINISTRADOR*****************************************************************************
 
 
-    //PARTE PRIVADA usuario*****************************************************************************
+        //PARTE PRIVADA usuario*****************************************************************************
 
     case 'administrador': // /ABM panel
         // instanciando un objeto de la clase UserController
         $controller = new UserController();
         $controller->showABMPanel();
-    break;
+        break;
 
     case 'nuevo_auto': // Dirige los datos del formulario al controller.    
         $controller = new UserController();
         $controller->addCar();
-    break;
+        break;
 
     case 'nueva_publicacion': //  formulario   ->   showForm()
         // instanciando un objeto de la clase UserController
         $controller = new UserController();
         $controller->ShowAddCarForm();
-    break;
+        break;
 
     case 'eliminar_publicacion':
         // instanciando un objeto de la clase UserController
         $controller = new UserController();
         $controller->deleteCar();
-    break;
+        break;
 
     case 'editar_publicacion':
         // instanciando un objeto de la clase UserController
         $controller = new UserController();
         $controller->showFormEditCars($parametros[1]);
-    break;
+        break;
 
     case 'editar_auto':
         // instanciando un objeto de la clase UserController
         $controller = new UserController();
         $controller->editCar();
-    break;
+        break;
 
     case 'eliminar_foto':
         // instanciando un objeto de la clase UserController
         $controller = new UserController();
-        $controller->deletePhoto($parametros[1],$parametros[2]);
-    break;
+        $controller->deletePhoto($parametros[1], $parametros[2]);
+        break;
 
-    //FIN PARTE PRIVADA usuario*****************************************************************************
+        //FIN PARTE PRIVADA usuario*****************************************************************************
 
 
-    default: 
+    default:
         $controller = new CarsController();
         $controller->showURLFail();
-    break;
+        break;
 }

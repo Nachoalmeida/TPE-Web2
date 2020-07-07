@@ -1,66 +1,57 @@
 <?php
 
-class HelperSession {
+class HelperSession
+{
 
-    static public function access(){
+    static public function access()
+    {
         session_start();
-        if (!isset($_SESSION['logged'])){
-            header('Location: ' . BASE_URL . "ingresar");
-            die;
-        }
-    }
-    
-    static public function accessAdmin(){
-        if(session_status() != PHP_SESSION_ACTIVE){   
-            session_start();
-        }
-        if (!($_SESSION['admin'])){
+        if (!isset($_SESSION['logged'])) {
             header('Location: ' . BASE_URL . "ingresar");
             die;
         }
     }
 
-    static public function accessAdmin_view(){
-        if(session_status() != PHP_SESSION_ACTIVE){   
+    static public function accessAdmin()
+    {
+        if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
-        if (isset($_SESSION['logged'])){
-            $admin=$_SESSION['admin'];
+        if (!($_SESSION['admin'])) {
+            header('Location: ' . BASE_URL . "ingresar");
+            die;
+        }
+    }
+
+    static public function accessAdmin_view()
+    {
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        if (isset($_SESSION['logged'])) {
+            $admin = $_SESSION['admin'];
             return $admin;
         }
     }
 
-    static public function access_view(){
-        if(session_status() != PHP_SESSION_ACTIVE){   
+    static public function access_view()
+    {
+        if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
-        if (isset($_SESSION['logged'])){
+        if (isset($_SESSION['logged'])) {
             return true;
         }
-        
-    } 
-    
-    static public function userID_view(){
-        if(session_status() != PHP_SESSION_ACTIVE){   
+    }
+
+    static public function userID_view()
+    {
+        if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
-        if (isset($_SESSION['logged'])){
-            $user_id=$_SESSION['user_id'];
+        if (isset($_SESSION['logged'])) {
+            $user_id = $_SESSION['user_id'];
             return $user_id;
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

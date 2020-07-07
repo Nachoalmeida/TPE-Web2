@@ -7,13 +7,10 @@ require_once 'api/comments-api.controller.php';
 $router = new Router();
 
 // creo la tabla de ruteo
-//$router->addRoute('comments', 'GET', 'CommentsApiController', 'getComments');
 $router->addRoute('cars/:ID/comments', 'GET', 'CommentsApiController', 'getCommentsByCar');
 $router->addRoute('comments/:ID', 'DELETE', 'CommentsApiController', 'deleteComment');
 $router->addRoute('cars/:ID/comments', 'POST', 'CommentsApiController', 'insertComment');
 $router->addRoute('comments/:ID', 'PUT', 'CommentsApiController', 'editComment');
-
-
 
 // rutea
 $router->route($_REQUEST['resource'], $_SERVER['REQUEST_METHOD']);
