@@ -153,7 +153,7 @@ class UserController
         if ($_FILES["imagesToUpload"]["error"][0] > 0) {
             $insert = 0;
         }
-        //PREGUNTAR SI ESTA BIEN, ASI
+        //añade la foto
         if ($insert && $id_car) {
             $photos = $this->addPhotos($id_car);
         }

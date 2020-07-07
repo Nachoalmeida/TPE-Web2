@@ -86,26 +86,21 @@ let app_form = new Vue({
 let app_score = new Vue({
   el: "#app-score",
   data: {
-    score: 0,
-    total: 0,
-    index: 0,
     average: 0,
     comments: [],
   },
 });
 
-function scoreComment() {
-  app_score.average = 0;
-  app_score.score = 0;
-  app_score.index = 0;
-  app_score.total = 0;
-  app_score.comments.forEach(average);
-  app_score.average = app_score.total / app_score.index;
+function scoreComment(){
+  let index=0;
+  let score= 0;
+  let total=0;
+  app_score.average= 0;
+  app_score.comments.forEach(comment => { 
+    index++;   
+    score= +comment.puntaje;
+    total= score + total;   
+  });
+  app_score.average = total / index;
   app_score.average = app_score.average.toFixed(1);
-}
-
-function average(item, index) {
-  app_score.score = +item.puntaje;
-  app_score.index = index + 1;
-  app_score.total = app_score.score + app_score.total;
 }

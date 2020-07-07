@@ -6,7 +6,7 @@ class CarsView extends SmartyInit
 
     public function show_cars($cars, $photos)
     {
-        $this->getSmarty()->assign('titulo', 'Comprate un Nissan');
+        $this->getSmarty()->assign('titulo', 'Inspired Autos');
         $this->getSmarty()->assign('autos', $cars);
         $this->getSmarty()->assign('fotos', $photos);
         $this->getSmarty()->assign('unaFoto', 0);
